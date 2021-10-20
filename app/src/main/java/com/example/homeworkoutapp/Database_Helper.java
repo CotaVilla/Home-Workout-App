@@ -20,7 +20,6 @@ public class Database_Helper extends SQLiteOpenHelper {
     private static final String EXERCISE_GIF_LOCATION = "gif_location";
     private static final String EXERCISE_TIPS = "tips";
 
-
     private static final String TABLE_RUTINE = "rutine";
     private static final String RUTINE_ID = "id";
     private static final String RUTINE_NAME = "name";
