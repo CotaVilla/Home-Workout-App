@@ -16,7 +16,7 @@ import com.example.homeworkoutapp.databinding.FragmentGalleryBinding;
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
-private FragmentGalleryBinding binding;
+    private FragmentGalleryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
