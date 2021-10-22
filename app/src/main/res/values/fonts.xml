@@ -48,4 +48,11 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/blue</item>
     </style>
+
+    <style name="start_text">
+        <item name="android:fontFamily">@font/gurajada</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">72sp</item>
+        <item name="android:textColor">@color/yellow</item>
+    </style>
 </resources>
