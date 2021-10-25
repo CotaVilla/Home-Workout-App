@@ -105,19 +105,45 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
                     Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.options_rutine);
 
-                /*dialog.setTitle("Title");
+                    TextView option_title = dialog.findViewById(R.id.excercise_options_title);
+                    TextView option_play = dialog.findViewById(R.id.rutine_option_play);
+                    TextView option_edit = dialog.findViewById(R.id.rutine_option_edit);
+                    TextView option_duplicate = dialog.findViewById(R.id.rutine_option_duplicate);
+                    TextView option_delete = dialog.findViewById(R.id.rutine_option_delete);
 
+                    option_title.setText("Opciones > "+name);
 
-                ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                image.setImageResource(R.drawable.ic_launcher);
+                    // play click event
+                    option_play.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
+                        }
+                    });
 
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });*/
+                    // edit click event
+                    option_edit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+                    // duplicate click event
+                    option_duplicate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+                    // option_delete click event
+                    option_delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
 
                     dialog.show();
                 }

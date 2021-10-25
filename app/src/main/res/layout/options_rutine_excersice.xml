@@ -4,8 +4,7 @@
     android:background="@drawable/white_container_big_corners"
     android:layout_width="250dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:weightSum="5">
+    android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -23,15 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/rutine_option_play"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="5dp"
-            android:text="Play"
-            android:textAppearance="@style/options_content" />
 
         <TextView
             android:id="@+id/rutine_option_edit"
