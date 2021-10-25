@@ -1,5 +1,9 @@
 package com.example.homeworkoutapp.ui;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
+import com.example.homeworkoutapp.StartActivity;
 
 import java.util.ArrayList;
 
@@ -53,6 +58,8 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
 
     // Referencia a la estructura del elemento
     public class Rutine extends RecyclerView.ViewHolder {
+        private Context context;
+
         // Objects in item rutine
         TextView rutine_name;
         TextView description;
@@ -65,12 +72,15 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
         public Rutine(@NonNull View itemView) {
             super(itemView);
 
+            context = itemView.getContext();
+
             // gettin ids of objects in item
             rutine_name = itemView.findViewById(R.id.rutine_name);
             description = itemView.findViewById(R.id.rutine_description);
             exercises = itemView.findViewById(R.id.rutine_exercises);
             time = itemView.findViewById(R.id.rutine_duration);
             options = itemView.findViewById(R.id.btn_options);
+
 
 
             // Listen click on all the item
@@ -86,6 +96,30 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
                 @Override
                 public void onClick(View v){
                     Log.d("demo","A click was made on item: "+ name);
+                    showDialog();
+                }
+
+                // Show options menu of the rutine
+                public void showDialog(){
+
+                    Dialog dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.options_rutine);
+
+                /*dialog.setTitle("Title");
+
+
+                ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                image.setImageResource(R.drawable.ic_launcher);
+
+
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });*/
+
+                    dialog.show();
                 }
             });
         }
