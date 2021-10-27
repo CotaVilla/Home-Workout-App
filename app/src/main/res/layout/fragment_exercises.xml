@@ -1,22 +1,50 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.exercises.ExercisesFragment">
+    android:orientation="vertical"
+    android:background="@drawable/linear_container_white_gray"
+    tools:context=".ui.routines.RoutinesFragment">
+
+    <include layout="@layout/fragment_title"
+        android:id="@+id/frag_title"/>
+
 
     <TextView
-        android:id="@+id/text_exercises"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        style="@style/filter_text"
+        android:text="Filtros" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/filter_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        style="@style/filter_text"
+        android:text="Seleccionado: " />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exercises_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:scrollbars="vertical"
+        android:layout_weight="1"/>
+
+
+
+
+
+</LinearLayout>

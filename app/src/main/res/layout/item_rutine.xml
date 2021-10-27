@@ -31,7 +31,7 @@
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_play"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"/>
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
             </RelativeLayout>
 
             <RelativeLayout

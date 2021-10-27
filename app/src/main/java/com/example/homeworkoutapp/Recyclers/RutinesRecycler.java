@@ -1,9 +1,7 @@
-package com.example.homeworkoutapp.ui;
+package com.example.homeworkoutapp.Recyclers;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
-import com.example.homeworkoutapp.StartActivity;
 
 import java.util.ArrayList;
 
@@ -23,13 +20,12 @@ import java.util.ArrayList;
 // Video de como hacer botones https://www.youtube.com/watch?v=FA5cGLLiSWs
 // Menu con opciones para los items https://www.youtube.com/watch?v=fNpt-_JHS64
 
-public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
-
+public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine>{
 
     ArrayList<String> listRutines;
 
     // Constructor of the class
-    public RutineList(ArrayList<String> listRutines){
+    public RutinesRecycler(ArrayList<String> listRutines){
         this.listRutines = listRutines;
     }
 
@@ -37,7 +33,7 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
     @NonNull
     @Override
     public Rutine onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_rutine,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rutine,null,false);
         Rutine rutine = new Rutine(view);
         return rutine;
     }
@@ -91,7 +87,7 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
                 }
             });
 
-            // Listen clic on just the options
+            // Listen click on just the options
             options.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -105,19 +101,19 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
                     Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.options_rutine);
 
-                    TextView option_title = dialog.findViewById(R.id.excercise_options_title);
+                    TextView option_title = dialog.findViewById(R.id.rutine_options_title);
                     TextView option_play = dialog.findViewById(R.id.rutine_option_play);
                     TextView option_edit = dialog.findViewById(R.id.rutine_option_edit);
                     TextView option_duplicate = dialog.findViewById(R.id.rutine_option_duplicate);
                     TextView option_delete = dialog.findViewById(R.id.rutine_option_delete);
 
-                    option_title.setText("Opciones > "+name);
+                    option_title.setText("Opciones > " + name);
 
                     // play click event
                     option_play.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Log.d("demo","Play: "+ name);
                         }
                     });
 
@@ -125,7 +121,7 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
                     option_edit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Log.d("demo","Edit: "+ name);
                         }
                     });
 
@@ -133,7 +129,7 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
                     option_duplicate.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Log.d("demo","Duplicate: "+ name);
                         }
                     });
 
@@ -141,10 +137,9 @@ public class RutineList extends RecyclerView.Adapter<RutineList.Rutine>{
                     option_delete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Log.d("demo","Delete: "+ name);
                         }
                     });
-
                     dialog.show();
                 }
             });

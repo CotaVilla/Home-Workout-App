@@ -30,9 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            tools:srcCompat="@drawable/ic_launcher_foreground"
-            android:scaleX="1"
-            android:scaleY="1"/>
+            tools:src="@drawable/ic_launcher_foreground"
+            android:scaleX="2"
+            android:scaleY="2"/>
     </LinearLayout>
 
     <LinearLayout
