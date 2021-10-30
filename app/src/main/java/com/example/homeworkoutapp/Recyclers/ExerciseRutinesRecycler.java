@@ -16,9 +16,10 @@ import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutinesRecycler.Exercise>{
-    ArrayList<Rutine_Exercise> list_exercises;
+    public ArrayList<Rutine_Exercise> list_exercises;
 
     public ExerciseRutinesRecycler(ArrayList<Rutine_Exercise> list_exercises) {
         this.list_exercises = list_exercises;
@@ -27,7 +28,7 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
     @NonNull
     @Override
     public ExerciseRutinesRecycler.Exercise onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rutine_exercise,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rutine_exercise,parent,false);
         ExerciseRutinesRecycler.Exercise exercise = new ExerciseRutinesRecycler.Exercise(view);
         return exercise;
     }
@@ -41,7 +42,7 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
         holder.workout_time.setText("Ejercicio: " + object.work_time + " sec");
         holder.rest_time.setText("Descanso: " + object.rest_time + " sec");
         holder.repeats.setText("Repeticiones: " + object.repeats + " sec");
-        holder.duration.setText("Repeticiones: " + (object.work_time+object.rest_time)*object.repeats + " sec");
+        holder.duration.setText("Duracion: " + (object.work_time+object.rest_time)*object.repeats + " sec");
     }
 
     @Override
@@ -79,6 +80,31 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
             btn_up = itemView.findViewById(R.id.btn_up);
             btn_down = itemView.findViewById(R.id.btn_down);
 
+            btn_up.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (rutine_exercise.position != 0){
+                        int actual =rutine_exercise.position;
+                        list_exercises.get(actual).position=actual-1;
+                        list_exercises.get(actual-1).position=actual;
+                        Collections.swap(list_exercises,actual,actual-1);
+                        notifyItemMoved(actual,actual-1);
+                    }
+                }
+            });
+
+            btn_down.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (rutine_exercise.position != (list_exercises.size()-1)){
+                        int actual =rutine_exercise.position;
+                        list_exercises.get(actual).position=actual+1;
+                        list_exercises.get(actual+1).position=actual;
+                        Collections.swap(list_exercises,actual,actual+1);
+                        notifyItemMoved(actual,actual+1);
+                    }
+                }
+            });
 
             btn_options.setOnClickListener(new View.OnClickListener(){
                 @Override

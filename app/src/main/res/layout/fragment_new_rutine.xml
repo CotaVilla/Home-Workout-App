@@ -164,7 +164,7 @@
                     android:textAppearance="@style/white_button_text"/>
                 <androidx.appcompat.widget.AppCompatButton
 
-                    android:id="@+id/acept_add_rutine"
+                    android:id="@+id/accept_add_rutine"
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:background="@drawable/background_blue_button"

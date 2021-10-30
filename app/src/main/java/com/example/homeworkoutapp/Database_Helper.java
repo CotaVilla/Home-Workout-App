@@ -1,10 +1,18 @@
 package com.example.homeworkoutapp;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.homeworkoutapp.objects.Rutine;
+import com.example.homeworkoutapp.objects.Rutine_Exercise;
+
+import java.util.ArrayList;
 
 public class Database_Helper extends SQLiteOpenHelper {
 
@@ -24,6 +32,8 @@ public class Database_Helper extends SQLiteOpenHelper {
     private static final String RUTINE_ID = "id";
     private static final String RUTINE_NAME = "name";
     private static final String RUTINE_DESCRIPTION = "description";
+    private static final String RUTINE_EXERCISES = "exercises";
+    private static final String RUTINE_DURATION = "duration";
 
     private static final String TABLE_STEP = "step";
     private static final String STEP_ID = "id";
@@ -66,7 +76,9 @@ public class Database_Helper extends SQLiteOpenHelper {
         String qry_create_rutine = "CREATE TABLE " + TABLE_RUTINE +"(" +
                 RUTINE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 RUTINE_NAME + " TEXT NOT NULL," +
-                RUTINE_DESCRIPTION + " TEXT);";
+                RUTINE_DESCRIPTION + " TEXT," +
+                RUTINE_EXERCISES + " INTEGER," +
+                RUTINE_DURATION + " INTEGER);";
 
         String qry_create_table_step = "CREATE TABLE " + TABLE_STEP + "(" +
                 STEP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -110,9 +122,16 @@ public class Database_Helper extends SQLiteOpenHelper {
                 " (9,6,'Flexiones',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
                 " (10,4,'Abdominales con piernas elevadas',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL);";
 
+        String qry_insert_routines = "INSERT INTO " + TABLE_RUTINE + " VALUES" +
+                " (1,'Rutina mañanera', 'Para las mañanas hermosas', 5,360)," +
+                " (2,'Rutina mediodia', 'Porque sí.', 0,0)," +
+                " (3,'Rutina noche', 'Para dormir mejor.', 3,180);";
+
 
         db.execSQL(qry_insert_types);
         db.execSQL(qry_insert_exercises);
+        db.execSQL(qry_insert_routines);
+
     }
 
     @Override
@@ -128,5 +147,70 @@ public class Database_Helper extends SQLiteOpenHelper {
         db.execSQL(drop_rutine);
 
         onCreate(db);
+    }
+
+    // To ger routines for routines view
+    public ArrayList<Rutine> getRutines(){
+        ArrayList<Rutine> routines = new ArrayList<Rutine>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] columns = new String[]{RUTINE_ID,RUTINE_NAME,RUTINE_DESCRIPTION,RUTINE_EXERCISES,RUTINE_DURATION};
+
+        Cursor cursor = db.query(TABLE_RUTINE,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        while(cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(RUTINE_NAME));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(RUTINE_DESCRIPTION));
+            int exercises = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_EXERCISES));
+            int duration = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_DURATION));
+
+            Rutine rutine = new Rutine(id, name, description, exercises,duration);
+            routines.add(rutine);
+        }
+        db.close();
+
+        return routines;
+    }
+
+    public long insertRutine(Rutine rutine){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(RUTINE_NAME,rutine.name);
+        values.put(RUTINE_DESCRIPTION,rutine.Description);
+        values.put(RUTINE_EXERCISES,rutine.Exercises);
+        values.put(RUTINE_DURATION,rutine.Duration);
+
+        long id = db.insert(TABLE_RUTINE,null,values);
+
+        db.close();
+        return id;
+    }
+
+    public void updateRutine(ArrayList<Rutine> rutine){
+
+    }
+
+    public void deleteRutine(){
+
+    }
+
+    public void add_excercises(ArrayList<Rutine_Exercise> exercises){
+
+    }
+
+    public void update_excercises(ArrayList<Rutine_Exercise> exercises){
+
+    }
+
+    public void delete_excercises(ArrayList<Rutine_Exercise> exercises){
+
     }
 }

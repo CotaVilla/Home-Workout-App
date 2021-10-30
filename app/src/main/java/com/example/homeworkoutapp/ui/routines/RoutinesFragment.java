@@ -17,9 +17,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
 import com.example.homeworkoutapp.Recyclers.RutinesRecycler;
+import com.example.homeworkoutapp.objects.Rutine;
+import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,7 @@ public class RoutinesFragment extends Fragment {
 
 
     // RecyclerView
-    ArrayList<String> rutines;
+    ArrayList<Rutine> rutines;
     RecyclerView recycler;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,11 +48,11 @@ public class RoutinesFragment extends Fragment {
         recycler = (RecyclerView) root.findViewById(R.id.rutines_recycler);
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
-        rutines = new ArrayList<String>();
+        // Get routines from database
+        Database_Helper database_helper = new Database_Helper(getActivity());
+        rutines = database_helper.getRutines();
 
-        for (int i =0; i<10;i++){
-            rutines.add("Rutina #" + i);
-        }
+
         RutinesRecycler adapter = new RutinesRecycler(rutines);
         recycler.setAdapter(adapter);
 

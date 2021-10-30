@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
+import com.example.homeworkoutapp.objects.Rutine;
 
 import java.util.ArrayList;
 
@@ -20,30 +21,33 @@ import java.util.ArrayList;
 // Video de como hacer botones https://www.youtube.com/watch?v=FA5cGLLiSWs
 // Menu con opciones para los items https://www.youtube.com/watch?v=fNpt-_JHS64
 
-public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine>{
+public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine_item>{
 
-    ArrayList<String> listRutines;
+    ArrayList<Rutine> listRutines;
 
     // Constructor of the class
-    public RutinesRecycler(ArrayList<String> listRutines){
+    public RutinesRecycler(ArrayList<Rutine> listRutines){
         this.listRutines = listRutines;
     }
 
     // To create viewHolders (items)
     @NonNull
     @Override
-    public Rutine onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Rutine_item onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rutine,null,false);
-        Rutine rutine = new Rutine(view);
-        return rutine;
+        Rutine_item rutineItem = new Rutine_item(view);
+        return rutineItem;
     }
 
     // Where we get the data on the item
     @Override
-    public void onBindViewHolder(@NonNull Rutine holder, int position) {
-        String name = listRutines.get(position);
-        holder.rutine_name.setText(name);
-        holder.name = name;
+    public void onBindViewHolder(@NonNull Rutine_item holder, int position) {
+        Rutine object = listRutines.get(position);
+        holder.rutine = object;
+        holder.rutine_name.setText(object.name);
+        holder.description.setText(object.Description);
+        holder.exercises.setText("Ejercicio: " + object.Exercises);
+        holder.time.setText("Duration: " + object.Duration + " sec");
     }
 
     // Get the amount of items to create
@@ -53,8 +57,10 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
     }
 
     // Referencia a la estructura del elemento
-    public class Rutine extends RecyclerView.ViewHolder {
+    public class Rutine_item extends RecyclerView.ViewHolder {
         private Context context;
+
+        Rutine rutine;
 
         // Objects in item rutine
         TextView rutine_name;
@@ -62,10 +68,9 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
         TextView exercises;
         TextView time;
         ImageView options;
-        String name;
 
         // Aqui
-        public Rutine(@NonNull View itemView) {
+        public Rutine_item(@NonNull View itemView) {
             super(itemView);
 
             context = itemView.getContext();
@@ -91,7 +96,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
             options.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    Log.d("demo","A click was made on item: "+ name);
+                    Log.d("demo","A click was made on item: "+ rutine.name);
                     showDialog();
                 }
 
@@ -107,37 +112,42 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                     TextView option_duplicate = dialog.findViewById(R.id.rutine_option_duplicate);
                     TextView option_delete = dialog.findViewById(R.id.rutine_option_delete);
 
-                    option_title.setText("Opciones > " + name);
+                    option_title.setText("Opciones > " + rutine.name);
 
                     // play click event
                     option_play.setOnClickListener(new View.OnClickListener() {
                         @Override
+                        // TODO: Sent routine to play
                         public void onClick(View v) {
-                            Log.d("demo","Play: "+ name);
+                            Log.d("demo","Play: "+ rutine.name);
                         }
                     });
 
                     // edit click event
                     option_edit.setOnClickListener(new View.OnClickListener() {
                         @Override
+                        //TODO: Open Edit routine with selected routine
                         public void onClick(View v) {
-                            Log.d("demo","Edit: "+ name);
+                            Log.d("demo","Edit: "+ rutine.name);
                         }
                     });
 
                     // duplicate click event
                     option_duplicate.setOnClickListener(new View.OnClickListener() {
                         @Override
+                        //TODO: Duplicate routine with a slightly different name
                         public void onClick(View v) {
-                            Log.d("demo","Duplicate: "+ name);
+                            Log.d("demo","Duplicate: "+ rutine.name);
                         }
                     });
 
                     // option_delete click event
                     option_delete.setOnClickListener(new View.OnClickListener() {
                         @Override
+                        //TODO: delete routine from database and reload routines
+
                         public void onClick(View v) {
-                            Log.d("demo","Delete: "+ name);
+                            Log.d("demo","Delete: "+ rutine.name);
                         }
                     });
                     dialog.show();

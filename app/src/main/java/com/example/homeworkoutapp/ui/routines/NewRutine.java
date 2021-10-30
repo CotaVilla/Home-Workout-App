@@ -3,7 +3,10 @@ package com.example.homeworkoutapp.ui.routines;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,64 +14,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.Recyclers.ExerciseRutinesRecycler;
 import com.example.homeworkoutapp.Recyclers.RutinesRecycler;
 import com.example.homeworkoutapp.databinding.FragmentNewRutineBinding;
 import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
+import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
 import java.util.ArrayList;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NewRutine#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Collections;
 
 public class NewRutine extends Fragment {
 
     private Context context;
     private FragmentRoutinesBinding binding;
 
-    // RecyclerView
-    ArrayList<Rutine_Exercise> rutines;
+    public ArrayList<Rutine_Exercise> rutines;
     RecyclerView recycler;
-
-    /*// TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public NewRutine() {
-        // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static NewRutine newInstance(String param1, String param2) {
-        NewRutine fragment = new NewRutine();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //To save passed data
-        /*if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
-
 
     }
 
@@ -89,6 +59,81 @@ public class NewRutine extends Fragment {
         ExerciseRutinesRecycler adapter = new ExerciseRutinesRecycler(rutines);
         recycler.setAdapter(adapter);
         // END RecyclerView
+
+        EditText name = root.findViewById(R.id.rutine_name);
+        EditText description = root.findViewById(R.id.rutine_description);
+        AppCompatButton accept = root.findViewById(R.id.accept_add_rutine);
+        AppCompatButton cancel = root.findViewById(R.id.cancel_add_rutine);
+
+        accept.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                CreateRutine();
+            }
+
+            public void CreateRutine(){
+
+                //  Get exercises of new rutine
+                rutines = ((ExerciseRutinesRecycler)recycler.getAdapter()).list_exercises;
+
+                //Get duration and exercise count
+                int rutine_id;
+                String routine_name = name.getText().toString();
+                String routine_description = description.getText().toString();
+                int routine_duration=0;
+                int routine_exercises = rutines.size();
+
+                for (Rutine_Exercise rutine:rutines) {
+                    routine_duration += (rutine.work_time+rutine.rest_time) * rutine.repeats;
+                }
+
+                // Create routine
+                Rutine newRutine= new Rutine(routine_name,routine_description,routine_exercises,routine_duration);
+
+                // Insert routine in database
+                Database_Helper database_helper = new Database_Helper(getActivity());
+                long id = database_helper.insertRutine(newRutine); //Returns id
+
+                //TODO: Add exercises to database to corresponding routine
+
+                //Return to routines fragment
+                RoutinesFragment routines = new RoutinesFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                // Remove all saved fragments in backstack
+                int count = fragmentManager.getBackStackEntryCount();
+                for(int i = 0; i < count; ++i) {
+                    fragmentManager.popBackStack();
+                }
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_start,routines);
+                fragmentTransaction.commit();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //Return to rutines
+                RoutinesFragment routines = new RoutinesFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                // Remove all saved fragments in backstack
+                int count = fragmentManager.getBackStackEntryCount();
+                for(int i = 0; i < count; ++i) {
+                    fragmentManager.popBackStack();
+                }
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_start,routines);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+
         return root;
     }
+
 }
