@@ -1,21 +1,21 @@
 package com.example.homeworkoutapp.ui.routines;
 
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
@@ -28,6 +28,7 @@ public class RoutinesFragment extends Fragment {
     private Context context;
     private RoutinesViewModel routinesViewModel;
     private FragmentRoutinesBinding binding;
+
 
     // RecyclerView
     ArrayList<String> rutines;
@@ -56,12 +57,42 @@ public class RoutinesFragment extends Fragment {
 
 
         return root;
+        /*binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
+        return  binding.getRoot();*/
     }
 
+    @Override
+    public  void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view,savedInstanceState);
+        binding.addRutine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                NewRutine newRutine = new NewRutine();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.addToBackStack("rutines");
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_start,newRutine);
+                fragmentTransaction.commit();
+            }
+        });
+
+    }
+
+    @Override
+    public void onResume() {
+        Log.e("DEBUG", "onResume of RutinesFragment");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.e("DEBUG", "OnPause of RutinesFragment");
+        super.onPause();
+    }
+
+    //To avoid memory leakage we use the on Destroy
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }

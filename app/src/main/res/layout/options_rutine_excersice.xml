@@ -30,7 +30,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="5dp"
             android:text="Edit"
-            android:textAppearance="@style/options_content" />
+            android:textAppearance="@style/options_content"/>
         <TextView
             android:id="@+id/rutine_option_duplicate"
             android:layout_width="wrap_content"

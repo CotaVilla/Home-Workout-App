@@ -9,7 +9,11 @@
         android:id="@+id/nav_routines"
         android:name="com.example.homeworkoutapp.ui.routines.RoutinesFragment"
         android:label="@string/menu_routines"
-        tools:layout="@layout/fragment_routines" />
+        tools:layout="@layout/fragment_routines" >
+        <action
+            android:id="@+id/action_nav_routines_to_newRutine"
+            app:destination="@id/newRutine" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_exercises"
@@ -28,6 +32,11 @@
         android:name="com.example.homeworkoutapp.ui.restart.RestartFragment"
         android:label="@string/menu_restart"
         tools:layout="@layout/fragment_restart" />
+    <fragment
+        android:id="@+id/newRutine"
+        android:name="com.example.homeworkoutapp.ui.routines.NewRutine"
+        android:label="fragment_new_rutine"
+        tools:layout="@layout/fragment_new_rutine" />
 
 
 </navigation>
