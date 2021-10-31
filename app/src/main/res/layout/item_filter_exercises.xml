@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            tools:src="@drawable/ic_missing_image" />
+            android:src="@drawable/ic_missing_image" />
     </LinearLayout>
 
 </LinearLayout>
