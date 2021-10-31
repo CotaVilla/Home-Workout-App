@@ -43,6 +43,7 @@ public class Database_Helper extends SQLiteOpenHelper {
     private static final String TABLE_RE = "rutine_exercise";
     private static final String RE_RUTINE_ID = "rutine_id";
     private static final String RE_EXERCISE_ID = "exercise_id";
+    private static final String RE_POSITION = "position";
     private static final String RE_REPS = "reps";
     private static final String RE_WORK_TIME = "work_time";
     private static final String RE_REST_TIME = "rest_time";
@@ -89,9 +90,10 @@ public class Database_Helper extends SQLiteOpenHelper {
         String qry_create_rutine_exercise = "CREATE TABLE " + TABLE_RE + "(" +
                 RE_RUTINE_ID + " INTEGER NOT NULL," +
                 RE_EXERCISE_ID + " INTEGER NOT NULL," +
+                RE_POSITION + " INTEGER NOT NULL," +
                 RE_REPS + " INTEGER," +
-                RE_WORK_TIME + " TEXT," +
-                RE_REST_TIME + " TEXT NOT NULL," +
+                RE_WORK_TIME + " INTEGER," +
+                RE_REST_TIME + " INTEGER NOT NULL," +
                 RE_REPEATS + " INTEGER NOT NULL," +
                 "FOREIGN KEY(" + RE_RUTINE_ID + ") REFERENCES " + TABLE_RUTINE + "(" + RUTINE_ID + ")," +
                 "FOREIGN KEY(" + RE_EXERCISE_ID + ") REFERENCES " + TABLE_EXCERCISE + "(" + EXERCISE_ID + "));";
@@ -127,10 +129,21 @@ public class Database_Helper extends SQLiteOpenHelper {
                 " (2,'Rutina mediodia', 'Porque sí.', 0,0)," +
                 " (3,'Rutina noche', 'Para dormir mejor.', 3,180);";
 
+        String qry_insert_routines_exercises = "INSERT INTO " + TABLE_RE + " VALUES" +
+                " (1, 1,1,null,30,15,4)," +
+                " (1, 2,2,null,30,15,4)," +
+                " (1, 3,3,null,30,15,4)," +
+                " (1, 4,4,null,30,15,4)," +
+                " (1, 5,5,null,30,15,4)," +
+                " (3, 6,6,null,30,15,4)," +
+                " (3, 7,7,null,30,15,4)," +
+                " (3, 8,8,null,30,15,4);";
+
 
         db.execSQL(qry_insert_types);
         db.execSQL(qry_insert_exercises);
         db.execSQL(qry_insert_routines);
+        db.execSQL(qry_insert_routines_exercises);
 
     }
 
@@ -149,7 +162,48 @@ public class Database_Helper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // To ger routines for routines view
+    // To get routines for routines view
+    public ArrayList<Rutine_Exercise> getExercises(long rutine_id){
+        ArrayList<Rutine_Exercise> exercises = new ArrayList<Rutine_Exercise>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection =   TABLE_RE + "." + RE_EXERCISE_ID + " = " + TABLE_EXCERCISE + "." + EXERCISE_ID + " AND " + TABLE_RE + "." + RE_RUTINE_ID + " = " +  rutine_id;
+        String orderBy = RE_POSITION + " ASC";
+
+        String[] columns = new String[]{
+                TABLE_RE+"."+RE_RUTINE_ID,
+                TABLE_RE+"."+RE_EXERCISE_ID,
+                TABLE_RE+"."+RE_POSITION,
+                TABLE_EXCERCISE+"."+EXERCISE_NAME,
+                TABLE_RE+"."+RE_WORK_TIME,
+                TABLE_RE+"."+RE_REST_TIME,
+                TABLE_RE+"."+RE_REPEATS};
+
+        Cursor cursor = db.query(TABLE_RE + ","+ TABLE_EXCERCISE,
+                columns,
+                selection,
+                null,
+                null,
+                null,
+                orderBy);
+
+        while(cursor.moveToNext()) {
+            int _rutine_id = cursor.getInt(cursor.getColumnIndexOrThrow(RE_RUTINE_ID));
+            int exercise_id = cursor.getInt(cursor.getColumnIndexOrThrow(RE_EXERCISE_ID));
+            int position = cursor.getInt(cursor.getColumnIndexOrThrow(RE_POSITION));
+            String exercise_name = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_NAME));
+            int workTime = cursor.getInt(cursor.getColumnIndexOrThrow(RE_WORK_TIME));
+            int restTime = cursor.getInt(cursor.getColumnIndexOrThrow(RE_REST_TIME));
+            int repeats = cursor.getInt(cursor.getColumnIndexOrThrow(RE_REPEATS));
+
+            Rutine_Exercise rutine = new Rutine_Exercise(_rutine_id, exercise_id, position, exercise_name,workTime, restTime,repeats);
+            exercises.add(rutine);
+        }
+        db.close();
+
+        return exercises;
+    }
+
+    // To get routines for routines view
     public ArrayList<Rutine> getRutines(){
         ArrayList<Rutine> routines = new ArrayList<Rutine>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -179,14 +233,14 @@ public class Database_Helper extends SQLiteOpenHelper {
         return routines;
     }
 
-    public long insertRutine(Rutine rutine){
+    public long insertRutine(Rutine routine){
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(RUTINE_NAME,rutine.name);
-        values.put(RUTINE_DESCRIPTION,rutine.Description);
-        values.put(RUTINE_EXERCISES,rutine.Exercises);
-        values.put(RUTINE_DURATION,rutine.Duration);
+        values.put(RUTINE_NAME,routine.name);
+        values.put(RUTINE_DESCRIPTION,routine.Description);
+        values.put(RUTINE_EXERCISES,routine.Exercises);
+        values.put(RUTINE_DURATION,routine.Duration);
 
         long id = db.insert(TABLE_RUTINE,null,values);
 
@@ -194,23 +248,48 @@ public class Database_Helper extends SQLiteOpenHelper {
         return id;
     }
 
-    public void updateRutine(ArrayList<Rutine> rutine){
+    public void updateRutine(Rutine routine,ArrayList<Rutine_Exercise> exercises){
+        SQLiteDatabase db = getReadableDatabase();
 
+        // Delete all related data of routine
+        String[] whereArgs = new String[]{String.valueOf(routine.id)};
+        db.delete(TABLE_RE,RE_RUTINE_ID + "=?",whereArgs);
+        db.delete(TABLE_RUTINE,RUTINE_ID + "=?",whereArgs);
+
+        // Insert routine
+        long routine_id = insertRutine(routine);
+
+        // Insert routine exercises
+        for (Rutine_Exercise exercise:exercises) {
+            add_excercises(routine_id,exercise);
+        }
+        db.close();
     }
 
     public void deleteRutine(){
-
+        // TODO: Delete routine
     }
 
-    public void add_excercises(ArrayList<Rutine_Exercise> exercises){
+    public void add_excercises(long routine_id, Rutine_Exercise exercise){
+        SQLiteDatabase db = getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put(RE_RUTINE_ID,routine_id);
+        values.put(RE_EXERCISE_ID,exercise.exercise_id);
+        values.put(RE_POSITION,exercise.position);
+        values.put(RE_WORK_TIME,exercise.work_time);
+        values.put(RE_REST_TIME,exercise.rest_time);
+        values.put(RE_REPEATS,exercise.repeats);
+
+        db.insert(TABLE_RE,null,values);
+        db.close();
     }
 
     public void update_excercises(ArrayList<Rutine_Exercise> exercises){
-
+        // TODO: Update exercise
     }
 
     public void delete_excercises(ArrayList<Rutine_Exercise> exercises){
-
+        // TODO: Delete exercise
     }
 }

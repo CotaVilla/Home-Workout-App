@@ -1,7 +1,9 @@
 package com.example.homeworkoutapp.Recyclers;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine;
+import com.example.homeworkoutapp.ui.routines.EditRoutine;
+import com.example.homeworkoutapp.ui.routines.NewRutine;
 
 import java.util.ArrayList;
 
@@ -126,9 +133,23 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                     // edit click event
                     option_edit.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        //TODO: Open Edit routine with selected routine
+
+                        //Open Edit routine with selected routine
                         public void onClick(View v) {
                             Log.d("demo","Edit: "+ rutine.name);
+                            EditRoutine newRutine = new EditRoutine(rutine);
+
+                            ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.nav_host_fragment_content_start, newRutine)
+                                    .commit();
+                            dialog.dismiss();
+                        }
+                        private Context unwrap(Context context) {
+                            while (!(context instanceof Activity) && context instanceof ContextWrapper) {
+                                context = ((ContextWrapper) context).getBaseContext();
+                            }
+
+                            return context;
                         }
                     });
 

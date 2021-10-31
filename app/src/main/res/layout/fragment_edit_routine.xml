@@ -169,7 +169,7 @@
                     android:layout_height="35dp"
                     android:background="@drawable/background_blue_button"
                     android:layout_marginLeft="10dp"
-                    android:text="Crear"
+                    android:text="Guardar"
                     android:textAppearance="@style/blue_button_text"/>
             </LinearLayout>
         </LinearLayout>

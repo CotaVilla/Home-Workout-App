@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,23 +18,28 @@ import android.widget.EditText;
 import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.Recyclers.ExerciseRutinesRecycler;
-import com.example.homeworkoutapp.Recyclers.RutinesRecycler;
-import com.example.homeworkoutapp.databinding.FragmentNewRutineBinding;
 import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class NewRutine extends Fragment {
+public class EditRoutine extends Fragment {
 
     private Context context;
     private FragmentRoutinesBinding binding;
 
-    public ArrayList<Rutine_Exercise> rutines;
+    public ArrayList<Rutine_Exercise> exercises;
+    public Rutine rutine;
     RecyclerView recycler;
+
     Database_Helper database_helper;
+
+    public EditRoutine(Rutine rutine) {
+        this.rutine = rutine;
+
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,19 +49,15 @@ public class NewRutine extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_new_rutine, container, false);
+
+        View root = inflater.inflate(R.layout.fragment_edit_routine, container, false);
         database_helper = new Database_Helper(getActivity());
+        exercises = database_helper.getExercises(rutine.id);
 
         // RecyclerView Rutinas
         recycler = (RecyclerView) root.findViewById(R.id.rutine_exercises_recycler);
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-
-        rutines = new ArrayList<Rutine_Exercise>();
-
-        for (int i =0; i<10;i++){
-            rutines.add(new Rutine_Exercise("Exercise #" + i,i));
-        }
-        ExerciseRutinesRecycler adapter = new ExerciseRutinesRecycler(rutines);
+        ExerciseRutinesRecycler adapter = new ExerciseRutinesRecycler(exercises);
         recycler.setAdapter(adapter);
         // END RecyclerView
 
@@ -66,25 +66,27 @@ public class NewRutine extends Fragment {
         AppCompatButton accept = root.findViewById(R.id.accept_add_rutine);
         AppCompatButton cancel = root.findViewById(R.id.cancel_add_rutine);
 
+        name.setText(rutine.name);
+        description.setText(rutine.Description);
+
         accept.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                CreateRutine();
+                SaveRutine();
             }
 
-            public void CreateRutine(){
-
+            public void SaveRutine(){
                 //  Get exercises of new rutine
-                rutines = ((ExerciseRutinesRecycler)recycler.getAdapter()).list_exercises;
+                exercises = ((ExerciseRutinesRecycler)recycler.getAdapter()).list_exercises;
 
                 //Get duration and exercise count
                 int rutine_id;
                 String routine_name = name.getText().toString();
                 String routine_description = description.getText().toString();
                 int routine_duration=0;
-                int routine_exercises = rutines.size();
+                int routine_exercises = exercises.size();
 
-                for (Rutine_Exercise rutine:rutines) {
+                for (Rutine_Exercise rutine: exercises) {
                     routine_duration += (rutine.work_time+rutine.rest_time) * rutine.repeats;
                 }
 
@@ -133,5 +135,4 @@ public class NewRutine extends Fragment {
 
         return root;
     }
-
 }

@@ -38,7 +38,7 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
         Rutine_Exercise object = list_exercises.get(position);
 
         holder.rutine_exercise = object;
-        holder.excercise_name.setText(object.exercise);
+        holder.excercise_name.setText(object.exercise_name);
         holder.workout_time.setText("Ejercicio: " + object.work_time + " sec");
         holder.rest_time.setText("Descanso: " + object.rest_time + " sec");
         holder.repeats.setText("Repeticiones: " + object.repeats + " sec");
@@ -109,7 +109,7 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
             btn_options.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    Log.d("demo","Options of: "+ rutine_exercise.exercise);
+                    Log.d("demo","Options of: "+ rutine_exercise.exercise_name);
                     showDialog();
                 }
 
@@ -124,7 +124,7 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
                     TextView option_duplicate = dialog.findViewById(R.id.rutine_option_duplicate);
                     TextView option_delete = dialog.findViewById(R.id.rutine_option_delete);
 
-                    option_title.setText(rutine_exercise.exercise + " > Opciones");
+                    option_title.setText(rutine_exercise.exercise_name + " > Opciones");
 
                     // edit click event
                     option_edit.setOnClickListener(new View.OnClickListener() {
