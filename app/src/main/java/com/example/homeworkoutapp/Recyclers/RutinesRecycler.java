@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine;
+import com.example.homeworkoutapp.ui.play.PlayFragment;
 import com.example.homeworkoutapp.ui.routines.EditRoutine;
 import com.example.homeworkoutapp.ui.routines.NewRutine;
 
@@ -90,15 +91,6 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
             options = itemView.findViewById(R.id.btn_options);
 
 
-
-            // Listen click on all the item
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.d("demo","onClick: al item se le hizo clic");
-                }
-            });
-
             // Listen click on just the options
             options.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -127,32 +119,27 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                         // TODO: Sent routine to play
                         public void onClick(View v) {
                             Log.d("demo","Play: "+ rutine.name);
+                            PlayFragment playFragment = new PlayFragment(rutine);
+                            FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.nav_host_fragment_content_start, playFragment);
+                            fragmentTransaction.commit();
+                            dialog.dismiss();
                         }
                     });
 
                     // edit click event
                     option_edit.setOnClickListener(new View.OnClickListener() {
                         @Override
-
                         //Open Edit routine with selected routine
                         public void onClick(View v) {
                             Log.d("demo","Edit: "+ rutine.name);
                             EditRoutine newRutine = new EditRoutine(rutine);
-
                             ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.nav_host_fragment_content_start, newRutine)
                                     .commit();
                             dialog.dismiss();
                         }
-                        private Context unwrap(Context context) {
-                            while (!(context instanceof Activity) && context instanceof ContextWrapper) {
-                                context = ((ContextWrapper) context).getBaseContext();
-                            }
-
-                            return context;
-                        }
                     });
-
                     // duplicate click event
                     option_duplicate.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -174,6 +161,15 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                     dialog.show();
                 }
             });
+        }
+
+        // for unwraping context in dialog
+        private Context unwrap(Context context) {
+            while (!(context instanceof Activity) && context instanceof ContextWrapper) {
+                context = ((ContextWrapper) context).getBaseContext();
+            }
+
+            return context;
         }
     }
 }

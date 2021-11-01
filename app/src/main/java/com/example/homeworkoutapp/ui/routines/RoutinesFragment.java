@@ -44,7 +44,6 @@ public class RoutinesFragment extends Fragment {
         View root = binding.getRoot();
 
         // RecyclerView Rutinas
-
         recycler = (RecyclerView) root.findViewById(R.id.rutines_recycler);
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
