@@ -113,16 +113,47 @@ public class Database_Helper extends SQLiteOpenHelper {
                 " (6,'arms');";
 
         String qry_insert_exercises = "INSERT INTO " + TABLE_EXCERCISE + " VALUES" +
-                " (1,5,'Sentadilla',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (2,4,'Plancha',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (3,4,'Plancha lateral derecha',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (4,4,'Plancha lateral izquierda',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (5,1,'Saltos de Tijera',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (6,5,'Zancada frontal',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (7,4,'Abdominales',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (8,6,'Flexiones Diamante',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (9,6,'Flexiones',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL)," +
-                " (10,4,'Abdominales con piernas elevadas',NULL,'app/src/main/res/drawable/exercises_img/default_img.jpg',NULL);";
+                " (1,5,'Sentadilla','Debes mantener la cabeza horizontal. \n" +
+                "- Los pies deben colocarse al ancho de los hombros. \n" +
+                "- La rodilla, durante la flexión, no debe sobrepasar la punta de los pies. \n" +
+                "- No se debe flexionar demasiado.\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Mantén un equilibrio apoyándote de los brazos')," +
+
+                " (2,4,'Plancha','Ponte en posición de flexión de brazos, con los codos por debajo de los hombros y los pies separados a lo ancho de las caderas. \n" +
+                "Flexione los codos y apoye el peso en los antebrazos y en los dedos de los pies, manteniendo el cuerpo en línea recta. \n" +
+                "Aguanta el mayor tiempo posible.\n" +
+                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Mantén los brazos separados y no bajes la pelvis')," +
+
+                " (3,4,'Plancha lateral derecha','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
+                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Posiciona un pie al frente para mantener el equilibrio\n')," +
+
+                " (4,4,'Plancha lateral izquierda','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
+                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Posiciona un pie al frente para mantener el equilibrio')," +
+
+                " (5,1,'Saltos de Tijera','Párate derecho con los pies juntos y las manos a los lados. \n" +
+                "Salte, abra los pies y ponga ambas manos juntas sobre su cabeza. \n" +
+                "Saltar de nuevo y volver a la posición inicial. \n" +
+                "Repita hasta que el juego esté completo\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Estira completamente los brazos y no abras demasiado las piernas en el salto')," +
+
+                " (6,5,'Zancada frontal','Baja la cadera hasta que el cuádriceps queda paralelo al suelo \n" +
+                "La pierna de atrás se flexiona hasta que casi tocamos el suelo con la rodilla que forma un ángulo de 90 grados. \n" +
+                "Volvemos a posición inicial y para hacerlo nos impulsamos con la pierna adelantada, apoya bien la planta del pie en el suelo para conseguir la fuerza.\n" +
+                "Alternar piernas\n','app/src/main/res/drawable/exercises_img/default_img.jpg',' mantente siempre erguido mirando hacia el frente')," +
+
+                " (7,4,'Abdominales','Túmbate boca arriba con las rodillas dobladas, si es posible sobre una colchoneta. \n" +
+                "Las rodillas deben doblarse en un ángulo que permita a los talones quedar lo más cerca posible de la parte anterior de los muslos.\n" +
+                "Apoya las manos sobre la cabeza, finalmente acerca el torso a las rodillas sin levantar la espalda del suelo\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
+
+                " (8,6,'Flexiones Diamante','Ponte en posición como si hicieras flexiones “comunes” pero, en lugar de colocar los brazos a los costados del cuerpo, debes apoyar las manos por delante del pecho. \n" +
+                "Los dedos índice y los pulgares se deben tocar (formando un corazón o un diamante, de allí el nombre del ejercicio).\n" +
+                "\n" +
+                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta')," +
+
+                " (9,6,'Flexiones','Coloca las manos alineadas a la altura de los hombros, justo debajo. \n" +
+                "Separa los dedos de la mano para que puedas soportar mejor tu propio peso. \n','app/src/main/res/drawable/exercises_img/default_img.jpg','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación\n')," +
+
+                " (10,4,'Abdominales con piernas elevadas','Acostarse en el piso,elevar las piernas hasta un ángulo de 90° , sin flexionar\n" +
+                "Bajarlas lentamente hasta casi tocar el piso,\n" +
+                "Repetir\n','app/src/main/res/drawable/exercises_img/default_img.jpg','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen');";
 
         String qry_insert_routines = "INSERT INTO " + TABLE_RUTINE + " VALUES" +
                 " (1,'Rutina mañanera', 'Para las mañanas hermosas', 5,360)," +
