@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,12 +69,7 @@ public class RoutinesFragment extends Fragment {
         super.onViewCreated(view,savedInstanceState);
         binding.addRutine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                NewRutine newRutine = new NewRutine();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.addToBackStack("rutines");
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_start,newRutine);
-                fragmentTransaction.commit();
+                Navigation.findNavController(v).navigate(R.id.newRutine);
             }
         });
 
