@@ -78,7 +78,7 @@ public class FilterRecycler extends RecyclerView.Adapter<FilterRecycler.itemFilt
                 @Override
                 public void onClick(View v){
                     selected = getItemId();
-                    currentFragment.setFilter(filter.description, filter.filter_id);
+                    currentFragment.setFilter(filter.filter_id, filter.description);
                     Log.d("demo","Click on filter.");
                 }
             });

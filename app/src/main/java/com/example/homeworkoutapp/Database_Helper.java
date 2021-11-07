@@ -285,6 +285,8 @@ public class Database_Helper extends SQLiteOpenHelper {
                 null,
                 null);
 
+        Filter nofilter = new Filter(0,"Todos", "ic_all_exercises");
+        filters.add(nofilter);
         while(cursor.moveToNext()) {
             int filter_id = cursor.getInt(cursor.getColumnIndexOrThrow(TYPE_ID));
             String description = cursor.getString(cursor.getColumnIndexOrThrow(TYPE_CLASIFICATION));
@@ -336,9 +338,6 @@ public class Database_Helper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Exercise> get_excercises(int type_id , String name){
-
-
-
         ArrayList<Exercise> exercises = new ArrayList<Exercise>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
@@ -348,17 +347,17 @@ public class Database_Helper extends SQLiteOpenHelper {
 
         String orderBy = EXERCISE_NAME + " ASC";
 
-        if (type_id == 0 && name == null){
+        if (type_id == 0 && (name == null || name.equals(""))){
             selection = null;
         }
-        else if (type_id == 0 && name != null){
-            selection = EXERCISE_NAME + " LIKE " + name;
+        else if (type_id == 0 && !(name == null || name.equals(""))){
+            selection = EXERCISE_NAME + " LIKE '%" + name + "%'";
         }
-        else if (type_id !=0 && name == null){
+        else if (type_id != 0 && (name == null || name.equals(""))){
             selection =   EXERCISE_TYPE_ID + " = " +  type_id;
         }
-        else if(type_id != 0 && name != null) {
-            selection =   EXERCISE_TYPE_ID + " = " +  type_id + EXERCISE_NAME + " LIKE " + name;
+        else if(type_id != 0 && !(name == null || name.equals(""))) {
+            selection =   EXERCISE_TYPE_ID + " = " +  type_id + " AND "+ EXERCISE_NAME + " LIKE '%" + name + "%'";
         }
 
         cursor = db.query(TABLE_EXCERCISE,

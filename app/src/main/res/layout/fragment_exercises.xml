@@ -23,8 +23,7 @@
         android:id="@+id/filter_recycler"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginHorizontal="20dp"/>
 
     <TextView
         android:id="@+id/selected_filter"
@@ -34,6 +33,34 @@
         android:layout_marginRight="20dp"
         style="@style/filter_text"
         android:text="Seleccionado: " />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar por nombre:"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/filter_text"/>
+
+        <EditText
+            android:id="@+id/excercise_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Nombre del ejercicio"
+            android:drawableStart="@drawable/ic_search"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="7dp"
+            android:background="@drawable/input_container"
+            android:textAppearance="@style/label_input_text"/>
+    </LinearLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exercises_recycler"

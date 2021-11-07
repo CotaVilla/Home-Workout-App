@@ -12,9 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,30 +40,36 @@ public class ExercisesFragment extends Fragment {
     private ExercisesViewModel exercisesViewModel;
     private FragmentExercisesBinding binding;
     private Fragment currentFragment;
+
     Database_Helper database_helper;
     FilterRecycler adapter_filters;
     ExercisesRecycler adapter_exercises;
 
-
-    ArrayList<Exercise> exersices;
-    ArrayList<Filter> filters;
     RecyclerView recycler;
     LinearLayout no_exercises;
     TextView selected_filter;
+    EditText name_filter;
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        selected_filter = getActivity().findViewById(R.id.selected_filter);
-    }
+    ArrayList<Exercise> exersices;
+    ArrayList<Filter> filters;
+    int filter_id;
+    String filter_description;
+    String name_search;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        exercisesViewModel =
-                new ViewModelProvider(this).get(ExercisesViewModel.class);
 
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        exercisesViewModel = new ViewModelProvider(this).get(ExercisesViewModel.class);
         binding = FragmentExercisesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        filter_id = 0;
+        filter_description = "Todo";
+        name_search = null;
+
+        name_filter = root.findViewById(R.id.excercise_name);
+        selected_filter = root.findViewById(R.id.selected_filter);
+        selected_filter.setText(filter_description);
 
         // RecyclerView Exercises
         no_exercises = root.findViewById(R.id.no_excercises);
@@ -76,19 +85,44 @@ public class ExercisesFragment extends Fragment {
         recycler = (RecyclerView) root.findViewById(R.id.exercises_recycler);
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
-        exersices = database_helper.get_excercises(0,null);
+        exersices = database_helper.get_excercises(0,name_search);
         adapter_exercises = new ExercisesRecycler(exersices);
         recycler.setAdapter(adapter_exercises);
 
         // END RecyclerView
 
+        name_filter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                name_search = name_filter.getText().toString();
+                search_exercises();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         return root;
     }
 
-    public void setFilter(String description, int filter_id){
-        selected_filter.setText("Seleccionado: " + description);
+    public void setFilter(int filter_id, String description) {
+        filter_description = description;
+        this.filter_id = filter_id;
 
-        exersices = database_helper.get_excercises(filter_id,null);
+        selected_filter.setText("Seleccionado: " + filter_description);
+
+        search_exercises();
+    }
+
+    public void search_exercises(){
+        exersices = database_helper.get_excercises(filter_id,name_search);
 
         if(exersices.isEmpty()){
             recycler.setVisibility(View.GONE);
