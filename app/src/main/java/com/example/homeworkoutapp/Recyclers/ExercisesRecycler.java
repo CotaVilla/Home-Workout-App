@@ -16,34 +16,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
+import com.example.homeworkoutapp.objects.Exercise;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.Exercise> {
-    ArrayList<String> list_exercises;
+public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.itemExercise> {
+    ArrayList<Exercise> list_exercises;
 
-    public ExercisesRecycler(ArrayList<String> list_exercises) {
+    public ExercisesRecycler(ArrayList<Exercise> list_exercises) {
         this.list_exercises = list_exercises;
     }
 
     @NonNull
     @Override
-    public ExercisesRecycler.Exercise onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ExercisesRecycler.itemExercise onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_excersice,null,false);
-        Exercise exercise = new Exercise(view);
+        itemExercise exercise = new itemExercise(view);
         return exercise;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Exercise holder, int position) {
-        String name = list_exercises.get(position);
-
-        holder.name.setText(name);
-        holder.filter = name;
-        holder.excercise_description.setText("Ejemplo de descripcion.");
-
-
+    public void onBindViewHolder(@NonNull itemExercise holder, int position) {
+        Exercise object = list_exercises.get(position);
+        holder.exercise = object;
+        holder.name.setText(object.name);
+        holder.excercise_description.setText(object.description);
     }
 
     @Override
@@ -51,16 +49,16 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.Ex
         return list_exercises.size();
     }
 
-    public class Exercise extends RecyclerView.ViewHolder {
+    public class itemExercise extends RecyclerView.ViewHolder {
         private Context context;
 
+        Exercise exercise;
         // Objects in item exercise item
         ImageView options;
         TextView name;
         TextView excercise_description;
-        String filter;
 
-        public Exercise(@NonNull View itemView) {
+        public itemExercise(@NonNull View itemView) {
             super(itemView);
 
             context = itemView.getContext();
@@ -87,13 +85,13 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.Ex
                     TextView option_open = dialog.findViewById(R.id.excercise_option_open);
                     TextView option_hide = dialog.findViewById(R.id.excercise_option_hide);
 
-                    option_title.setText("Opciones > " + filter);
+                    option_title.setText("Opciones > " + exercise.name);
 
                     // play click event
                     option_open.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("demo","Play: "+ filter);
+                            Log.d("demo","Play: "+ exercise.name);
                         }
                     });
 
@@ -101,7 +99,7 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.Ex
                     option_hide.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("demo","Edit: "+ filter);
+                            Log.d("demo","Edit: "+ exercise.name);
                         }
                     });
 
@@ -110,4 +108,7 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.Ex
             });
         }
     }
+    public void changeExercises(ArrayList<Exercise> exercises){
+        list_exercises = exercises;
+    };
 }

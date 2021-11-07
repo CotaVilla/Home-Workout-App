@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:gravity="center">
-
-    <LinearLayout
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        android:layout_margin="3dp"
-        android:background="@drawable/filter_cirlce">
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/itemFilter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="2dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/blue">
         <ImageView
             android:id="@+id/filter_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_missing_image" />
-    </LinearLayout>
-
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="2dp"
+            android:src="@drawable/ic_no_image" />
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

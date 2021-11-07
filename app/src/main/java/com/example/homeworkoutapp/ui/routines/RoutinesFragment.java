@@ -1,5 +1,6 @@
 package com.example.homeworkoutapp.ui.routines;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +25,7 @@ import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
 import com.example.homeworkoutapp.Recyclers.RutinesRecycler;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
+import com.example.homeworkoutapp.ui.play.PlayFragment;
 
 import java.util.ArrayList;
 
@@ -69,7 +71,11 @@ public class RoutinesFragment extends Fragment {
         super.onViewCreated(view,savedInstanceState);
         binding.addRutine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                Navigation.findNavController(v).navigate(R.id.newRutine);
+                NewRutine newRutine = new NewRutine();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_start, newRutine);
+                fragmentTransaction.commit();
             }
         });
 

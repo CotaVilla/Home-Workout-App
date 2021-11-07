@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +21,6 @@ import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.ui.play.PlayFragment;
 import com.example.homeworkoutapp.ui.routines.EditRoutine;
-import com.example.homeworkoutapp.ui.routines.NewRutine;
 
 import java.util.ArrayList;
 
@@ -98,78 +97,103 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                     Log.d("demo","A click was made on item: "+ rutine.name);
                     showDialog();
                 }
-
-                // Show options menu of the rutine
-                public void showDialog(){
-
-                    Dialog dialog = new Dialog(context);
-                    dialog.setContentView(R.layout.options_rutine);
-
-                    TextView option_title = dialog.findViewById(R.id.rutine_options_title);
-                    TextView option_play = dialog.findViewById(R.id.rutine_option_play);
-                    TextView option_edit = dialog.findViewById(R.id.rutine_option_edit);
-                    TextView option_duplicate = dialog.findViewById(R.id.rutine_option_duplicate);
-                    TextView option_delete = dialog.findViewById(R.id.rutine_option_delete);
-
-                    option_title.setText("Opciones > " + rutine.name);
-
-                    // play click event
-                    option_play.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        // TODO: Sent routine to play
-                        public void onClick(View v) {
-                            Log.d("demo","Play: "+ rutine.name);
-                            PlayFragment playFragment = new PlayFragment(rutine);
-                            FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
-                            fragmentTransaction.replace(R.id.nav_host_fragment_content_start, playFragment);
-                            fragmentTransaction.commit();
-                            dialog.dismiss();
-                        }
-                    });
-
-                    // edit click event
-                    option_edit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        //Open Edit routine with selected routine
-                        public void onClick(View v) {
-                            Log.d("demo","Edit: "+ rutine.name);
-                            EditRoutine newRutine = new EditRoutine(rutine);
-                            ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.nav_host_fragment_content_start, newRutine)
-                                    .commit();
-                            dialog.dismiss();
-                        }
-                    });
-                    // duplicate click event
-                    option_duplicate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        //TODO: Duplicate routine with a slightly different name
-                        public void onClick(View v) {
-                            Log.d("demo","Duplicate: "+ rutine.name);
-                        }
-                    });
-
-                    // option_delete click event
-                    option_delete.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        //TODO: delete routine from database and reload routines
-
-                        public void onClick(View v) {
-                            Log.d("demo","Delete: "+ rutine.name);
-                        }
-                    });
-                    dialog.show();
-                }
             });
         }
 
-        // for unwraping context in dialog
-        private Context unwrap(Context context) {
-            while (!(context instanceof Activity) && context instanceof ContextWrapper) {
-                context = ((ContextWrapper) context).getBaseContext();
-            }
+        // Show options menu of the rutine
+        public void showDialog(){
 
-            return context;
+            Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.options_rutine);
+
+            TextView option_title = dialog.findViewById(R.id.rutine_options_title);
+            TextView option_play = dialog.findViewById(R.id.rutine_option_play);
+            TextView option_edit = dialog.findViewById(R.id.rutine_option_edit);
+            TextView option_duplicate = dialog.findViewById(R.id.rutine_option_duplicate);
+            TextView option_delete = dialog.findViewById(R.id.rutine_option_delete);
+
+            option_title.setText("Opciones > " + rutine.name);
+
+            Dialog errorDialog = new Dialog(context);
+            errorDialog.setContentView(R.layout.dialog_no_exercises);
+
+            AppCompatButton aceptar = errorDialog.findViewById(R.id.accept_error);
+
+            aceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    errorDialog.dismiss();
+                }
+            });
+
+
+
+            // play click event
+            option_play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                // TODO: Sent routine to play
+                public void onClick(View v) {
+                    Log.d("demo","Play: "+ rutine.name);
+                    if(rutine.Exercises!=0){
+                        PlayFragment playFragment = new PlayFragment(rutine);
+                        FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_start, playFragment);
+                        fragmentTransaction.commit();
+                        dialog.dismiss();
+                    }
+                    else{
+                        errorDialog.show();
+                        dialog.dismiss();
+                    }
+
+                }
+            });
+
+            // edit click event
+            option_edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //Open Edit routine with selected routine
+                public void onClick(View v) {
+                    Log.d("demo","Edit: "+ rutine.name);
+                    EditRoutine newRutine = new EditRoutine(rutine);
+                    ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.nav_host_fragment_content_start, newRutine)
+                            .commit();
+                    dialog.dismiss();
+                }
+            });
+            // duplicate click event
+            option_duplicate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //TODO: Duplicate routine with a slightly different name
+                public void onClick(View v) {
+                    Log.d("demo","Duplicate: "+ rutine.name);
+                }
+            });
+
+            // option_delete click event
+            option_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                //TODO: delete routine from database and reload routines
+
+                public void onClick(View v) {
+                    Log.d("demo","Delete: "+ rutine.name);
+                }
+            });
+            dialog.show();
         }
+
     }
+
+    // for unwrapping context in dialog
+    private Context unwrap(Context context) {
+        while (!(context instanceof Activity) && context instanceof ContextWrapper) {
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+
+        return context;
+    }
+
 }

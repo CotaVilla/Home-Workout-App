@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/white_container_big_corners"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="5">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/rutine_options_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="Oh oh!"
+            android:textAppearance="@style/options_title" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/rutine_option_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:text="La rutina que quieres reproducir no tiene ejercicios. Agrega unos para reproducirla."
+            android:textAppearance="@style/options_content" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/accept_error"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="5dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="Entendido"
+            android:background="@drawable/background_blue_button"
+            android:textAppearance="@style/blue_button_text"/>
+
+    </LinearLayout>
+
+</LinearLayout>

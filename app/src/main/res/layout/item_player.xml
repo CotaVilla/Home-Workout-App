@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:background="@drawable/round_container_blue"
@@ -47,11 +46,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/fase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/fase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -100,7 +99,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/player_next"
+                android:id="@+id/player_previous"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_go_back"
@@ -126,7 +125,7 @@
                 android:backgroundTint="@color/transparent"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/player_previous"
+                android:id="@+id/player_next"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_go_next"

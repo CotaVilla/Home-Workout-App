@@ -9,10 +9,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.homeworkoutapp.objects.Exercise;
+import com.example.homeworkoutapp.objects.Filter;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Database_Helper extends SQLiteOpenHelper {
 
@@ -52,6 +55,7 @@ public class Database_Helper extends SQLiteOpenHelper {
     private static  final String TABLE_TYPE = "type";
     private static final String TYPE_ID = "id";
     private static final String TYPE_CLASIFICATION = "clasification";
+    private static final String TYPE_IMAGE = "location";
 
     public Database_Helper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,7 +67,8 @@ public class Database_Helper extends SQLiteOpenHelper {
 
         String qry_create_type = "CREATE TABLE " + TABLE_TYPE + " (" +
                 TYPE_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                TYPE_CLASIFICATION + " TEXT NOT NULL UNIQUE);";
+                TYPE_CLASIFICATION + " TEXT NOT NULL UNIQUE," +
+                TYPE_IMAGE + " TEXT NOT NULL);";
 
         String qry_create_exercise = "CREATE TABLE " + TABLE_EXCERCISE + "(" +
                 EXERCISE_ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -105,12 +110,13 @@ public class Database_Helper extends SQLiteOpenHelper {
         db.execSQL(qry_create_rutine_exercise);
 
         String qry_insert_types = "INSERT INTO " + TABLE_TYPE + " VALUES" +
-                " (1,'full_body')," +
-                " (2,'neck')," +
-                " (3,'chest')," +
-                " (4,'abdomen')," +
-                " (5,'legs')," +
-                " (6,'arms');";
+                " (1,'Completo','ic_body')," +
+                " (2,'Cuello','ic_neck')," +
+                " (3,'Pecho','ic_chest_true')," +
+                " (4,'Abdomen','ic_abs')," +
+                " (5,'Piernas','ic_legs')," +
+                " (6,'Brazo','ic_arm')," +
+                " (7,'Espalda','ic_back');";
 
         String qry_insert_exercises = "INSERT INTO " + TABLE_EXCERCISE + " VALUES" +
                 " (1,5,'Sentadilla','Debes mantener la cabeza horizontal. \n" +
@@ -264,6 +270,34 @@ public class Database_Helper extends SQLiteOpenHelper {
         return routines;
     }
 
+    // To get routines for routines view
+    public ArrayList<Filter> getFilters(){
+        ArrayList<Filter> filters = new ArrayList<Filter>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] columns = new String[]{TYPE_ID,TYPE_CLASIFICATION,TYPE_IMAGE};
+
+        Cursor cursor = db.query(TABLE_TYPE,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        while(cursor.moveToNext()) {
+            int filter_id = cursor.getInt(cursor.getColumnIndexOrThrow(TYPE_ID));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(TYPE_CLASIFICATION));
+            String image_path = cursor.getString(cursor.getColumnIndexOrThrow(TYPE_IMAGE));
+
+            Filter filter = new Filter(filter_id, description, image_path);
+            filters.add(filter);
+        }
+        db.close();
+
+        return filters;
+    }
+
     public long insertRutine(Rutine routine){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -299,6 +333,55 @@ public class Database_Helper extends SQLiteOpenHelper {
 
     public void deleteRutine(){
         // TODO: Delete routine
+    }
+
+    public ArrayList<Exercise> get_excercises(int type_id , String name){
+
+
+
+        ArrayList<Exercise> exercises = new ArrayList<Exercise>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        String selection = "";
+
+        String[] columns = new String[]{EXERCISE_ID,EXERCISE_TYPE_ID,EXERCISE_NAME, EXERCISE_DESCRIPTION,EXERCISE_GIF_LOCATION,EXERCISE_TIPS};
+
+        String orderBy = EXERCISE_NAME + " ASC";
+
+        if (type_id == 0 && name == null){
+            selection = null;
+        }
+        else if (type_id == 0 && name != null){
+            selection = EXERCISE_NAME + " LIKE " + name;
+        }
+        else if (type_id !=0 && name == null){
+            selection =   EXERCISE_TYPE_ID + " = " +  type_id;
+        }
+        else if(type_id != 0 && name != null) {
+            selection =   EXERCISE_TYPE_ID + " = " +  type_id + EXERCISE_NAME + " LIKE " + name;
+        }
+
+        cursor = db.query(TABLE_EXCERCISE,
+                columns,
+                selection,
+                null,
+                null,
+                null,
+                orderBy);
+
+        while(cursor.moveToNext()) {
+            int exercise_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_ID));
+            int _type_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_TYPE_ID));
+            String namecursor = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_NAME));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_DESCRIPTION));
+            String gifLocation = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_GIF_LOCATION));
+            String tips = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_TIPS));
+            Exercise exercise = new Exercise(exercise_id, _type_id, namecursor, description, gifLocation, tips);
+            exercises.add(exercise);
+        }
+        db.close();
+
+        return exercises;
     }
 
     public void add_excercises(long routine_id, Rutine_Exercise exercise){

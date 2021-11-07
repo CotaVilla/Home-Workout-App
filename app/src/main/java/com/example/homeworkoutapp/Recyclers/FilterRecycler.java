@@ -3,48 +3,48 @@ package com.example.homeworkoutapp.Recyclers;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
+import com.example.homeworkoutapp.objects.Filter;
+import com.example.homeworkoutapp.ui.exercises.ExercisesFragment;
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class FilterRecycler extends RecyclerView.Adapter<FilterRecycler.Filter>{
+public class FilterRecycler extends RecyclerView.Adapter<FilterRecycler.itemFilter>{
 
-    ArrayList<String> list_filters;
+    ArrayList<Filter> list_filters;
+    private ExercisesFragment currentFragment;
 
-    public FilterRecycler(ArrayList<String> listRutines) {
+    public FilterRecycler(ArrayList<Filter> listRutines, ExercisesFragment exercisesFragment) {
+        this.currentFragment = exercisesFragment;
         this.list_filters = listRutines;
     }
 
     @NonNull
     @Override
-    public Filter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public itemFilter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filter_exercises,null,false);
-        FilterRecycler.Filter rutine = new FilterRecycler.Filter(view);
+        itemFilter rutine = new itemFilter(view);
         return rutine;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Filter holder, int position) {
-        String filter_type = list_filters.get(position);
-        String image_path = "";
-
-        File imgFile = new File(image_path);
-
-        if(imgFile.exists()){
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            holder.image.setImageBitmap(myBitmap);
-        }
+    public void onBindViewHolder(@NonNull itemFilter holder, int position) {
+        Filter object = list_filters.get(position);
+        holder.image.setImageDrawable(getMyDrawable(holder.context,object.image_location));
+        holder.filter = object;
     }
 
     @Override
@@ -52,28 +52,40 @@ public class FilterRecycler extends RecyclerView.Adapter<FilterRecycler.Filter>{
         return list_filters.size();
     }
 
-    public class Filter extends RecyclerView.ViewHolder {
+    public class itemFilter extends RecyclerView.ViewHolder {
         private Context context;
+
+        private long selected;
+
+        Filter filter;
 
         // Objects in item rutine
         ImageView image;
+        MaterialCardView cotainer;
 
 
-        public Filter(@NonNull View itemView) {
+        public itemFilter(@NonNull View itemView) {
             super(itemView);
 
             context = itemView.getContext();
 
             // Getting id's of objects in item
             image = itemView.findViewById(R.id.filter_image);
+            cotainer = itemView.findViewById(R.id.itemFilter);
 
             // Listen click on all the item
-            itemView.setOnClickListener(new View.OnClickListener(){
+            cotainer.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
+                    selected = getItemId();
+                    currentFragment.setFilter(filter.description, filter.filter_id);
                     Log.d("demo","Click on filter.");
                 }
             });
         }
+    }
+
+    Drawable getMyDrawable(Context c,String ImageName) {
+        return c.getResources().getDrawable(c.getResources().getIdentifier(ImageName, "drawable", c.getPackageName()));
     }
 }
