@@ -6,8 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.routines.RoutinesFragment">
 
-    <include layout="@layout/fragment_title"
-        android:id="@+id/frag_title"/>
+    <include layout="@layout/fragment_title"/>
 
 
     <TextView
@@ -60,8 +59,6 @@
             android:textAppearance="@style/label_input_text"/>
     </LinearLayout>
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exercises_recycler"
         android:layout_width="match_parent"
@@ -89,9 +86,6 @@
             android:text="No se encontraron ejercicios."
             android:textAppearance="@style/no_exercises"/>
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>

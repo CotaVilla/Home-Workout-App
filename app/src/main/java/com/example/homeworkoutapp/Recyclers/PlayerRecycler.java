@@ -132,9 +132,9 @@ public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPl
     }
 
     public void resetSelection(){
+        lastItemSelectedPos = selectedItemPos;
         selectedItemPos=0;
         notifyItemChanged(selectedItemPos);
-        lastItemSelectedPos++;
         notifyItemChanged(lastItemSelectedPos);
     }
 

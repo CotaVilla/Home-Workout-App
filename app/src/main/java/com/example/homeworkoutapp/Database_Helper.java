@@ -79,18 +79,18 @@ public class Database_Helper extends SQLiteOpenHelper {
                 EXERCISE_TIPS + " TEXT," +
                 "FOREIGN KEY(" + EXERCISE_TYPE_ID + ") REFERENCES " + TABLE_TYPE + "(" + TYPE_ID + "));";
 
+        String qry_create_table_step = "CREATE TABLE " + TABLE_STEP + "(" +
+                STEP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                STEP_EXERCISE_ID + " INTEGER NOT NULL," +
+                STEP_DESCRIPTION + " TEXT," +
+                "FOREIGN KEY(" + STEP_EXERCISE_ID + ") REFERENCES " + TABLE_EXCERCISE + "(" + EXERCISE_ID +"));";
+
         String qry_create_rutine = "CREATE TABLE " + TABLE_RUTINE +"(" +
                 RUTINE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 RUTINE_NAME + " TEXT NOT NULL," +
                 RUTINE_DESCRIPTION + " TEXT," +
                 RUTINE_EXERCISES + " INTEGER," +
                 RUTINE_DURATION + " INTEGER);";
-
-        String qry_create_table_step = "CREATE TABLE " + TABLE_STEP + "(" +
-                STEP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                STEP_EXERCISE_ID + " INTEGER NOT NULL," +
-                STEP_DESCRIPTION + " TEXT," +
-                "FOREIGN KEY(" + STEP_EXERCISE_ID + ") REFERENCES " + TABLE_EXCERCISE + "(" + EXERCISE_ID +"));";
 
         String qry_create_rutine_exercise = "CREATE TABLE " + TABLE_RE + "(" +
                 RE_RUTINE_ID + " INTEGER NOT NULL," +
@@ -195,7 +195,6 @@ public class Database_Helper extends SQLiteOpenHelper {
         db.execSQL(drop_rutine_exercise);
         db.execSQL(drop_exercise);
         db.execSQL(drop_rutine);
-
         onCreate(db);
     }
 
@@ -285,7 +284,7 @@ public class Database_Helper extends SQLiteOpenHelper {
                 null,
                 null);
 
-        Filter nofilter = new Filter(0,"Todos", "ic_all_exercises");
+        Filter nofilter = new Filter(0,"Todos", "ic_todo");
         filters.add(nofilter);
         while(cursor.moveToNext()) {
             int filter_id = cursor.getInt(cursor.getColumnIndexOrThrow(TYPE_ID));

@@ -45,6 +45,7 @@ public class ExercisesFragment extends Fragment {
     FilterRecycler adapter_filters;
     ExercisesRecycler adapter_exercises;
 
+    TextView title;
     RecyclerView recycler;
     LinearLayout no_exercises;
     TextView selected_filter;
@@ -64,12 +65,14 @@ public class ExercisesFragment extends Fragment {
         View root = binding.getRoot();
 
         filter_id = 0;
-        filter_description = "Todo";
+        filter_description = "Seleccionado: Todos";
         name_search = null;
 
         name_filter = root.findViewById(R.id.excercise_name);
         selected_filter = root.findViewById(R.id.selected_filter);
         selected_filter.setText(filter_description);
+        title = root.findViewById(R.id.frag_title);
+        title.setText("Ejercicios");
 
         // RecyclerView Exercises
         no_exercises = root.findViewById(R.id.no_excercises);
@@ -77,7 +80,9 @@ public class ExercisesFragment extends Fragment {
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         database_helper = new Database_Helper(getActivity());
         filters = database_helper.getFilters();
+
         adapter_filters = new FilterRecycler(filters, this);
+
         recycler.setAdapter(adapter_filters);
         // END RecyclerView
 

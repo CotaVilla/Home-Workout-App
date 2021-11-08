@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
@@ -35,6 +36,7 @@ public class RoutinesFragment extends Fragment {
     private RoutinesViewModel routinesViewModel;
     private FragmentRoutinesBinding binding;
 
+    TextView title;
 
     // RecyclerView
     ArrayList<Rutine> rutines;
@@ -45,6 +47,9 @@ public class RoutinesFragment extends Fragment {
 
         binding = FragmentRoutinesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        title = root.findViewById(R.id.frag_title);
+        title.setText("Rutinas");
 
         // RecyclerView Rutinas
         recycler = (RecyclerView) root.findViewById(R.id.rutines_recycler);
@@ -62,8 +67,6 @@ public class RoutinesFragment extends Fragment {
 
 
         return root;
-        /*binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
-        return  binding.getRoot();*/
     }
 
     @Override

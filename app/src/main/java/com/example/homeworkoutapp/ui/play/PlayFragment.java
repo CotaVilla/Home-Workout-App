@@ -184,7 +184,7 @@ public class PlayFragment extends Fragment {
             @Override
             public void onFinish() {
                 countDownTimer.cancel();
-                if((actuaRepeat != repeats) || !rest){
+                if((actuaRepeat != repeats) || rest){
                     nextTimer();
                 }
                 else {
