@@ -17,10 +17,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.ui.play.PlayFragment;
 import com.example.homeworkoutapp.ui.routines.EditRoutine;
+import com.example.homeworkoutapp.ui.routines.RoutinesFragment;
 
 import java.util.ArrayList;
 
@@ -31,9 +33,12 @@ import java.util.ArrayList;
 public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine_item>{
 
     ArrayList<Rutine> listRutines;
+    Context context;
+    private RoutinesFragment currentFragment;
 
     // Constructor of the class
-    public RutinesRecycler(ArrayList<Rutine> listRutines){
+    public RutinesRecycler(ArrayList<Rutine> listRutines, RoutinesFragment routinesFragment){
+        currentFragment = routinesFragment;
         this.listRutines = listRutines;
     }
 
@@ -75,6 +80,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
         TextView exercises;
         TextView time;
         ImageView options;
+        ImageView play;
 
         // Aqui
         public Rutine_item(@NonNull View itemView) {
@@ -88,7 +94,24 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
             exercises = itemView.findViewById(R.id.rutine_exercises);
             time = itemView.findViewById(R.id.rutine_duration);
             options = itemView.findViewById(R.id.btn_options);
+            play = itemView.findViewById(R.id.btn_play);
 
+
+            play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(rutine.Exercises!=0){
+                        PlayFragment playFragment = new PlayFragment(rutine);
+                        FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_start, playFragment);
+                        fragmentTransaction.commit();
+                    }
+                    else{
+                        showDialogError();
+                    }
+                }
+            });
 
             // Listen click on just the options
             options.setOnClickListener(new View.OnClickListener(){
@@ -98,6 +121,22 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                     showDialog();
                 }
             });
+
+        }
+
+        public void showDialogError(){
+            Dialog errorDialog = new Dialog(context);
+            errorDialog.setContentView(R.layout.dialog_no_exercises);
+
+            AppCompatButton aceptar = errorDialog.findViewById(R.id.accept_error);
+
+            aceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    errorDialog.dismiss();
+                }
+            });
+            errorDialog.show();
         }
 
         // Show options menu of the rutine
@@ -113,18 +152,6 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
             TextView option_delete = dialog.findViewById(R.id.rutine_option_delete);
 
             option_title.setText("Opciones > " + rutine.name);
-
-            Dialog errorDialog = new Dialog(context);
-            errorDialog.setContentView(R.layout.dialog_no_exercises);
-
-            AppCompatButton aceptar = errorDialog.findViewById(R.id.accept_error);
-
-            aceptar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    errorDialog.dismiss();
-                }
-            });
 
 
 
@@ -143,8 +170,8 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                         dialog.dismiss();
                     }
                     else{
-                        errorDialog.show();
                         dialog.dismiss();
+                        showDialogError();
                     }
 
                 }
@@ -167,19 +194,27 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
             // duplicate click event
             option_duplicate.setOnClickListener(new View.OnClickListener() {
                 @Override
-                //TODO: Duplicate routine with a slightly different name
                 public void onClick(View v) {
                     Log.d("demo","Duplicate: "+ rutine.name);
+                    Database_Helper database_helper = new Database_Helper(((FragmentActivity) unwrap(v.getContext())));
+                    database_helper.duplicateRoutine(rutine);
+                    listRutines = database_helper.getRutines();
+                    notifyDataSetChanged();
+                    dialog.dismiss();
                 }
             });
 
             // option_delete click event
             option_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
-                //TODO: delete routine from database and reload routines
-
                 public void onClick(View v) {
                     Log.d("demo","Delete: "+ rutine.name);
+                    Database_Helper database_helper = new Database_Helper(((FragmentActivity) unwrap(v.getContext())));
+                    database_helper.deleteRoutine(rutine.id);
+                    int pos = getAdapterPosition();
+                    listRutines.remove(pos);
+                    notifyItemRemoved(pos);
+                    dialog.dismiss();
                 }
             });
             dialog.show();

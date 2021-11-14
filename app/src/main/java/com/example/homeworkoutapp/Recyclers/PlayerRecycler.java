@@ -122,10 +122,19 @@ public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPl
         }
     }
 
-    public void changeSelected(){
+    public void changeSelectedNext(){
         if(selectedItemPos<(getItemCount()-1)){
             lastItemSelectedPos= selectedItemPos;
             selectedItemPos++;
+            notifyItemChanged(selectedItemPos);
+            notifyItemChanged(lastItemSelectedPos);
+        }
+    }
+
+    public void changeSelectedPrevious(){
+        if(selectedItemPos>0){
+            lastItemSelectedPos = selectedItemPos;
+            selectedItemPos--;
             notifyItemChanged(selectedItemPos);
             notifyItemChanged(lastItemSelectedPos);
         }

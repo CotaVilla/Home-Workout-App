@@ -1,7 +1,9 @@
 package com.example.homeworkoutapp.Recyclers;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,19 +15,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Exercise;
+import com.example.homeworkoutapp.ui.exercises.viewExercise;
+import com.example.homeworkoutapp.ui.play.PlayFragment;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.itemExercise> {
     ArrayList<Exercise> list_exercises;
+    Database_Helper databaseHelper;
+    long hiddenFilter;
 
-    public ExercisesRecycler(ArrayList<Exercise> list_exercises) {
+    public ExercisesRecycler(ArrayList<Exercise> list_exercises ,Database_Helper databaseHelper) {
         this.list_exercises = list_exercises;
+        this.databaseHelper = databaseHelper;
+        hiddenFilter = databaseHelper.getHiddenFilterId();
     }
 
     @NonNull
@@ -92,18 +103,48 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
                         @Override
                         public void onClick(View v) {
                             Log.d("demo","Play: "+ exercise.name);
+                            viewExercise viewExercise = new viewExercise(exercise);
+                            FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.replace(R.id.nav_host_fragment_content_start, viewExercise);
+                            fragmentTransaction.commit();
+                            dialog.dismiss();
                         }
-                    });
 
+                    });
                     // edit click event
-                    option_hide.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Log.d("demo","Edit: "+ exercise.name);
-                        }
-                    });
+                    if((long)exercise.actual_type_id == hiddenFilter)
+                    {
+                        option_hide.setText("Desocultar");
+                        option_hide.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Log.d("demo","Edit: "+ exercise.name);
+                                databaseHelper.unhideExercise(exercise);
+                                int pos = getAdapterPosition();
+                                list_exercises.remove(pos);
+                                notifyItemRemoved(pos);
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
+                    }
+                    else {
+                        option_hide.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Log.d("demo","Edit: "+ exercise.name);
+                                int pos = getAdapterPosition();
+                                list_exercises.remove(pos);
+                                notifyItemRemoved(pos);
+                                databaseHelper.hideExercise(exercise);
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
+                    }
 
-                    dialog.show();
+
                 }
             });
         }
@@ -111,4 +152,13 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
     public void changeExercises(ArrayList<Exercise> exercises){
         list_exercises = exercises;
     };
+
+    // for unwrapping context in dialog
+    private Context unwrap(Context context) {
+        while (!(context instanceof Activity) && context instanceof ContextWrapper) {
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+
+        return context;
+    }
 }

@@ -1,66 +1,90 @@
 package com.example.homeworkoutapp.ui.exercises;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
+import com.example.homeworkoutapp.Recyclers.FilterRecycler;
+import com.example.homeworkoutapp.Recyclers.StepsRecycler;
+import com.example.homeworkoutapp.databinding.FragmentExercisesBinding;
+import com.example.homeworkoutapp.databinding.FragmentViewExerciseBinding;
+import com.example.homeworkoutapp.objects.Exercise;
+import com.example.homeworkoutapp.objects.Step;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link viewExercise#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+import pl.droidsonroids.gif.GifImageView;
+
 public class viewExercise extends Fragment {
+    Exercise exercise;
+    FragmentViewExerciseBinding binding;
+    StepsRecycler stepsAdapterRecycler;
+    Database_Helper database_helper;
+    Context context;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    TextView exercise_Name;
+    TextView exercise_Description;
+    TextView exercise_Tips;
+    GifImageView exercise_Video;
+    RecyclerView steps_Recycler;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ArrayList<Step> list_steps;
 
-    public viewExercise() {
-        // Required empty public constructor
+    public viewExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment viewExercise.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static viewExercise newInstance(String param1, String param2) {
-        viewExercise fragment = new viewExercise();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentViewExerciseBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        context = getContext();
+
+        exercise_Name = root.findViewById(R.id.exercise_name_detail);
+        exercise_Description = root.findViewById(R.id.excercise_description);
+        exercise_Video = root.findViewById(R.id.gif_image_view);
+        steps_Recycler = root.findViewById(R.id.recycler_steps);
+        exercise_Tips = root.findViewById(R.id.exercise_tips);
+
+        database_helper = new Database_Helper(getActivity());
+        list_steps = database_helper.getSteps(exercise);
+
+        exercise_Name.setText(exercise.name);
+        exercise_Description.setText(exercise.description);
+        exercise_Tips.setText(exercise.tips);
+
+        exercise_Video.setImageResource(getMyDrawable(exercise.gifLocation));
+
+        steps_Recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+        stepsAdapterRecycler = new StepsRecycler(list_steps);
+        steps_Recycler.setAdapter(stepsAdapterRecycler);
+
+        return root;
+    }
+
+    private int getMyDrawable(String ImageName) {
+        int image=0;
+
+        image = context.getResources().getIdentifier(ImageName, "drawable", context.getPackageName());
+
+        if (image ==0){
+            image = context.getResources().getIdentifier("gif_homer", "drawable", context.getPackageName());
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_exercise, container, false);
+        return image;
     }
 }

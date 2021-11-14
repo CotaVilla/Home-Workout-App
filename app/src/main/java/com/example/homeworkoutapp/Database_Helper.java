@@ -13,6 +13,7 @@ import com.example.homeworkoutapp.objects.Exercise;
 import com.example.homeworkoutapp.objects.Filter;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
+import com.example.homeworkoutapp.objects.Step;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -26,6 +27,7 @@ public class Database_Helper extends SQLiteOpenHelper {
     private static final String TABLE_EXCERCISE = "exercise";
     private static final String EXERCISE_ID = "id";
     private static final String EXERCISE_TYPE_ID = "type_id";
+    private static final String EXERCISE_ACTUAL_TYPE_ID = "actual_type_id";
     private static final String EXERCISE_NAME = "name";
     private static final String EXERCISE_DESCRIPTION = "description";
     private static final String EXERCISE_GIF_LOCATION = "gif_location";
@@ -73,6 +75,7 @@ public class Database_Helper extends SQLiteOpenHelper {
         String qry_create_exercise = "CREATE TABLE " + TABLE_EXCERCISE + "(" +
                 EXERCISE_ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 EXERCISE_TYPE_ID + " INTEGER NOT NULL DEFAULT 1," +
+                EXERCISE_ACTUAL_TYPE_ID + " INTEGER NOT NULL DEFAULT 1," +
                 EXERCISE_NAME + " TEXT NOT NULL," +
                 EXERCISE_DESCRIPTION + " TEXT," +
                 EXERCISE_GIF_LOCATION + " TEXT NOT NULL," +
@@ -116,50 +119,66 @@ public class Database_Helper extends SQLiteOpenHelper {
                 " (4,'Abdomen','ic_abs')," +
                 " (5,'Piernas','ic_legs')," +
                 " (6,'Brazo','ic_arm')," +
-                " (7,'Espalda','ic_back');";
+                " (7,'Espalda','ic_back')," +
+                " (8,'Oculto','ic_hidden');";
 
+        // id, tipo_ejercicio_original, tipo_ejercicio_actual, nombre, Descripcion,Tips
         String qry_insert_exercises = "INSERT INTO " + TABLE_EXCERCISE + " VALUES" +
-                " (1,5,'Sentadilla','Debes mantener la cabeza horizontal. \n" +
+                " (1,5,5,'Sentadilla','Debes mantener la cabeza horizontal. \n" +
                 "- Los pies deben colocarse al ancho de los hombros. \n" +
                 "- La rodilla, durante la flexión, no debe sobrepasar la punta de los pies. \n" +
-                "- No se debe flexionar demasiado.\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Mantén un equilibrio apoyándote de los brazos')," +
+                "- No se debe flexionar demasiado.\n','gif_homer','Mantén un equilibrio apoyándote de los brazos')," +
 
-                " (2,4,'Plancha','Ponte en posición de flexión de brazos, con los codos por debajo de los hombros y los pies separados a lo ancho de las caderas. \n" +
+                " (2,4,4,'Plancha','Ponte en posición de flexión de brazos, con los codos por debajo de los hombros y los pies separados a lo ancho de las caderas. \n" +
                 "Flexione los codos y apoye el peso en los antebrazos y en los dedos de los pies, manteniendo el cuerpo en línea recta. \n" +
                 "Aguanta el mayor tiempo posible.\n" +
-                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Mantén los brazos separados y no bajes la pelvis')," +
+                "\n','gif_homer','Mantén los brazos separados y no bajes la pelvis')," +
 
-                " (3,4,'Plancha lateral derecha','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
-                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Posiciona un pie al frente para mantener el equilibrio\n')," +
+                " (3,4,4,'Plancha lateral derecha','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
+                "\n','gif_homer','Posiciona un pie al frente para mantener el equilibrio\n')," +
 
-                " (4,4,'Plancha lateral izquierda','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
-                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Posiciona un pie al frente para mantener el equilibrio')," +
+                " (4,4,4,'Plancha lateral izquierda','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
+                "\n','gif_homer','Posiciona un pie al frente para mantener el equilibrio')," +
 
-                " (5,1,'Saltos de Tijera','Párate derecho con los pies juntos y las manos a los lados. \n" +
+                " (5,1,1,'Saltos de Tijera','Párate derecho con los pies juntos y las manos a los lados. \n" +
                 "Salte, abra los pies y ponga ambas manos juntas sobre su cabeza. \n" +
                 "Saltar de nuevo y volver a la posición inicial. \n" +
-                "Repita hasta que el juego esté completo\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Estira completamente los brazos y no abras demasiado las piernas en el salto')," +
+                "Repita hasta que el juego esté completo\n','gif_homer','Estira completamente los brazos y no abras demasiado las piernas en el salto')," +
 
-                " (6,5,'Zancada frontal','Baja la cadera hasta que el cuádriceps queda paralelo al suelo \n" +
+                " (6,5,5,'Zancada frontal','Baja la cadera hasta que el cuádriceps queda paralelo al suelo \n" +
                 "La pierna de atrás se flexiona hasta que casi tocamos el suelo con la rodilla que forma un ángulo de 90 grados. \n" +
                 "Volvemos a posición inicial y para hacerlo nos impulsamos con la pierna adelantada, apoya bien la planta del pie en el suelo para conseguir la fuerza.\n" +
-                "Alternar piernas\n','app/src/main/res/drawable/exercises_img/default_img.jpg',' mantente siempre erguido mirando hacia el frente')," +
+                "Alternar piernas\n','gif_homer',' mantente siempre erguido mirando hacia el frente')," +
 
-                " (7,4,'Abdominales','Túmbate boca arriba con las rodillas dobladas, si es posible sobre una colchoneta. \n" +
+                " (7,4,4,'Abdominales','Túmbate boca arriba con las rodillas dobladas, si es posible sobre una colchoneta. \n" +
                 "Las rodillas deben doblarse en un ángulo que permita a los talones quedar lo más cerca posible de la parte anterior de los muslos.\n" +
-                "Apoya las manos sobre la cabeza, finalmente acerca el torso a las rodillas sin levantar la espalda del suelo\n','app/src/main/res/drawable/exercises_img/default_img.jpg','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
+                "Apoya las manos sobre la cabeza, finalmente acerca el torso a las rodillas sin levantar la espalda del suelo\n','gif_homer','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
 
-                " (8,6,'Flexiones Diamante','Ponte en posición como si hicieras flexiones “comunes” pero, en lugar de colocar los brazos a los costados del cuerpo, debes apoyar las manos por delante del pecho. \n" +
+                " (8,6,6,'Flexiones Diamante','Ponte en posición como si hicieras flexiones “comunes” pero, en lugar de colocar los brazos a los costados del cuerpo, debes apoyar las manos por delante del pecho. \n" +
                 "Los dedos índice y los pulgares se deben tocar (formando un corazón o un diamante, de allí el nombre del ejercicio).\n" +
                 "\n" +
-                "\n','app/src/main/res/drawable/exercises_img/default_img.jpg',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta')," +
+                "\n','gif_homer',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta')," +
 
-                " (9,6,'Flexiones','Coloca las manos alineadas a la altura de los hombros, justo debajo. \n" +
-                "Separa los dedos de la mano para que puedas soportar mejor tu propio peso. \n','app/src/main/res/drawable/exercises_img/default_img.jpg','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación\n')," +
+                " (9,6,6,'Flexiones','Coloca las manos alineadas a la altura de los hombros, justo debajo. \n" +
+                "Separa los dedos de la mano para que puedas soportar mejor tu propio peso. \n','gif_homer','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación\n')," +
 
-                " (10,4,'Abdominales con piernas elevadas','Acostarse en el piso,elevar las piernas hasta un ángulo de 90° , sin flexionar\n" +
+                " (10,4,4,'Abdominales con piernas elevadas','Acostarse en el piso,elevar las piernas hasta un ángulo de 90° , sin flexionar\n" +
                 "Bajarlas lentamente hasta casi tocar el piso,\n" +
-                "Repetir\n','app/src/main/res/drawable/exercises_img/default_img.jpg','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen');";
+                "Repetir\n','gif_homer','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen');";
+
+        String qry_insert_steps = "INSERT INTO " + TABLE_STEP + " VALUES" +
+                "(1,1,'Debes mantener la cabeza horizontal.')," +
+                "(2,1,'Los pies deben colocarse al ancho de los hombros.')," +
+                "(3,1,'La rodilla, durante la flexión, no debe sobrepasar la punta de los pies.')," +
+                "(4,1,'No se debe flexionar demasiado.')," +
+                "(5,2,'Paso 1.')," +
+                "(6,2,'Paso 2.')," +
+                "(7,2,'Paso 3.')," +
+                "(8,2,'Paso 4.')," +
+                "(9,3,'Paso 1.')," +
+                "(10,3,'Debes mantener la cabeza horizontal.')," +
+                "(11,4,'Debes mantener la cabeza horizontal.')," +
+                "(12,5,'Debes mantener la cabeza horizontal.')";
 
         String qry_insert_routines = "INSERT INTO " + TABLE_RUTINE + " VALUES" +
                 " (1,'Rutina mañanera', 'Para las mañanas hermosas', 5,360)," +
@@ -179,6 +198,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
         db.execSQL(qry_insert_types);
         db.execSQL(qry_insert_exercises);
+        db.execSQL(qry_insert_steps);
         db.execSQL(qry_insert_routines);
         db.execSQL(qry_insert_routines_exercises);
 
@@ -198,78 +218,23 @@ public class Database_Helper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // To get routines for routines view
-    public ArrayList<Rutine_Exercise> getExercises(long rutine_id){
-        ArrayList<Rutine_Exercise> exercises = new ArrayList<Rutine_Exercise>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selection =   TABLE_RE + "." + RE_EXERCISE_ID + " = " + TABLE_EXCERCISE + "." + EXERCISE_ID + " AND " + TABLE_RE + "." + RE_RUTINE_ID + " = " +  rutine_id;
-        String orderBy = RE_POSITION + " ASC";
-
-        String[] columns = new String[]{
-                TABLE_RE+"."+RE_RUTINE_ID,
-                TABLE_RE+"."+RE_EXERCISE_ID,
-                TABLE_RE+"."+RE_POSITION,
-                TABLE_EXCERCISE+"."+EXERCISE_NAME,
-                TABLE_RE+"."+RE_WORK_TIME,
-                TABLE_RE+"."+RE_REST_TIME,
-                TABLE_RE+"."+RE_REPEATS};
-
-        Cursor cursor = db.query(TABLE_RE + ","+ TABLE_EXCERCISE,
+    public long getHiddenFilterId(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = new String[]{TYPE_ID,TYPE_CLASIFICATION};
+        String selection =   TYPE_CLASIFICATION + " = " +  "'Oculto'";
+        Cursor cursor = db.query(TABLE_TYPE,
                 columns,
                 selection,
                 null,
                 null,
                 null,
-                orderBy);
-
-        while(cursor.moveToNext()) {
-            int _rutine_id = cursor.getInt(cursor.getColumnIndexOrThrow(RE_RUTINE_ID));
-            int exercise_id = cursor.getInt(cursor.getColumnIndexOrThrow(RE_EXERCISE_ID));
-            int position = cursor.getInt(cursor.getColumnIndexOrThrow(RE_POSITION));
-            String exercise_name = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_NAME));
-            int workTime = cursor.getInt(cursor.getColumnIndexOrThrow(RE_WORK_TIME));
-            int restTime = cursor.getInt(cursor.getColumnIndexOrThrow(RE_REST_TIME));
-            int repeats = cursor.getInt(cursor.getColumnIndexOrThrow(RE_REPEATS));
-
-            Rutine_Exercise rutine = new Rutine_Exercise(_rutine_id, exercise_id, position, exercise_name,workTime, restTime,repeats);
-            exercises.add(rutine);
-        }
-        db.close();
-
-        return exercises;
-    }
-
-    // To get routines for routines view
-    public ArrayList<Rutine> getRutines(){
-        ArrayList<Rutine> routines = new ArrayList<Rutine>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String[] columns = new String[]{RUTINE_ID,RUTINE_NAME,RUTINE_DESCRIPTION,RUTINE_EXERCISES,RUTINE_DURATION};
-
-        Cursor cursor = db.query(TABLE_RUTINE,
-                columns,
-                null,
-                null,
-                null,
-                null,
                 null);
 
-        while(cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_ID));
-            String name = cursor.getString(cursor.getColumnIndexOrThrow(RUTINE_NAME));
-            String description = cursor.getString(cursor.getColumnIndexOrThrow(RUTINE_DESCRIPTION));
-            int exercises = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_EXERCISES));
-            int duration = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_DURATION));
-
-            Rutine rutine = new Rutine(id, name, description, exercises,duration);
-            routines.add(rutine);
-        }
-        db.close();
-
-        return routines;
+        cursor.moveToFirst();
+        int type_id_hidden = cursor.getInt(cursor.getColumnIndexOrThrow(TYPE_ID));
+        return type_id_hidden;
     }
 
-    // To get routines for routines view
     public ArrayList<Filter> getFilters(){
         ArrayList<Filter> filters = new ArrayList<Filter>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -299,6 +264,127 @@ public class Database_Helper extends SQLiteOpenHelper {
         return filters;
     }
 
+    public void hideExercise(Exercise exercise){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long type_id_hidden = getHiddenFilterId();
+
+        ContentValues cv = new ContentValues();
+        cv.put(EXERCISE_ACTUAL_TYPE_ID,type_id_hidden);
+        String where = EXERCISE_ID+" = " + exercise.exercise_id;
+        db.update(TABLE_EXCERCISE, cv, where,null);
+        db.close();
+    }
+
+    public void unhideExercise(Exercise exercise){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(EXERCISE_ACTUAL_TYPE_ID,exercise.type_id);
+        String where = EXERCISE_ID+" = " + exercise.exercise_id;
+        db.update(TABLE_EXCERCISE, cv, where,null);
+        db.close();
+    }
+
+    public ArrayList<Step> getSteps(Exercise exercise){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Step> step_list= new ArrayList<Step>();
+
+
+
+        String[] columns = new String[]{STEP_ID,STEP_EXERCISE_ID,STEP_DESCRIPTION};
+        String selection = STEP_EXERCISE_ID + " = " + exercise.exercise_id;
+
+        Cursor cursor = db.query(TABLE_STEP,
+                columns,
+                selection,
+                null,
+                null,
+                null,
+                null);
+
+        while(cursor.moveToNext()) {
+            int step_id = cursor.getInt(cursor.getColumnIndexOrThrow(STEP_ID));
+            int exercise_id = cursor.getInt(cursor.getColumnIndexOrThrow(STEP_EXERCISE_ID));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(STEP_DESCRIPTION));
+
+            Step step = new Step(step_id, exercise_id, description);
+            step_list.add(step);
+        }
+        db.close();
+
+        return step_list;
+    }
+
+    public ArrayList<Rutine_Exercise> getExercises(long rutine_id){
+        ArrayList<Rutine_Exercise> exercises = new ArrayList<Rutine_Exercise>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection =   TABLE_RE + "." + RE_EXERCISE_ID + " = " + TABLE_EXCERCISE + "." + EXERCISE_ID + " AND " + TABLE_RE + "." + RE_RUTINE_ID + " = " +  rutine_id;
+        String orderBy = RE_POSITION + " ASC";
+
+        String[] columns = new String[]{
+                TABLE_RE+"."+RE_RUTINE_ID,
+                TABLE_RE+"."+RE_EXERCISE_ID,
+                TABLE_RE+"."+RE_POSITION,
+                TABLE_EXCERCISE+"."+EXERCISE_NAME,
+                TABLE_RE+"."+RE_WORK_TIME,
+                TABLE_RE+"."+RE_REST_TIME,
+                TABLE_RE+"."+RE_REPEATS};
+
+        Cursor cursor = db.query(TABLE_RE + ","+ TABLE_EXCERCISE,
+                columns,
+                selection,
+                null,
+                null,
+                null,
+                orderBy);
+
+        int count = 1;
+        while(cursor.moveToNext()) {
+            int _rutine_id = cursor.getInt(cursor.getColumnIndexOrThrow(RE_RUTINE_ID));
+            int exercise_id = cursor.getInt(cursor.getColumnIndexOrThrow(RE_EXERCISE_ID));
+            int position = count;
+            String exercise_name = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_NAME));
+            int workTime = cursor.getInt(cursor.getColumnIndexOrThrow(RE_WORK_TIME));
+            int restTime = cursor.getInt(cursor.getColumnIndexOrThrow(RE_REST_TIME));
+            int repeats = cursor.getInt(cursor.getColumnIndexOrThrow(RE_REPEATS));
+            count++;
+            Rutine_Exercise rutine = new Rutine_Exercise( exercise_id, _rutine_id, position, exercise_name,workTime, restTime,repeats);
+            exercises.add(rutine);
+        }
+        db.close();
+
+        return exercises;
+    }
+
+    public ArrayList<Rutine> getRutines(){
+        ArrayList<Rutine> routines = new ArrayList<Rutine>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] columns = new String[]{RUTINE_ID,RUTINE_NAME,RUTINE_DESCRIPTION,RUTINE_EXERCISES,RUTINE_DURATION};
+
+        Cursor cursor = db.query(TABLE_RUTINE,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        while(cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(RUTINE_NAME));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(RUTINE_DESCRIPTION));
+            int exercises = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_EXERCISES));
+            int duration = cursor.getInt(cursor.getColumnIndexOrThrow(RUTINE_DURATION));
+
+            Rutine rutine = new Rutine(id, name, description, exercises,duration);
+            routines.add(rutine);
+        }
+        db.close();
+
+        return routines;
+    }
+
     public long insertRutine(Rutine routine){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -317,32 +403,43 @@ public class Database_Helper extends SQLiteOpenHelper {
     public void updateRutine(Rutine routine,ArrayList<Rutine_Exercise> exercises){
         SQLiteDatabase db = getReadableDatabase();
 
+        ContentValues cv = new ContentValues();
+
+        cv.put(RUTINE_NAME,routine.name);
+        cv.put(RUTINE_DESCRIPTION,routine.Description);
+        cv.put(RUTINE_EXERCISES,routine.Exercises);
+        cv.put(RUTINE_DURATION,routine.Duration);
+        String where = RUTINE_ID + " = " + routine.id;
+
+        db.delete(TABLE_RE,RE_RUTINE_ID + " = " + RE_RUTINE_ID,null);
+
+
+
         // Delete all related data of routine
         String[] whereArgs = new String[]{String.valueOf(routine.id)};
-        db.delete(TABLE_RE,RE_RUTINE_ID + "=?",whereArgs);
-        db.delete(TABLE_RUTINE,RUTINE_ID + "=?",whereArgs);
 
-        // Insert routine
-        long routine_id = insertRutine(routine);
+        for (Rutine_Exercise exercise: exercises) {
+            cv = new ContentValues();
+            cv.put(RE_RUTINE_ID,routine.id);
+            cv.put(RE_WORK_TIME,exercise.exercise_id);
+            cv.put(RE_REPEATS,exercise.repeats);
+            cv.put(RE_POSITION,exercise.position);
+            cv.put(RE_REST_TIME,exercise.rest_time);
+            cv.put(RE_WORK_TIME,exercise.work_time);
 
-        // Insert routine exercises
-        for (Rutine_Exercise exercise:exercises) {
-            add_excercises(routine_id,exercise);
+            db.insert(TABLE_RUTINE, null, cv);
         }
+
         db.close();
     }
 
-    public void deleteRutine(){
-        // TODO: Delete routine
-    }
-
-    public ArrayList<Exercise> get_excercises(int type_id , String name){
+    public ArrayList<Exercise> getFilteredExcercises(int type_id , String name){
         ArrayList<Exercise> exercises = new ArrayList<Exercise>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
         String selection = "";
 
-        String[] columns = new String[]{EXERCISE_ID,EXERCISE_TYPE_ID,EXERCISE_NAME, EXERCISE_DESCRIPTION,EXERCISE_GIF_LOCATION,EXERCISE_TIPS};
+        String[] columns = new String[]{EXERCISE_ID,EXERCISE_TYPE_ID,EXERCISE_ACTUAL_TYPE_ID,EXERCISE_NAME, EXERCISE_DESCRIPTION,EXERCISE_GIF_LOCATION,EXERCISE_TIPS};
 
         String orderBy = EXERCISE_NAME + " ASC";
 
@@ -353,10 +450,10 @@ public class Database_Helper extends SQLiteOpenHelper {
             selection = EXERCISE_NAME + " LIKE '%" + name + "%'";
         }
         else if (type_id != 0 && (name == null || name.equals(""))){
-            selection =   EXERCISE_TYPE_ID + " = " +  type_id;
+            selection =   EXERCISE_ACTUAL_TYPE_ID + " = " +  type_id;
         }
         else if(type_id != 0 && !(name == null || name.equals(""))) {
-            selection =   EXERCISE_TYPE_ID + " = " +  type_id + " AND "+ EXERCISE_NAME + " LIKE '%" + name + "%'";
+            selection =   EXERCISE_ACTUAL_TYPE_ID + " = " +  type_id + " AND "+ EXERCISE_NAME + " LIKE '%" + name + "%'";
         }
 
         cursor = db.query(TABLE_EXCERCISE,
@@ -370,11 +467,12 @@ public class Database_Helper extends SQLiteOpenHelper {
         while(cursor.moveToNext()) {
             int exercise_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_ID));
             int _type_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_TYPE_ID));
+            int actual_type_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_ACTUAL_TYPE_ID));
             String namecursor = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_NAME));
             String description = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_DESCRIPTION));
             String gifLocation = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_GIF_LOCATION));
             String tips = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_TIPS));
-            Exercise exercise = new Exercise(exercise_id, _type_id, namecursor, description, gifLocation, tips);
+            Exercise exercise = new Exercise(exercise_id, _type_id,actual_type_id, namecursor, description, gifLocation, tips);
             exercises.add(exercise);
         }
         db.close();
@@ -382,7 +480,7 @@ public class Database_Helper extends SQLiteOpenHelper {
         return exercises;
     }
 
-    public void add_excercises(long routine_id, Rutine_Exercise exercise){
+    public void insertExercise (long routine_id, Rutine_Exercise exercise){
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -397,11 +495,21 @@ public class Database_Helper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void update_excercises(ArrayList<Rutine_Exercise> exercises){
-        // TODO: Update exercise
+    public void duplicateRoutine(Rutine routine){
+        ArrayList<Rutine_Exercise> list_exercises = getExercises(routine.id);
+        Rutine newroutine = routine;
+        newroutine.name += " copia";
+        newroutine.id = (int)insertRutine(newroutine);
+        for (Rutine_Exercise exercise: list_exercises) {
+            insertExercise(newroutine.id, exercise);
+        }
     }
 
-    public void delete_excercises(ArrayList<Rutine_Exercise> exercises){
-        // TODO: Delete exercise
+    public void deleteRoutine(long RoutineID){
+        SQLiteDatabase db = getWritableDatabase();
+        String whereRE = RE_RUTINE_ID + " = " + RoutineID;
+        String whereROUTINE = RUTINE_ID + " = " + RoutineID;
+        db.delete(TABLE_RE, whereRE, null);
+        db.delete(TABLE_RUTINE, whereROUTINE, null);
     }
 }

@@ -31,9 +31,12 @@ public class PlayFragment extends Fragment {
     private ArrayList<Rutine_Exercise> list_exercises;
     private RecyclerView recycler;
     PlayerRecycler adapter;
+    boolean firtsLoad = true;
 
     Database_Helper database_helper;
 
+    TextView title;
+    TextView rutineName;
     SeekBar seekBar;
     TextView position;
     TextView exerciseName;
@@ -61,30 +64,14 @@ public class PlayFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /*container.removeAllViews();*/
         View root = inflater.inflate(R.layout.fragment_play, container, false);
         database_helper = new Database_Helper(getActivity());
+        title = root.findViewById(R.id.frag_title);
+        title.setText("Reproductor");
+        rutineName = root.findViewById(R.id.fragment_name);
+        rutineName.setText(rutine.name);
 
         // RecyclerView Rutinas
         recycler = (RecyclerView) root.findViewById(R.id.recyler_player);
@@ -92,7 +79,11 @@ public class PlayFragment extends Fragment {
             @Override
             public void onLayoutCompleted(RecyclerView.State state) {
                 super.onLayoutCompleted(state);
-                setNewExcercise();
+                if(firtsLoad)
+                {
+                    setNewExcercise();
+                    firtsLoad = false;
+                }
             }
         });
 
@@ -138,7 +129,7 @@ public class PlayFragment extends Fragment {
         buttonPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                previousButtonClick();
             }
         });
 
@@ -218,6 +209,15 @@ public class PlayFragment extends Fragment {
         nextTimer();
     }
 
+    public void setPreviousExcercise(){
+        rutine_exercise = adapter.getSelectedValues();
+        exerciseName.setText(rutine_exercise.exercise_name);
+        position.setText("#"+rutine_exercise.position);
+        actuaRepeat = 4;
+        rest = true;
+        nextTimer();
+    }
+
     public void nextButtonClick(){
 
         if(!(actuaRepeat >= repeats) || rest){
@@ -240,11 +240,49 @@ public class PlayFragment extends Fragment {
         }
         else {
             if(rutine_exercise.position < adapter.getItemCount()){
-                adapter.changeSelected();
+                adapter.changeSelectedNext();
                 setNewExcercise();
             }
             else {
                 counterIsActive=false;
+                adapter.resetSelection();
+                setNewExcercise();
+
+                buttonPlay.setImageResource(R.drawable.ic_play);
+            }
+        }
+    }
+
+    public void previousButtonClick(){
+
+        if(actuaRepeat > 1 || !rest){
+            if(rest){
+                timeToPlay = rutine_exercise.rest_time;
+                actuaRepeat--;
+                updateValues();
+                rest=false;
+            }
+            else {
+                timeToPlay = rutine_exercise.work_time;
+                updateValues();
+                rest=true;
+            }
+            if(counterIsActive){
+                countDownTimer.cancel();
+                countDownTimer = setTimer(timeToPlay);
+                countDownTimer.start();
+            }
+        }
+        else {
+            if(rutine_exercise.position > 1){
+                adapter.changeSelectedPrevious();
+                setPreviousExcercise();
+            }
+            else {
+                if(counterIsActive){
+                    countDownTimer.cancel();
+                    counterIsActive=false;
+                }
                 adapter.resetSelection();
                 setNewExcercise();
 
@@ -302,7 +340,7 @@ public class PlayFragment extends Fragment {
     }
     public void nextItem(){
         if(rutine_exercise.position < adapter.getItemCount()){
-            adapter.changeSelected();
+            adapter.changeSelectedNext();
             setNewExcercise();
             mediaPlayer = MediaPlayer.create(getContext(), R.raw.change_exercise_sound);
             mediaPlayer.start();

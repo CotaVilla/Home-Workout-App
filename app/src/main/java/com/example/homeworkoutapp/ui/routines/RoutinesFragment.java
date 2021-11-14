@@ -60,12 +60,10 @@ public class RoutinesFragment extends Fragment {
         rutines = database_helper.getRutines();
 
 
-        RutinesRecycler adapter = new RutinesRecycler(rutines);
+        RutinesRecycler adapter = new RutinesRecycler(rutines,this);
         recycler.setAdapter(adapter);
 
         // END RecyclerView
-
-
         return root;
     }
 

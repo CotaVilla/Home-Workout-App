@@ -30,7 +30,7 @@ android:weightSum="5">
         android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="5dp"
-        android:text="Play"
+        android:text="Reproducir"
         android:textAppearance="@style/options_content" />
 
     <TextView
@@ -39,7 +39,7 @@ android:weightSum="5">
         android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="5dp"
-        android:text="Edit"
+        android:text="Editar"
         android:textAppearance="@style/options_content" />
     <TextView
         android:id="@+id/rutine_option_duplicate"
@@ -47,7 +47,7 @@ android:weightSum="5">
         android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="5dp"
-        android:text="Duplicate"
+        android:text="Duplicar"
         android:textAppearance="@style/options_content" />
     <TextView
         android:id="@+id/rutine_option_delete"
@@ -55,7 +55,7 @@ android:weightSum="5">
         android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="5dp"
-        android:text="Delete"
+        android:text="Borrar"
         android:textAppearance="@style/options_content" />
 
 </LinearLayout>
