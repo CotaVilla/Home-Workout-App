@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 
+import com.example.homeworkoutapp.objects.Exercise;
+import com.example.homeworkoutapp.objects.Rutine_Exercise;
 import com.example.homeworkoutapp.ui.exercises.ExercisesFragment;
 import com.example.homeworkoutapp.ui.routines.RoutinesFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -17,14 +19,36 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.homeworkoutapp.databinding.ActivityStartBinding;
 
+import java.util.ArrayList;
+
 public class StartActivity extends AppCompatActivity {
 
     private ActivityStartBinding binding;
-
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
+
+    private Rutine_Exercise pasableRE;
+
+    public Exercise getPasableExercise() {
+        return pasableExercise;
+    }
+
+    public void setPasableExercise(Exercise pasableExercise) {
+        this.pasableExercise = pasableExercise;
+    }
+
+    private Exercise pasableExercise;
+
+    public Rutine_Exercise getPasableRE() {
+        return pasableRE;
+    }
+
+    public void setPasableRE(Rutine_Exercise pasable_RE) {
+        this.pasableRE = pasable_RE;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +76,7 @@ public class StartActivity extends AppCompatActivity {
                 if(id == R.id.nav_routines) {
                     loadFragment(new RoutinesFragment());
                 } else if(id == R.id.nav_exercises) {
-                    loadFragment(new ExercisesFragment());
+                    loadFragment(new ExercisesFragment(false));
                 }
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

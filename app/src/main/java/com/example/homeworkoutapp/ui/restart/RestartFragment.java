@@ -14,11 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.homeworkoutapp.R;
+
 import com.example.homeworkoutapp.databinding.FragmentRestartBinding;
-import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
-import com.example.homeworkoutapp.ui.exercises.ExercisesViewModel;
-import com.example.homeworkoutapp.ui.routines.RoutinesViewModel;
 
 public class RestartFragment extends Fragment {
 

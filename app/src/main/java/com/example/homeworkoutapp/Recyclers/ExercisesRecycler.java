@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,27 +13,31 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
+import com.example.homeworkoutapp.StartActivity;
 import com.example.homeworkoutapp.objects.Exercise;
-import com.example.homeworkoutapp.ui.exercises.viewExercise;
-import com.example.homeworkoutapp.ui.play.PlayFragment;
+import com.example.homeworkoutapp.ui.exercises.ViewExerciseFragment;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.itemExercise> {
     ArrayList<Exercise> list_exercises;
     Database_Helper databaseHelper;
+    StartActivity activity;
+    boolean selectable;
     long hiddenFilter;
 
-    public ExercisesRecycler(ArrayList<Exercise> list_exercises ,Database_Helper databaseHelper) {
+    public ExercisesRecycler(ArrayList<Exercise> list_exercises ,Database_Helper databaseHelper, boolean selectable, StartActivity activity) {
+        this.selectable = selectable;
         this.list_exercises = list_exercises;
         this.databaseHelper = databaseHelper;
         hiddenFilter = databaseHelper.getHiddenFilterId();
+        this.activity = activity;
     }
 
     @NonNull
@@ -79,6 +80,17 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
             name = itemView.findViewById(R.id.excercise_name);
             excercise_description = itemView.findViewById(R.id.excercise_description);
 
+            if (selectable){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activity.setPasableExercise(exercise);
+                        FragmentManager fragmentManager = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager();
+                        fragmentManager.popBackStack();
+                    }
+                });
+            }
+
             options.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -88,7 +100,6 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
 
                 // Show options menu of the rutine
                 public void showDialog(){
-
                     Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.options_excersice);
 
@@ -103,10 +114,10 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
                         @Override
                         public void onClick(View v) {
                             Log.d("demo","Play: "+ exercise.name);
-                            viewExercise viewExercise = new viewExercise(exercise);
+                            ViewExerciseFragment ViewExerciseFragment = new ViewExerciseFragment(exercise);
                             FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
                             fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.replace(R.id.nav_host_fragment_content_start, viewExercise);
+                            fragmentTransaction.replace(R.id.nav_host_fragment_content_start, ViewExerciseFragment);
                             fragmentTransaction.commit();
                             dialog.dismiss();
                         }

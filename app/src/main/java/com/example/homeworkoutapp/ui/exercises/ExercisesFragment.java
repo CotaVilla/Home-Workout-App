@@ -23,6 +23,7 @@ import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.Recyclers.ExercisesRecycler;
 import com.example.homeworkoutapp.Recyclers.FilterRecycler;
+import com.example.homeworkoutapp.StartActivity;
 import com.example.homeworkoutapp.databinding.FragmentExercisesBinding;
 import com.example.homeworkoutapp.objects.Exercise;
 import com.example.homeworkoutapp.objects.Filter;
@@ -31,10 +32,11 @@ import java.util.ArrayList;
 
 public class ExercisesFragment extends Fragment {
     private Context context;
-
-    private ExercisesViewModel exercisesViewModel;
     private FragmentExercisesBinding binding;
+    StartActivity activity;
     private Fragment currentFragment;
+
+    private boolean selectable;
 
     Database_Helper database_helper;
     FilterRecycler adapter_filters;
@@ -52,10 +54,12 @@ public class ExercisesFragment extends Fragment {
     String filter_description;
     String name_search;
 
-
+    public ExercisesFragment(boolean selectable){
+        this.selectable = selectable;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        exercisesViewModel = new ViewModelProvider(this).get(ExercisesViewModel.class);
+        activity= (StartActivity)getActivity();
         binding = FragmentExercisesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -67,7 +71,12 @@ public class ExercisesFragment extends Fragment {
         selected_filter = root.findViewById(R.id.selected_filter);
         selected_filter.setText(filter_description);
         title = root.findViewById(R.id.frag_title);
-        title.setText("Ejercicios");
+        if(selectable){
+            title.setText("Selecionar ejercicio");
+        }
+        else {
+            title.setText("Ejercicios");
+        }
 
         // RecyclerView Exercises
         no_exercises = root.findViewById(R.id.no_excercises);
@@ -86,7 +95,7 @@ public class ExercisesFragment extends Fragment {
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
         exersices = database_helper.getFilteredExcercises(0,name_search);
-        adapter_exercises = new ExercisesRecycler(exersices,database_helper);
+        adapter_exercises = new ExercisesRecycler(exersices,database_helper, selectable, activity);
         recycler.setAdapter(adapter_exercises);
 
         // END RecyclerView

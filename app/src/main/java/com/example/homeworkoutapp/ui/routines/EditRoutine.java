@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
@@ -30,14 +32,21 @@ public class EditRoutine extends Fragment {
     private FragmentRoutinesBinding binding;
 
     public ArrayList<Rutine_Exercise> exercises;
-    public Rutine rutine;
     RecyclerView recycler;
-
     Database_Helper database_helper;
+    ExerciseRutinesRecycler adapter;
+    Rutine rutine;
+
+
+    EditText name;
+    EditText description;
+    AppCompatButton accept;
+    AppCompatButton cancel;
+    TextView exercisesCount;
+    LinearLayout add_exercise;
 
     public EditRoutine(Rutine rutine) {
         this.rutine = rutine;
-
     }
 
 
@@ -57,17 +66,16 @@ public class EditRoutine extends Fragment {
         // RecyclerView Rutinas
         recycler = (RecyclerView) root.findViewById(R.id.rutine_exercises_recycler);
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-        ExerciseRutinesRecycler adapter = new ExerciseRutinesRecycler(exercises);
+        adapter = new ExerciseRutinesRecycler(exercises);
         recycler.setAdapter(adapter);
         // END RecyclerView
 
-        EditText name = root.findViewById(R.id.rutine_name);
-        EditText description = root.findViewById(R.id.rutine_description);
-        AppCompatButton accept = root.findViewById(R.id.accept_add_rutine);
-        AppCompatButton cancel = root.findViewById(R.id.cancel_add_rutine);
-
-        name.setText(rutine.name);
-        description.setText(rutine.Description);
+        name = root.findViewById(R.id.rutine_name);
+        description = root.findViewById(R.id.rutine_description);
+        accept = root.findViewById(R.id.accept_add_rutine);
+        cancel = root.findViewById(R.id.cancel_add_rutine);
+        exercisesCount = root.findViewById(R.id.exercises_count);
+        add_exercise = root.findViewById(R.id.add_excercise);
 
         accept.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -96,21 +104,8 @@ public class EditRoutine extends Fragment {
                 // Insert routine in database
                 long id = database_helper.insertRutine(newRutine); //Returns id
 
-                //TODO: Add exercises to database to corresponding routine
-
-                //Return to routines fragment
-                RoutinesFragment routines = new RoutinesFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                // Remove all saved fragments in backstack
-                int count = fragmentManager.getBackStackEntryCount();
-                for(int i = 0; i < count; ++i) {
-                    fragmentManager.popBackStack();
-                }
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_start,routines);
-                fragmentTransaction.commit();
+                fragmentManager.popBackStack();
             }
         });
 

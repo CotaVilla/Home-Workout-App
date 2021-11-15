@@ -82,18 +82,6 @@ public class RoutinesFragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        Log.e("DEBUG", "onResume of RutinesFragment");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        Log.e("DEBUG", "OnPause of RutinesFragment");
-        super.onPause();
-    }
-
     //To avoid memory leakage we use the on Destroy
     @Override
     public void onDestroyView() {

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -401,7 +402,7 @@ public class Database_Helper extends SQLiteOpenHelper {
     }
 
     public void updateRutine(Rutine routine,ArrayList<Rutine_Exercise> exercises){
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
 
         ContentValues cv = new ContentValues();
 
@@ -411,26 +412,57 @@ public class Database_Helper extends SQLiteOpenHelper {
         cv.put(RUTINE_DURATION,routine.Duration);
         String where = RUTINE_ID + " = " + routine.id;
 
-        db.delete(TABLE_RE,RE_RUTINE_ID + " = " + RE_RUTINE_ID,null);
-
-
-
         // Delete all related data of routine
+        db.delete(TABLE_RE,RE_RUTINE_ID + " = " + routine.id,null);
+
+
         String[] whereArgs = new String[]{String.valueOf(routine.id)};
 
         for (Rutine_Exercise exercise: exercises) {
             cv = new ContentValues();
             cv.put(RE_RUTINE_ID,routine.id);
-            cv.put(RE_WORK_TIME,exercise.exercise_id);
+            cv.put(RE_EXERCISE_ID,exercise.exercise_id);
             cv.put(RE_REPEATS,exercise.repeats);
             cv.put(RE_POSITION,exercise.position);
             cv.put(RE_REST_TIME,exercise.rest_time);
             cv.put(RE_WORK_TIME,exercise.work_time);
 
-            db.insert(TABLE_RUTINE, null, cv);
+            long resultado = db.insert(TABLE_RE, null, cv);
+            if(resultado == -1){
+                Log.d("TAG", "Error insertando dato");
+            }
         }
 
         db.close();
+    }
+
+    public Exercise getExercise(int exerciseId){
+        Exercise exercise;
+        Cursor cursor;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] columns = new String[]{EXERCISE_ID,EXERCISE_TYPE_ID,EXERCISE_ACTUAL_TYPE_ID,EXERCISE_NAME, EXERCISE_DESCRIPTION,EXERCISE_GIF_LOCATION,EXERCISE_TIPS};
+        String selection = EXERCISE_ID + " = " + exerciseId;
+
+        cursor = db.query(TABLE_EXCERCISE,
+                columns,
+                selection,
+                null,
+                null,
+                null,
+                null);
+
+        cursor.moveToFirst();
+        int exercise_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_ID));
+        int _type_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_TYPE_ID));
+        int actual_type_id = cursor.getInt(cursor.getColumnIndexOrThrow(EXERCISE_ACTUAL_TYPE_ID));
+        String namecursor = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_NAME));
+        String description = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_DESCRIPTION));
+        String gifLocation = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_GIF_LOCATION));
+        String tips = cursor.getString(cursor.getColumnIndexOrThrow(EXERCISE_TIPS));
+        exercise = new Exercise(exercise_id, _type_id,actual_type_id, namecursor, description, gifLocation, tips);
+
+        return exercise;
     }
 
     public ArrayList<Exercise> getFilteredExcercises(int type_id , String name){

@@ -123,6 +123,7 @@
                             android:layout_margin="7dp"/>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/exercises_count"
                         android:text="20/100"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

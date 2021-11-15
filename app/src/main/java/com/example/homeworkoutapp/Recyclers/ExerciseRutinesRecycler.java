@@ -1,7 +1,9 @@
 package com.example.homeworkoutapp.Recyclers;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +12,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
+import com.example.homeworkoutapp.ui.exercises.EditExerciseFragment;
+import com.example.homeworkoutapp.ui.exercises.NewExerciseFragment;
+import com.example.homeworkoutapp.ui.play.PlayFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutinesRecycler.Exercise>{
     public ArrayList<Rutine_Exercise> list_exercises;
+
+    public int getEditExercisePosition() {
+        return editExercisePosition;
+    }
+
+    public void setEditExercisePosition(int editExercisePosition) {
+        this.editExercisePosition = editExercisePosition;
+    }
+
+    int editExercisePosition = -1;
 
     public ExerciseRutinesRecycler(ArrayList<Rutine_Exercise> list_exercises) {
         this.list_exercises = list_exercises;
@@ -38,7 +55,7 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
         Rutine_Exercise object = list_exercises.get(position);
 
         holder.rutine_exercise = object;
-        holder.excercise_name.setText(object.exercise_name);
+        holder.excercise_name.setText("#" + (position+1) + " " + object.exercise_name);
         holder.workout_time.setText("Ejercicio: " + object.work_time + " sec");
         holder.rest_time.setText("Descanso: " + object.rest_time + " sec");
         holder.repeats.setText("Repeticiones: " + object.repeats + " sec");
@@ -83,12 +100,15 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
             btn_up.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (rutine_exercise.position != 0){
-                        int actual =rutine_exercise.position;
-                        list_exercises.get(actual).position=actual-1;
-                        list_exercises.get(actual-1).position=actual;
-                        Collections.swap(list_exercises,actual,actual-1);
-                        notifyItemMoved(actual,actual-1);
+                    int clicked = getAdapterPosition();
+                    if (clicked != 0){
+                        list_exercises.get(clicked).position -= 1;
+                        list_exercises.get(clicked-1).position += 1;
+
+                        Collections.swap(list_exercises,clicked,clicked-1);
+                        notifyItemMoved(clicked,clicked-1);
+                        notifyItemChanged(clicked);
+                        notifyItemChanged(clicked-1);
                     }
                 }
             });
@@ -96,12 +116,15 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
             btn_down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (rutine_exercise.position != (list_exercises.size()-1)){
-                        int actual =rutine_exercise.position;
-                        list_exercises.get(actual).position=actual+1;
-                        list_exercises.get(actual+1).position=actual;
-                        Collections.swap(list_exercises,actual,actual+1);
-                        notifyItemMoved(actual,actual+1);
+                    int clicked = getAdapterPosition();
+                    if (clicked < getItemCount()-1){
+                        list_exercises.get(clicked).position += 1;
+                        list_exercises.get(clicked+1).position -= 1;
+
+                        Collections.swap(list_exercises,clicked,clicked+1);
+                        notifyItemMoved(clicked,clicked+1);
+                        notifyItemChanged(clicked);
+                        notifyItemChanged(clicked+1);
                     }
                 }
             });
@@ -131,6 +154,13 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
                         @Override
                         public void onClick(View v) {
                             Log.d("demo","Edit");
+                            editExercisePosition = getAdapterPosition();
+                            EditExerciseFragment playFragment = new EditExerciseFragment(rutine_exercise);
+                            FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.replace(R.id.nav_host_fragment_content_start, playFragment);
+                            fragmentTransaction.commit();
+                            dialog.dismiss();
                         }
                     });
 
@@ -139,6 +169,12 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
                         @Override
                         public void onClick(View v) {
                             Log.d("demo","Duplicate");
+                            Rutine_Exercise exercise = list_exercises.get(getAdapterPosition());
+                            Rutine_Exercise newDuplicate = new Rutine_Exercise(exercise.exercise_id,exercise.rutine_id,exercise.position,exercise.exercise_name,exercise.work_time,exercise.rest_time,exercise.repeats);
+                            newDuplicate.exercise_name += " copia";
+                            list_exercises.add(newDuplicate);
+                            notifyDataSetChanged();
+                            dialog.dismiss();
                         }
                     });
 
@@ -147,6 +183,9 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
                         @Override
                         public void onClick(View v) {
                             Log.d("demo","Delete");
+                            list_exercises.remove(getAdapterPosition());
+                            notifyDataSetChanged();
+                            dialog.dismiss();
                         }
                     });
 
@@ -154,5 +193,14 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
                 }
             });
         }
+    }
+
+    // for unwrapping context in dialog
+    private Context unwrap(Context context) {
+        while (!(context instanceof Activity) && context instanceof ContextWrapper) {
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+
+        return context;
     }
 }
