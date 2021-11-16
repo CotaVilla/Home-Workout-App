@@ -139,17 +139,11 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (7,4,4,'Abdominales','Ejercicio para fortalecer el abdomen.','gif_homer','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
 
-                " (8,6,6,'Flexiones Diamante','Ponte en posición como si hicieras flexiones “comunes” pero, en lugar de colocar los brazos a los costados del cuerpo, debes apoyar las manos por delante del pecho. \n" +
-                "Los dedos índice y los pulgares se deben tocar (formando un corazón o un diamante, de allí el nombre del ejercicio).\n" +
-                "\n" +
-                "\n','gif_homer',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta')," +
+                " (8,6,6,'Flexiones Diamante','Ejercicio pecho y brazos.','gif_homer',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta.')," +
 
-                " (9,6,6,'Flexiones','Coloca las manos alineadas a la altura de los hombros, justo debajo. \n" +
-                "Separa los dedos de la mano para que puedas soportar mejor tu propio peso. \n','gif_homer','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación\n')," +
+                " (9,6,6,'Flexiones','Ejercicio para fortalecer los brazos.','gif_homer','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación.')," +
 
-                " (10,4,4,'Abdominales con piernas elevadas','Acostarse en el piso,elevar las piernas hasta un ángulo de 90° , sin flexionar\n" +
-                "Bajarlas lentamente hasta casi tocar el piso,\n" +
-                "Repetir\n','gif_homer','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen');";
+                " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','gif_homer','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.');";
 
         String qry_insert_steps = "INSERT INTO " + TABLE_STEP + " VALUES" +
                 "(1,1,'Debes mantener la cabeza horizontal.')," +
@@ -173,9 +167,18 @@ public class Database_Helper extends SQLiteOpenHelper {
                 "(19,6,'La pierna de atrás se flexiona hasta que casi tocamos el suelo con la rodilla que forma un ángulo de 90 grados.')," +
                 "(20,6,'Volvemos a posición inicial y para hacerlo nos impulsamos con la pierna adelantada, apoya bien la planta del pie en el suelo para conseguir la fuerza.')," +
                 "(21,6,'Alternar piernas.')," +
+                "(22,7,'Túmbate boca arriba con las rodillas dobladas, si es posible sobre una colchoneta.')," +
+                "(23,7,'Las rodillas deben doblarse en un ángulo que permita a los talones quedar lo más cerca posible de la parte anterior de los muslos.')," +
+                "(24,7,'Apoya las manos sobre la cabeza, finalmente acerca el torso a las rodillas sin levantar la espalda del suelo.')," +
+                "(25,8,'Ponte en posición como si hicieras flexiones “comunes” pero, en lugar de colocar los brazos a los costados del cuerpo, debes apoyar las manos por delante del pecho.')," +
+                "(26,8,'Los dedos índice y los pulgares se deben tocar (formando un corazón o un diamante, de allí el nombre del ejercicio).')," +
+                "(27,9,'Coloca las manos alineadas a la altura de los hombros, justo debajo.')," +
+                "(28,9,'Separa los dedos de la mano para que puedas soportar mejor tu propio peso.')," +
+                "(29,10,'Acostarse en el piso,elevar las piernas hasta un ángulo de 90°, sin flexionar.')," +
+                "(30,10,'Bajarlas lentamente hasta casi tocar el piso.')," +
+                "(31,10,'Repetir.')," +
 
-                "(22,6,'')," +
-                "(123434343443434,5,'Debes mantener la cabeza horizontal.')";
+                "(14523,5,'Debes mantener la cabeza horizontal.')";
 
         String qry_insert_routines = "INSERT INTO " + TABLE_RUTINE + " VALUES" +
                 " (1,'Rutina mañanera', 'Para las mañanas hermosas', 5,360)," +
