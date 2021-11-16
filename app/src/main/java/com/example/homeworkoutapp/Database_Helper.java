@@ -143,7 +143,27 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (9,6,6,'Flexiones','Ejercicio para fortalecer los brazos.','gif_homer','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación.')," +
 
-                " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','gif_homer','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.');";
+                " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','gif_homer','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.')," +
+
+                " (11,4,4,'Elevación de rodilla a codo contrario','Ejercicio para fortalecer el abdomen.','gif_homer','Trata de tocar la rodilla con el codo para mayor eficiencia.')," +
+
+                " (12,1,1,'Burpees','Es un ejercicio que mide la resistencia anaeróbica y con él se trabaja el abdomen, la espalda, el pecho, los brazos y las piernas.','gif_homer','Recuerda que es importante amortiguar la caída y aterrizar de la manera más suave posible al saltar. El número de series y el tiempo de descanso entre series de burpees dependerá de tu nivel: principiante, intermedio, avanzado.')," +
+
+                " (13,6,6,'Deadbug','Ejercicio de movimiento de brazos y piernas que trabaja nuestra zona lumbar y mejora nuestra coordinación.','gif_homer','Mantén tus brazos y piernas siempre lo más estirados posible.')," +
+
+                " (14,6,6,'Full roll-up','Ejercicio para fortalecer los brazos.','gif_homer','Inicia tocando las rodillas y ve avanzando poco a poco hasta llegar a los pies.')," +
+
+                " (15,1,1,'Levantamiento de pelvis',' Ejercicio ideal para fortalecer tus glúteos, muslos, abdomen y piernas. Además, reduce el dolor de rodilla y de espalda baja.','gif_homer','Recuerda mantener la pelvis elevada unos segundos y no forzarte mucho tiempo.')," +
+
+                " (16,5,5,'Frog jumps','Ejercicio que trabaja las piernas.','gif_homer','Es importante caer suavemente para evitar algún daño. No realizar este ejercicio si padeces sobrepeso, a menos que puedas aterrizar suavemente.')," +
+
+                " (17,5,5,'Jumping Jacks','Ejercicio que te ayuda a quemar muchas calorías y ejercita las piernas.','gif_homer','Es importante la posición de sentadillas puesto que te proveerá mayor estabilidad y menor impacto en las rodillas.')," +
+
+                " (18,4,4,'La V','Con este tipo de ejercicio se trabaja gran parte del torso.','gif_homer','Si no puedes mantener la «V» por más de 30 segundos, procura hacer tiempos más cortos y practicar más seguido.')," +
+
+                " (19,6,6,'Boxeo','Es un ejercicio que te ayudará a liberar estrés y quemar calorías rápidamente.','gif_homer','Es conveniente realizar este ejercicio al concluir los sets de entrenamiento. No necesitas un saco de boxeo para el ejercicio. Si realizas el ejercicio durante al menos 5 minutos, será un trabajo cardiovascular muy eficaz.')," +
+
+                " (20,1,1,'Escalador',' El escalador es un excelente ejercicio para fortalecer el abdomen, brazos y hombros. Es sencillo y sus resultados son magníficos.','gif_homer','Realiza entre 6 y 12 repeticiones de acuerdo con tu nivel de resistencia.');";
 
         String qry_insert_steps = "INSERT INTO " + TABLE_STEP + " VALUES" +
                 "(1,1,'Debes mantener la cabeza horizontal.')," +
@@ -177,8 +197,43 @@ public class Database_Helper extends SQLiteOpenHelper {
                 "(29,10,'Acostarse en el piso,elevar las piernas hasta un ángulo de 90°, sin flexionar.')," +
                 "(30,10,'Bajarlas lentamente hasta casi tocar el piso.')," +
                 "(31,10,'Repetir.')," +
-
-                "(14523,5,'Debes mantener la cabeza horizontal.')";
+                "(32,11,'Para realizarlo partimos de la posición de pie, separamos ligeramente las piernas.')," +
+                "(33,11,'Elevamos la rodilla izquierda para aproximarla al codo derecho.')," +
+                "(34,11,'A continuación elevamos la rodilla derecha para aproximarla al codo izquierdo.')," +
+                "(35,12,'Colocarse en cuclillas, colocando las manos en el suelo y manteniendo la cabeza erguida.')," +
+                "(36,12,'Desplazar las piernas hacia atrás manteniendo los pies juntos.')," +
+                "(37,12,'Hacer una flexión de pecho (también conocida como flexión de codos). Debes mantener la espalda recta y tocar el sueño con el pecho.')," +
+                "(38,12,'Recoge las piernas para volver a la posición inicial (en cuclillas).')," +
+                "(39,12,'Levanta todo el cuerpo de un salto vertical, elevando las manos. Puedes dar una palmada por encima de la cabeza.')," +
+                "(40,12,'Regresar a la posición inicial para repetir el ejercicio.')," +
+                "(41,13,'Debes acostarte boca arriba.')," +
+                "(42,13,'Levanta los brazos y piernas hacia arriba formando un ángulo de 90°.')," +
+                "(43,13,'Sin levantar la espalda, alterna tus piernas de forma que no coincidan en posición.')," +
+                "(44,13,'Al mismo tiempo, alterna tus brazos de forma que no coincidan con la pierna del mismo lado.')," +
+                "(45,14,'Para llevarlos a cabo hace falta que uses el cuerpo entero, de forma que se fortalecerá tu núcleo y te ayudará a alargar y estirar tanto tu espalda como los músculos isquiotibiales.')," +
+                "(46,14,'Los «rolls-up» se ejecutan sentándose en el suelo con las piernas y los brazos flexionados paralelos hacia adelante.')," +
+                "(47,14,'Una vez tengas esta postura has de intentar llegar con tu tronco lo más lejos posible y en dirección a tus pies.')," +
+                "(48,15,'Acuéstate en el suelo boca arriba, con tu espalda completamente recta.')," +
+                "(49,15,'Eleva la pelvis lo más arriba posible durante unos segundos.')," +
+                "(50,15,'Al bajar, no pegues tu trasero contra el suelo. Mantenlo ligeramente elevado.')," +
+                "(51,15,'Repite este ejercicio las veces que te desees.')," +
+                "(52,16,'Iniciar con posición en cuclillas.')," +
+                "(53,16,'Da un salto estirando y abriendo las piernas lo más posible.')," +
+                "(54,16,'Cae lo más suavemente posible.')," +
+                "(55,16,'Regresa en la posición de cuclillas.')," +
+                "(56,16,'Repite el ejercicio las veces que desees.')," +
+                "(57,17,'Inicia en posición de sentadilla.')," +
+                "(58,17,'Salta y abre lo máximo que puedas los brazos y piernas, procurando mantener una posición de estrella mientras estás en el aire.')," +
+                "(59,17,'Cae lo más suavemente posible.')," +
+                "(60,17,'Al caer, vuelve a la posición inicial de sentadillas flexionando las piernas.')," +
+                "(61,17,'Realiza entre 8 o 12 repeticiones en cada serie.')," +
+                "(62,18,'Acuéstate sobre el suelo con los brazos estirados hacia la parte superior de la cabeza.')," +
+                "(63,18,'Toma un poco de impulso para elevar brazos y piernas. Debes quedar solo con los glúteos tocando el suelo.')," +
+                "(64,18,'Coloca los brazos a un costado de las pantorrillas y así tu cuerpo formará una silueta similar a una «V». Mantén la posición de «V» durante al menos 30 segundos.')," +
+                "(65,19,'Flexiona un poco las rodillas.')," +
+                "(66,19,'Lanza golpes al frente con los puños como si estuvieras golpeando algo.')," +
+                "(67,20,'Debes iniciar con una posición de plancha.')," +
+                "(68,20,'Luego, alterna las rodillas, procurando tocar tus codos con ellas.')";
 
         String qry_insert_routines = "INSERT INTO " + TABLE_RUTINE + " VALUES" +
                 " (1,'Rutina mañanera', 'Para las mañanas hermosas', 5,360)," +
