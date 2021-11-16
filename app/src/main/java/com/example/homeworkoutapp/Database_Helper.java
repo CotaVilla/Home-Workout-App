@@ -125,35 +125,19 @@ public class Database_Helper extends SQLiteOpenHelper {
 
         // id, tipo_ejercicio_original, tipo_ejercicio_actual, nombre, Descripcion,Tips
         String qry_insert_exercises = "INSERT INTO " + TABLE_EXCERCISE + " VALUES" +
-                " (1,5,5,'Sentadilla','Debes mantener la cabeza horizontal. \n" +
-                "- Los pies deben colocarse al ancho de los hombros. \n" +
-                "- La rodilla, durante la flexión, no debe sobrepasar la punta de los pies. \n" +
-                "- No se debe flexionar demasiado.\n','gif_homer','Mantén un equilibrio apoyándote de los brazos')," +
+                " (1,5,5,'Sentadilla','Ejercicio para fortalecer las piernas.','gif_homer','Mantén un equilibrio apoyándote de los brazos.')," +
 
-                " (2,4,4,'Plancha','Ponte en posición de flexión de brazos, con los codos por debajo de los hombros y los pies separados a lo ancho de las caderas. \n" +
-                "Flexione los codos y apoye el peso en los antebrazos y en los dedos de los pies, manteniendo el cuerpo en línea recta. \n" +
-                "Aguanta el mayor tiempo posible.\n" +
-                "\n','gif_homer','Mantén los brazos separados y no bajes la pelvis')," +
+                " (2,4,4,'Plancha','Ejercicio para fortalecer el abdomen.','gif_homer','Mantén los brazos separados y no bajes la pelvis.')," +
 
-                " (3,4,4,'Plancha lateral derecha','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
-                "\n','gif_homer','Posiciona un pie al frente para mantener el equilibrio\n')," +
+                " (3,4,4,'Plancha lateral derecha','Ejercicio para fortalecer el abdomen oblicuo.','gif_homer','Posiciona un pie al frente para mantener el equilibrio.')," +
 
-                " (4,4,4,'Plancha lateral izquierda','Con una mano apoyada en el suelo y la otra pegada al cuerpo, nos elevaremos hasta que sólo tengamos apoyado un brazo y los pies en el suelo.\n" +
-                "\n','gif_homer','Posiciona un pie al frente para mantener el equilibrio')," +
+                " (4,4,4,'Plancha lateral izquierda','Ejercicio para fortalecer el abdomen oblicuo.','gif_homer','Posiciona un pie al frente para mantener el equilibrio.')," +
 
-                " (5,1,1,'Saltos de Tijera','Párate derecho con los pies juntos y las manos a los lados. \n" +
-                "Salte, abra los pies y ponga ambas manos juntas sobre su cabeza. \n" +
-                "Saltar de nuevo y volver a la posición inicial. \n" +
-                "Repita hasta que el juego esté completo\n','gif_homer','Estira completamente los brazos y no abras demasiado las piernas en el salto')," +
+                " (5,1,1,'Saltos de Tijera','Ejercicio de cardio.','gif_homer','Estira completamente los brazos y no abras demasiado las piernas en el salto.')," +
 
-                " (6,5,5,'Zancada frontal','Baja la cadera hasta que el cuádriceps queda paralelo al suelo \n" +
-                "La pierna de atrás se flexiona hasta que casi tocamos el suelo con la rodilla que forma un ángulo de 90 grados. \n" +
-                "Volvemos a posición inicial y para hacerlo nos impulsamos con la pierna adelantada, apoya bien la planta del pie en el suelo para conseguir la fuerza.\n" +
-                "Alternar piernas\n','gif_homer',' mantente siempre erguido mirando hacia el frente')," +
+                " (6,5,5,'Zancada frontal','Ejercicio para fortalecer las piernas.','gif_homer','Mantente siempre erguido mirando hacia el frente.')," +
 
-                " (7,4,4,'Abdominales','Túmbate boca arriba con las rodillas dobladas, si es posible sobre una colchoneta. \n" +
-                "Las rodillas deben doblarse en un ángulo que permita a los talones quedar lo más cerca posible de la parte anterior de los muslos.\n" +
-                "Apoya las manos sobre la cabeza, finalmente acerca el torso a las rodillas sin levantar la espalda del suelo\n','gif_homer','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
+                " (7,4,4,'Abdominales','Ejercicio para fortalecer el abdomen.','gif_homer','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
 
                 " (8,6,6,'Flexiones Diamante','Ponte en posición como si hicieras flexiones “comunes” pero, en lugar de colocar los brazos a los costados del cuerpo, debes apoyar las manos por delante del pecho. \n" +
                 "Los dedos índice y los pulgares se deben tocar (formando un corazón o un diamante, de allí el nombre del ejercicio).\n" +
@@ -172,14 +156,26 @@ public class Database_Helper extends SQLiteOpenHelper {
                 "(2,1,'Los pies deben colocarse al ancho de los hombros.')," +
                 "(3,1,'La rodilla, durante la flexión, no debe sobrepasar la punta de los pies.')," +
                 "(4,1,'No se debe flexionar demasiado.')," +
-                "(5,2,'Paso 1.')," +
-                "(6,2,'Paso 2.')," +
-                "(7,2,'Paso 3.')," +
-                "(8,2,'Paso 4.')," +
-                "(9,3,'Paso 1.')," +
-                "(10,3,'Debes mantener la cabeza horizontal.')," +
-                "(11,4,'Debes mantener la cabeza horizontal.')," +
-                "(12,5,'Debes mantener la cabeza horizontal.')";
+                "(5,2,'Ponte en posición de flexión de brazos, con los codos por debajo de los hombros y los pies separados a lo ancho de las caderas.')," +
+                "(6,2,'Flexione los codos y apoye el peso en los antebrazos y en los dedos de los pies, manteniendo el cuerpo en línea recta.')," +
+                "(7,2,'Aguanta el mayor tiempo posible.')," +
+                "(8,3,'Apoya la mano derecha en el suelo.')," +
+                "(9,3,'Coloca la mano izquierda pegada al cuerpo.')," +
+                "(10,3,'Elévate hasta que sólo tengas apoyado un brazo y los pies en el suelo.')," +
+                "(11,4,'Apoya la mano izquierda en el suelo.')," +
+                "(12,4,'Coloca la mano derecha pegada al cuerpo.')," +
+                "(13,4,'Elévate hasta que sólo tengas apoyado un brazo y los pies en el suelo.')," +
+                "(14,5,'Párate derecho con los pies juntos y las manos a los lados.')," +
+                "(15,5,'Salta, abra los pies y ponga ambas manos juntas sobre su cabeza.')," +
+                "(16,5,'Saltar de nuevo y volver a la posición inicial.')," +
+                "(17,5,'Repite hasta que el juego esté completo.')," +
+                "(18,6,'Baja la cadera hasta que el cuádriceps queda paralelo al suelo.')," +
+                "(19,6,'La pierna de atrás se flexiona hasta que casi tocamos el suelo con la rodilla que forma un ángulo de 90 grados.')," +
+                "(20,6,'Volvemos a posición inicial y para hacerlo nos impulsamos con la pierna adelantada, apoya bien la planta del pie en el suelo para conseguir la fuerza.')," +
+                "(21,6,'Alternar piernas.')," +
+
+                "(22,6,'')," +
+                "(123434343443434,5,'Debes mantener la cabeza horizontal.')";
 
         String qry_insert_routines = "INSERT INTO " + TABLE_RUTINE + " VALUES" +
                 " (1,'Rutina mañanera', 'Para las mañanas hermosas', 5,360)," +
