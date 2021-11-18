@@ -125,7 +125,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
         // id, tipo_ejercicio_original, tipo_ejercicio_actual, nombre, Descripcion,Tips
         String qry_insert_exercises = "INSERT INTO " + TABLE_EXCERCISE + " VALUES" +
-                " (1,5,5,'Sentadilla','Ejercicio para fortalecer las piernas.','gif_homer','Mantén un equilibrio apoyándote de los brazos.')," +
+                " (1,5,5,'Sentadilla','Ejercicio para fortalecer las piernas.','gif_sentadilla','Mantén un equilibrio apoyándote de los brazos.')," +
 
                 " (2,4,4,'Plancha','Ejercicio para fortalecer el abdomen.','gif_homer','Mantén los brazos separados y no bajes la pelvis.')," +
 
