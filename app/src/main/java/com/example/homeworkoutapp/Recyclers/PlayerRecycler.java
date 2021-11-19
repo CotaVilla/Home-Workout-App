@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
-import com.example.homeworkoutapp.ui.play.PlayFragment;
+import com.example.homeworkoutapp.ui.player.PlayerFragment;
 
 import java.util.ArrayList;
 
@@ -104,8 +104,8 @@ public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPl
                     notifyItemChanged(lastItemSelectedPos);
                     selectedItemPos = getAdapterPosition();
                     notifyItemChanged(selectedItemPos);
-                    if (currentFragment instanceof PlayFragment) {
-                        ((PlayFragment) currentFragment).selectedItemChanged();
+                    if (currentFragment instanceof PlayerFragment) {
+                        ((PlayerFragment) currentFragment).selectedItemChanged();
                     }
                 }
             });

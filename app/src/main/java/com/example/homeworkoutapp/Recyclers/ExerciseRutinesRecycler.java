@@ -19,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 import com.example.homeworkoutapp.ui.exercises.EditExerciseFragment;
-import com.example.homeworkoutapp.ui.exercises.NewExerciseFragment;
-import com.example.homeworkoutapp.ui.play.PlayFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -136,11 +134,11 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
                     showDialog();
                 }
 
-                // Show options menu of the rutine_exercise
+                // Show OptionsFragment menu of the rutine_exercise
                 public void showDialog(){
 
                     Dialog dialog = new Dialog(context);
-                    dialog.setContentView(R.layout.options_rutine_excersice);
+                    dialog.setContentView(R.layout.dialog_options_rutine_excersice);
 
                     TextView option_title = dialog.findViewById(R.id.rutine_options_title);
                     TextView option_edit = dialog.findViewById(R.id.rutine_option_edit);

@@ -23,7 +23,6 @@ import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.StartActivity;
 import com.example.homeworkoutapp.databinding.FragmentEditExerciseBinding;
-import com.example.homeworkoutapp.databinding.FragmentNewExerciseBinding;
 import com.example.homeworkoutapp.objects.Exercise;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
@@ -223,7 +222,7 @@ public class EditExerciseFragment extends Fragment {
 
     public void showTimePicker(){
         Dialog timePickerDialog = new Dialog(context);
-        timePickerDialog.setContentView(R.layout.time_dialog);
+        timePickerDialog.setContentView(R.layout.dialog_time);
 
         AppCompatButton cancel = timePickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = timePickerDialog.findViewById(R.id.ok);
@@ -264,7 +263,7 @@ public class EditExerciseFragment extends Fragment {
 
     public void showTimePicker2(){
         Dialog timePickerDialog = new Dialog(context);
-        timePickerDialog.setContentView(R.layout.time_dialog);
+        timePickerDialog.setContentView(R.layout.dialog_time);
 
         AppCompatButton cancel = timePickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = timePickerDialog.findViewById(R.id.ok);
@@ -305,7 +304,7 @@ public class EditExerciseFragment extends Fragment {
 
     public void showRepeatsPicker(){
         Dialog repeatsPickerDialog = new Dialog(context);
-        repeatsPickerDialog.setContentView(R.layout.repeats_dialog);
+        repeatsPickerDialog.setContentView(R.layout.dialog_repeats);
 
         AppCompatButton cancel = repeatsPickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = repeatsPickerDialog.findViewById(R.id.ok);

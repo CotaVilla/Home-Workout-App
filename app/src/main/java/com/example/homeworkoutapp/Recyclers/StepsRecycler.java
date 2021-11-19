@@ -1,30 +1,15 @@
 package com.example.homeworkoutapp.Recyclers;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
-import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Step;
-import com.example.homeworkoutapp.ui.play.PlayFragment;
-import com.example.homeworkoutapp.ui.routines.EditRoutine;
-import com.example.homeworkoutapp.ui.routines.RoutinesFragment;
 
 import java.util.ArrayList;
 

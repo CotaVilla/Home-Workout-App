@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.objects.Rutine;
-import com.example.homeworkoutapp.ui.play.PlayFragment;
-import com.example.homeworkoutapp.ui.routines.EditRoutine;
+import com.example.homeworkoutapp.ui.player.PlayerFragment;
+import com.example.homeworkoutapp.ui.routines.EditRoutineFragment;
 import com.example.homeworkoutapp.ui.routines.RoutinesFragment;
 
 import java.util.ArrayList;
@@ -101,7 +101,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                 @Override
                 public void onClick(View v) {
                     if(rutine.Exercises!=0){
-                        PlayFragment playFragment = new PlayFragment(rutine);
+                        PlayerFragment playFragment = new PlayerFragment(rutine);
                         FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.replace(R.id.nav_host_fragment_content_start, playFragment);
@@ -113,7 +113,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                 }
             });
 
-            // Listen click on just the options
+            // Listen click on just the OptionsFragment
             options.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -139,11 +139,11 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
             errorDialog.show();
         }
 
-        // Show options menu of the rutine
+        // Show OptionsFragment menu of the rutine
         public void showDialog(){
 
             Dialog dialog = new Dialog(context);
-            dialog.setContentView(R.layout.options_rutine);
+            dialog.setContentView(R.layout.dialog_options_rutine);
 
             TextView option_title = dialog.findViewById(R.id.rutine_options_title);
             TextView option_play = dialog.findViewById(R.id.rutine_option_play);
@@ -162,7 +162,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                 public void onClick(View v) {
                     Log.d("demo","Play: "+ rutine.name);
                     if(rutine.Exercises!=0){
-                        PlayFragment playFragment = new PlayFragment(rutine);
+                        PlayerFragment playFragment = new PlayerFragment(rutine);
                         FragmentTransaction fragmentTransaction = ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.replace(R.id.nav_host_fragment_content_start, playFragment);
@@ -183,7 +183,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
                 //Open Edit routine with selected routine
                 public void onClick(View v) {
                     Log.d("demo","Edit: "+ rutine.name);
-                    EditRoutine newRutine = new EditRoutine(rutine);
+                    EditRoutineFragment newRutine = new EditRoutineFragment(rutine);
                     ((FragmentActivity) unwrap(v.getContext())).getSupportFragmentManager().beginTransaction()
                             .addToBackStack(null)
                             .replace(R.id.nav_host_fragment_content_start, newRutine)

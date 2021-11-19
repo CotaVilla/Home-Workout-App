@@ -98,10 +98,10 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
                     showDialog();
                 }
 
-                // Show options menu of the rutine
+                // Show OptionsFragment menu of the rutine
                 public void showDialog(){
                     Dialog dialog = new Dialog(context);
-                    dialog.setContentView(R.layout.options_excersice);
+                    dialog.setContentView(R.layout.dialog_options_excersice);
 
                     TextView option_title = dialog.findViewById(R.id.excercise_options_title);
                     TextView option_open = dialog.findViewById(R.id.excercise_option_open);

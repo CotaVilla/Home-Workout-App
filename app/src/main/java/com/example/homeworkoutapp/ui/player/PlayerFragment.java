@@ -1,9 +1,9 @@
-package com.example.homeworkoutapp.ui.play;
+package com.example.homeworkoutapp.ui.player;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +26,22 @@ import com.example.homeworkoutapp.objects.Rutine_Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Queue;
 
-public class PlayFragment extends Fragment {
+public class PlayerFragment extends Fragment {
+    Database_Helper database_helper;
+    SharedPreferences appSettingsPrefs;
+    SharedPreferences.Editor sharedPrefsEdit;
+
     private Rutine rutine;
     private ArrayList<Rutine_Exercise> list_exercises;
     private RecyclerView recycler;
-    PlayerRecycler adapter;
+    private PlayerRecycler adapter;
     boolean firtsLoad = true;
-
-    Database_Helper database_helper;
+    CountDownTimer countDownTimer;
+    MediaPlayer mediaPlayer;
+    TextToSpeech textToSpeech;
 
     TextView title;
     TextView rutineName;
@@ -47,8 +55,12 @@ public class PlayFragment extends Fragment {
     FloatingActionButton buttonPlay;
     FloatingActionButton buttonPrevious;
     FloatingActionButton buttonNext;
-    CountDownTimer countDownTimer;
-    MediaPlayer mediaPlayer;
+
+
+    private boolean sound_next_countdown;
+    private boolean sound_next_exercise;
+    private boolean sound_routine_finish;
+    private boolean narrator;
 
     Rutine_Exercise rutine_exercise;
     int timeToPlay;
@@ -59,8 +71,39 @@ public class PlayFragment extends Fragment {
     Boolean counterIsActive = false;
     Boolean playclicked = false;
 
-    public PlayFragment (Rutine rutine){
+
+    public PlayerFragment(Rutine rutine){
         this.rutine = rutine;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        appSettingsPrefs = getActivity().getSharedPreferences("AppSettingsPrefs",0);
+        sharedPrefsEdit = appSettingsPrefs.edit();
+
+        textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                Locale locSpanish = new Locale("spa", "MEX");
+                textToSpeech.setLanguage(locSpanish);
+                textToSpeech.setSpeechRate(1.0F);
+                textToSpeech.setPitch(1.0F);
+            }
+        });
+    }
+
+    public void speak(String text){
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH,null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sound_next_countdown = appSettingsPrefs.getBoolean("sound_next_countdown",true);
+        sound_next_exercise = appSettingsPrefs.getBoolean("sound_next_exercise",true);
+        sound_routine_finish = appSettingsPrefs.getBoolean("sound_routine_finish",true);
+        narrator = appSettingsPrefs.getBoolean("narrator",true);
     }
 
     @Override
@@ -310,8 +353,17 @@ public class PlayFragment extends Fragment {
             countDownTimer.cancel();
             countDownTimer = setTimer(timeToPlay);
             countDownTimer.start();
-            if (actuaRepeat != 1 || !rest)
-                mediaPlayer.start();
+            if (actuaRepeat != 1 || !rest){
+                if(sound_next_countdown){
+                    speak(fase.getText().toString());
+                    mediaPlayer.start();
+                }
+                if(narrator){
+                    speak(fase.getText().toString());
+                }
+            }
+
+
         }
     }
 
@@ -342,12 +394,24 @@ public class PlayFragment extends Fragment {
         if(rutine_exercise.position < adapter.getItemCount()){
             adapter.changeSelectedNext();
             setNewExcercise();
-            mediaPlayer = MediaPlayer.create(getContext(), R.raw.change_exercise_sound);
-            mediaPlayer.start();
+            if(sound_next_exercise){
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.change_exercise_sound);
+                mediaPlayer.start();
+            }
+            if(narrator){
+                speak(exerciseName.getText().toString());
+            }
         }
         else {
-            mediaPlayer = MediaPlayer.create(getContext(), R.raw.rutine_finished);
-            mediaPlayer.start();
+            if(sound_routine_finish){
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.rutine_finished);
+
+                mediaPlayer.start();
+            }
+            if(narrator){
+                speak(exerciseName.getText().toString());
+                speak("Rutina finalizada");
+            }
             counterIsActive=false;
             adapter.resetSelection();
             setNewExcercise();
@@ -395,9 +459,13 @@ public class PlayFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        if(textToSpeech!=null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
         if(counterIsActive){
             countDownTimer.cancel();
         }
+        super.onDestroy();
     }
 }

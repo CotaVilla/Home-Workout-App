@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.routines.NewRutine">
+    tools:context=".ui.routines.NewRutineFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                     </LinearLayout>
                     <TextView
                         android:id="@+id/exercises_count"
-                        android:text="20/100"
+                        android:text="0/100"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

@@ -23,6 +23,7 @@ import com.example.homeworkoutapp.Database_Helper;
 import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.Recyclers.ExerciseRutinesRecycler;
 import com.example.homeworkoutapp.StartActivity;
+import com.example.homeworkoutapp.databinding.FragmentNewRutineBinding;
 import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
@@ -30,10 +31,10 @@ import com.example.homeworkoutapp.ui.exercises.NewExerciseFragment;
 
 import java.util.ArrayList;
 
-public class NewRutine extends Fragment {
+public class NewRutineFragment extends Fragment {
 
     private Context context;
-    private FragmentRoutinesBinding binding;
+    private FragmentNewRutineBinding binding;
     private StartActivity activity;
     Rutine_Exercise newRE;
 

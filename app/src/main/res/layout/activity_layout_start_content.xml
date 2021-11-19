@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/linear_container_white_gray"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/layout_start">
+    tools:showIn="@layout/activity_layout_start">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_content_start"

@@ -119,13 +119,13 @@
                         android:layout_margin="7dp"/>
                 </LinearLayout>
                 <TextView
-                    android:text="20/100"
+                    android:id="@+id/exercises_count"
+                    android:text="0/100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textAppearance="@style/label_input_text"
                     android:layout_marginStart="10dp">
-
                 </TextView>
             </LinearLayout>
 

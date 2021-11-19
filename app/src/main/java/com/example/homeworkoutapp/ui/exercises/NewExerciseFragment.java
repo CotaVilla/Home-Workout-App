@@ -247,7 +247,7 @@ public class NewExerciseFragment extends Fragment {
 
     public void showTimePicker(){
         Dialog timePickerDialog = new Dialog(context);
-        timePickerDialog.setContentView(R.layout.time_dialog);
+        timePickerDialog.setContentView(R.layout.dialog_time);
 
         AppCompatButton cancel = timePickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = timePickerDialog.findViewById(R.id.ok);
@@ -288,7 +288,7 @@ public class NewExerciseFragment extends Fragment {
 
     public void showTimePicker2(){
         Dialog timePickerDialog = new Dialog(context);
-        timePickerDialog.setContentView(R.layout.time_dialog);
+        timePickerDialog.setContentView(R.layout.dialog_time);
 
         AppCompatButton cancel = timePickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = timePickerDialog.findViewById(R.id.ok);
@@ -329,7 +329,7 @@ public class NewExerciseFragment extends Fragment {
 
     public void showRepeatsPicker(){
         Dialog repeatsPickerDialog = new Dialog(context);
-        repeatsPickerDialog.setContentView(R.layout.repeats_dialog);
+        repeatsPickerDialog.setContentView(R.layout.dialog_repeats);
 
         AppCompatButton cancel = repeatsPickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = repeatsPickerDialog.findViewById(R.id.ok);

@@ -1,7 +1,5 @@
 package com.example.homeworkoutapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +12,7 @@ public class Loading_Screen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_initiation);
+        setContentView(R.layout.activity_layout_initiation);
 
         TimerTask task = new TimerTask() {
             @Override

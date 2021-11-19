@@ -466,8 +466,11 @@ public class Database_Helper extends SQLiteOpenHelper {
         cv.put(RUTINE_DURATION,routine.Duration);
         String where = RUTINE_ID + " = " + routine.id;
 
+        db.update(TABLE_RUTINE, cv, where, null);
+
+        where = RE_RUTINE_ID + " = " + routine.id;
         // Delete all related data of routine
-        db.delete(TABLE_RE,RE_RUTINE_ID + " = " + routine.id,null);
+        db.delete(TABLE_RE,where,null);
 
 
         String[] whereArgs = new String[]{String.valueOf(routine.id)};
@@ -528,9 +531,10 @@ public class Database_Helper extends SQLiteOpenHelper {
         String[] columns = new String[]{EXERCISE_ID,EXERCISE_TYPE_ID,EXERCISE_ACTUAL_TYPE_ID,EXERCISE_NAME, EXERCISE_DESCRIPTION,EXERCISE_GIF_LOCATION,EXERCISE_TIPS};
 
         String orderBy = EXERCISE_NAME + " ASC";
+        long hidden_id = getHiddenFilterId();
 
         if (type_id == 0 && (name == null || name.equals(""))){
-            selection = null;
+            selection = EXERCISE_ACTUAL_TYPE_ID + " != " +  hidden_id;
         }
         else if (type_id == 0 && !(name == null || name.equals(""))){
             selection = EXERCISE_NAME + " LIKE '%" + name + "%'";
