@@ -3,12 +3,11 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24"
-    android:tint="@color/yellow"
     android:alpha="1">
   <group android:scaleX="0.5"
       android:scaleY="0.5">
     <path
         android:pathData="M24,0.6667C25.6108,0.6667 26.9167,1.9726 26.9167,3.5834V21.0834H44.4167C46.0275,21.0834 47.3333,22.3892 47.3333,24.0001C47.3333,25.6109 46.0275,26.9167 44.4167,26.9167H26.9167V44.4167C26.9167,46.0275 25.6108,47.3334 24,47.3334C22.3892,47.3334 21.0833,46.0275 21.0833,44.4167V26.9167H3.5833C1.9725,26.9167 0.6667,25.6109 0.6667,24.0001C0.6667,22.3892 1.9725,21.0834 3.5833,21.0834H21.0833V3.5834C21.0833,1.9726 22.3892,0.6667 24,0.6667Z"
-        android:fillColor="#FBBF26"/>
+        android:fillColor="@color/accent"/>
   </group>
 </vector>

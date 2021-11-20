@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/linear_container_white_gray">
+    android:background="@drawable/container_linear">
 
     <include layout="@layout/fragment_title"/>
 
@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ejercicio"
+                android:text="@string/label_select_exercise"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="@style/label_input_text" />
 
@@ -42,18 +42,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/input_container">
+                android:background="@drawable/container_text">
 
                 <TextView
                     android:id="@+id/selected_exercise"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="number"
-                    android:hint="Sin seleccionar"
+                    android:hint="@string/hint_exercise_select"
                     android:paddingVertical="7dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/transparent"
+                    android:background="@color/container_transparent"
                     android:textAlignment="center"
                     android:textAppearance="@style/label_input_text"/>
 
@@ -70,10 +69,10 @@
             android:layout_marginTop="10dp"
             android:paddingHorizontal="10dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/background_blue_button"
+            android:background="@drawable/container_accept_button"
             android:text="Seleccionar un ejercicio."
             android:textAllCaps="false"
-            android:textAppearance="@style/blue_button_text"/>
+            android:textAppearance="@style/accept_button_text"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +83,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tiempo de ejercicio"
+                android:text="@string/label_select_work_time"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="@style/label_input_text" />
 
@@ -93,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/input_container">
+                android:background="@drawable/container_text">
 
                 <TextView
                     android:id="@+id/exercise_work_time"
@@ -104,7 +103,7 @@
                     android:hint="00:00:00"
                     android:paddingVertical="7dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/transparent"
+                    android:background="@color/container_transparent"
                     android:textAlignment="center"
                     android:textAppearance="@style/label_input_text"/>
 
@@ -123,7 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tiempo de descanso"
+                android:text="@string/label_select_rest_time"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="@style/label_input_text" />
 
@@ -132,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/input_container">
+                android:background="@drawable/container_text">
 
                 <TextView
                     android:id="@+id/exercise_rest_time"
@@ -143,7 +142,7 @@
                     android:hint="00:00:00"
                     android:paddingVertical="7dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/transparent"
+                    android:background="@color/container_transparent"
                     android:textAlignment="center"
                     android:textAppearance="@style/label_input_text"/>
 
@@ -160,7 +159,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Repeticiones"
+                android:text="@string/label_select_repetitions"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="@style/label_input_text" />
 
@@ -169,18 +168,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/input_container">
+                android:background="@drawable/container_text">
 
                 <TextView
                     android:id="@+id/exercise_repetitions"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="number"
-                    android:hint="1 repeticion"
+                    android:hint="@string/hint_select_repetitions"
                     android:paddingVertical="7dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/transparent"
+                    android:background="@color/container_transparent"
                     android:textAlignment="center"
                     android:textAppearance="@style/label_input_text"/>
 
@@ -195,24 +193,24 @@
             android:layout_marginBottom="60dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
-            android:gravity="right">
+            android:gravity="end">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/cancel_exercise"
                 android:layout_width="110dp"
                 android:layout_height="35dp"
-                android:background="@drawable/background_white_button"
-                android:text="Cancelar"
-                android:textAppearance="@style/white_button_text"/>
+                android:background="@drawable/container_cancel_button"
+                android:text="@string/btn_text_cancel"
+                android:textAppearance="@style/cancel_button_text"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_excercise"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
-                android:background="@drawable/background_blue_button"
-                android:layout_marginLeft="10dp"
-                android:text="Guardar"
-                android:textAppearance="@style/blue_button_text"/>
+                android:background="@drawable/container_accept_button"
+                android:layout_marginStart="10dp"
+                android:text="@string/btn_text_save"
+                android:textAppearance="@style/accept_button_text"/>
         </LinearLayout>
 
     </LinearLayout>

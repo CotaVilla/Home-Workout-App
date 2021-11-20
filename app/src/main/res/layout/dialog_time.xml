@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="50dp"
     android:orientation="vertical"
-    android:background="@drawable/white_container_big_corners">
+    android:background="@drawable/container_options">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -47,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:background="@color/container_transparent"
             android:text="Cancelar"
             android:textAllCaps="false"
-            android:textAppearance="@style/white_button_text"/>
+            android:textAppearance="@style/dialog_button"/>
 
         <View
             android:id="@+id/view2"
@@ -63,10 +63,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:background="@color/container_transparent"
             android:text="Aceptar"
             android:textAllCaps="false"
-            android:textAppearance="@style/white_button_text"/>
+            android:textAppearance="@style/dialog_button"/>
     </LinearLayout>
 
 </LinearLayout>

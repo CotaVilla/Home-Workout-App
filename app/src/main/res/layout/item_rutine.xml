@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/round_container_blue">
+        android:background="@drawable/container_item">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -22,7 +22,7 @@
             <RelativeLayout
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -46,12 +46,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Example text"
-                    android:textAppearance="@style/item_title" />
+                    android:textAppearance="@style/item_title"
+                    tools:ignore="HardcodedText" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -76,7 +77,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/white_container_little_corners"
+                android:background="@drawable/container_little_corners"
+                android:elevation="-10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -87,7 +89,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="Example text"
-                    android:textAppearance="@style/item_textbox" />
+                    android:textAppearance="@style/item_textbox"
+                    tools:ignore="HardcodedText" />
             </RelativeLayout>
 
         </RelativeLayout>
@@ -111,7 +114,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="3dp"
                     android:text="Example text"
-                    android:textAppearance="@style/item_text" />
+                    android:textAppearance="@style/item_text"
+                    tools:ignore="HardcodedText" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_weight="2"
@@ -123,9 +127,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="3dp"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:text="Example text"
                     android:textAppearance="@style/item_text" />
             </RelativeLayout>

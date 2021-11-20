@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -23,13 +24,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Exercise"
-                android:textAppearance="@style/content_title_fragment" />
+                android:textAppearance="@style/content_title_fragment"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Descripción"
+                android:text="@string/label_exercise_description"
                 android:textAppearance="@style/label_input_text" />
 
             <TextView
@@ -37,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/input_container"
+                android:background="@drawable/container_text"
                 android:gravity="start"
                 android:lines="4"
                 android:maxLength="200"
@@ -50,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Video del ejercicio"
+                android:text="@string/label_exercise_video"
                 android:textAppearance="@style/label_input_text" />
 
             <pl.droidsonroids.gif.GifImageView
@@ -64,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Pasos"
+                android:text="@string/label_exercise_steps"
                 android:textAppearance="@style/label_input_text" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -77,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Tips"
+                android:text="@string/label_exercise_tips"
                 android:textAppearance="@style/label_input_text" />
             <TextView
                 android:id="@+id/exercise_tips"
@@ -86,9 +88,10 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
                 android:layout_marginBottom="100dp"
-                android:text="Pasos"
-                android:background="@drawable/input_container"
-                android:textAppearance="@style/input_description_text" />
+                android:text="Tips"
+                android:background="@drawable/container_text"
+                android:textAppearance="@style/input_description_text"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

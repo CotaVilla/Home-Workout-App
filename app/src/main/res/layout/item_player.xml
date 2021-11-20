@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="@drawable/round_container_blue"
+    android:background="@drawable/container_item"
     android:layout_marginHorizontal="20dp"
     android:layout_marginTop="10dp"
     android:orientation="vertical">
@@ -21,17 +22,19 @@
             android:text="#100"
             android:gravity="start"
             android:layout_marginStart="10dp"
-            style="@style/player_title" />
+            style="@style/player_title"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/exercise_name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Ejercicio 1"
             android:gravity="start"
             android:layout_weight="1"
-            style="@style/player_title" />
+            style="@style/player_title"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/repeats"
@@ -41,7 +44,8 @@
             android:layout_marginEnd="10dp"
             android:gravity="end"
             android:text="Repeat 1/20"
-            style="@style/player_title" />
+            style="@style/player_title"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
@@ -55,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="A ejercitarse"
-            style="@style/player_fase"/>
+            style="@style/player_fase"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,7 +74,8 @@
                 android:gravity="start"
                 android:layout_weight="1"
                 android:layout_marginStart="10dp"
-                style="@style/player_time" />
+                style="@style/player_time"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/total_time"
@@ -79,7 +85,8 @@
                 android:layout_marginEnd="10dp"
                 android:gravity="end"
                 android:text="60 seg"
-                style="@style/player_time" />
+                style="@style/player_time"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <SeekBar
@@ -91,9 +98,9 @@
             android:layout_marginHorizontal="10dp"
             android:max="100"
             android:progress="0"
-            android:progressTint="@color/white"
-            android:thumbTint="@color/white"
-            android:progressBackgroundTint="@color/transparent_white"/>
+            android:progressTint="@color/icon_secondary"
+            android:thumbTint="@color/icon_secondary"
+            android:progressBackgroundTint="@color/icon_transparent"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,11 +111,12 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_go_back"
                 app:fabCustomSize="50dp"
-                app:elevation="0dp"
+                app:tint ="#ffffff"
+                android:tint="@android:color/white"
                 app:pressedTranslationZ="0dp"
                 app:borderWidth="0dp"
-                app:tint="@color/white"
-                android:backgroundTint="@color/transparent"/>
+                android:backgroundTint="@color/container_transparent"
+                tools:ignore="ContentDescription" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/player_play"
@@ -117,24 +125,26 @@
                 android:src="@drawable/ic_play"
                 android:scaleX="1.3"
                 android:scaleY="1.3"
+                app:tint ="#ffffff"
                 app:fabCustomSize="50dp"
                 app:elevation="0dp"
                 app:pressedTranslationZ="0dp"
                 app:borderWidth="0dp"
-                app:tint="@color/white"
-                android:backgroundTint="@color/transparent"/>
+                android:backgroundTint="@color/container_transparent"
+                tools:ignore="ContentDescription" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/player_next"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_go_next"
+                app:tint ="#ffffff"
                 app:fabCustomSize="50dp"
                 app:elevation="0dp"
                 app:pressedTranslationZ="0dp"
                 app:borderWidth="0dp"
-                app:tint="@color/white"
-                android:backgroundTint="@color/transparent"/>
+                android:backgroundTint="@color/container_transparent"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

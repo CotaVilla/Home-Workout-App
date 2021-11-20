@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Colores"
+                android:text="@string/label_option_colors"
                 android:textAppearance="@style/item_title"/>
 
             <Switch
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:paddingHorizontal="10dp"
-                android:text="Modo oscuro"
+                android:text="@string/label_options_dark_mode"
                 android:textAppearance="@style/label_input_text"
                 tools:ignore="UseSwitchCompatOrMaterialXml"/>
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Sonido"
+                android:text="@string/label_options_sound"
                 android:textAppearance="@style/item_title"/>
 
             <Switch
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:paddingHorizontal="10dp"
-                android:text="Cambio ejercitarce/descansar"
+                android:text="@string/label_options_sound_exercise_rest"
                 android:textAppearance="@style/label_input_text"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Switch
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingHorizontal="10dp"
-                android:text="Cambio de ejercicio"
+                android:text="@string/label_options_sound_next"
                 android:textAppearance="@style/label_input_text"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Switch
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingHorizontal="10dp"
-                android:text="Finalizacion de rutina"
+                android:text="@string/label_sound_end"
                 android:textAppearance="@style/label_input_text"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Switch
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingHorizontal="10dp"
-                android:text="Narracion"
+                android:text="@string/label_sound_narrator"
                 android:textAppearance="@style/label_input_text"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
         </LinearLayout>

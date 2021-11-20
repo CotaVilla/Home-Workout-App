@@ -1,169 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".ui.routines.NewRutineFragment">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/fragment_title"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="20dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre"
-                android:layout_marginTop="10dp"
-                android:textAppearance="@style/label_input_text"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:text="*"
-                android:layout_marginTop="10dp"
-                android:textAppearance="@style/label_input_warning_text"/>
-        </LinearLayout>
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/rutine_name"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="20dp"
-            android:inputType="textPersonName"
-            android:hint="Nombre de la rutina"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="7dp"
-            android:background="@drawable/input_container"
-            android:textAppearance="@style/label_input_text"/>
+            <include layout="@layout/fragment_title"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="20dp">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Descripción"
-                android:layout_marginTop="10dp"
-                android:textAppearance="@style/label_input_text"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="20dp">
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_rutine_name"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/label_input_text"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="@string/label_required"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/label_input_warning_text"/>
+            </LinearLayout>
 
             <EditText
-                android:id="@+id/rutine_description"
+                android:id="@+id/rutine_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:hint="Descripción de la rutina"
-                android:inputType="textMultiLine"
-                android:lines="4"
-                android:maxLength="200"
-                android:gravity="start"
+                android:layout_marginHorizontal="20dp"
+                android:inputType="textPersonName"
+                android:hint="@string/hint_rutine_name"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="7dp"
-                android:background="@drawable/input_container"
-                android:textAppearance="@style/input_description_text" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="20dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ejercicios"
-                android:layout_marginTop="10dp"
-                android:textAppearance="@style/label_input_text"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_container_big_corners"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="20dp">
+                android:background="@drawable/container_text"
+                android:textAppearance="@style/label_input_text"
+                android:autofillHints="" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="5dp">
-                <LinearLayout
-                    android:id="@+id/add_excercise"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/filter_cirlce">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_plus"
-                        android:layout_margin="7dp"/>
-                </LinearLayout>
+                android:layout_marginHorizontal="20dp">
                 <TextView
-                    android:id="@+id/exercises_count"
-                    android:text="0/100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAppearance="@style/label_input_text"
-                    android:layout_marginStart="10dp">
-                </TextView>
+                    android:text="@string/label_rutine_description"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/label_input_text"/>
             </LinearLayout>
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rutine_exercises_recycler"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:scrollbars="vertical" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp">
 
-        <LinearLayout
+                <EditText
+                    android:id="@+id/rutine_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_rutine_description"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:maxLength="200"
+                    android:gravity="start"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="7dp"
+                    android:background="@drawable/container_text"
+                    android:textAppearance="@style/input_description_text"
+                    android:autofillHints="" />
+            </LinearLayout>
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="60dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:gravity="right">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cancel_add_rutine"
-                android:layout_width="110dp"
-                android:layout_height="35dp"
-                android:background="@drawable/background_white_button"
-                android:text="Cancelar"
-                android:textAppearance="@style/white_button_text"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/accept_add_rutine"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:background="@drawable/background_blue_button"
-                android:layout_marginLeft="10dp"
-                android:text="Guardar"
-                android:textAppearance="@style/blue_button_text"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_rutine_exercises"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="@style/label_input_text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_options"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:id="@+id/add_excercise"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/container_filter">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_plus"
+                            android:layout_margin="7dp"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/exercises_count"
+                        android:text="@string/label_exercises_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAppearance="@style/label_input_text"
+                        android:layout_marginStart="10dp">
+
+                    </TextView>
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rutine_exercises_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="60dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="right">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cancel_add_rutine"
+                    android:layout_width="110dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/container_cancel_button"
+                    android:text="@string/btn_text_cancel"
+                    android:textAppearance="@style/cancel_button_text"/>
+                <androidx.appcompat.widget.AppCompatButton
+
+                    android:id="@+id/accept_add_rutine"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/container_accept_button"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/btn_text_save"
+                    android:textAppearance="@style/accept_button_text"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

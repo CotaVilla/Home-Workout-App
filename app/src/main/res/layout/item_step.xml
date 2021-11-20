@@ -12,23 +12,22 @@
         android:orientation="vertical"
         android:layout_marginBottom="10dp"
         android:paddingHorizontal="10dp"
-        android:background="@drawable/round_container_blue">
+        android:background="@drawable/container_item">
 
         <TextView
             android:id="@+id/step_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="Example text"
-            android:textAppearance="@style/item_title" />
+            android:textAppearance="@style/item_title"
+            tools:ignore="HardcodedText" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_centerVertical="true"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/white_container_little_corners"
+            android:background="@drawable/container_text"
             android:orientation="vertical">
 
             <TextView
@@ -36,8 +35,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp"
                 android:text="Example text"
-                android:textAppearance="@style/item_textbox" />
+                android:textAppearance="@style/item_textbox"
+                tools:ignore="HardcodedText" />
         </RelativeLayout>
 
     </LinearLayout>

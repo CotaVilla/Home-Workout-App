@@ -3,6 +3,7 @@ package com.example.homeworkoutapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
@@ -65,8 +67,15 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        appSettingsPrefs = getSharedPreferences("AppSettingsPrefs",0);
+        appSettingsPrefs = getSharedPreferences("AppSettingsPrefs", Context.MODE_PRIVATE);
         sharedPrefsEdit = appSettingsPrefs.edit();
+
+        if(appSettingsPrefs.getBoolean("dark_mode",false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         binding = ActivityStartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

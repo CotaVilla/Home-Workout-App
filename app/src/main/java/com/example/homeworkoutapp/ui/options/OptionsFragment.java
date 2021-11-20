@@ -1,6 +1,7 @@
 package com.example.homeworkoutapp.ui.options;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -36,7 +37,7 @@ public class OptionsFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        appSettingsPrefs = getActivity().getSharedPreferences("AppSettingsPrefs",0);
+        appSettingsPrefs = getActivity().getSharedPreferences("AppSettingsPrefs", Context.MODE_PRIVATE);
         sharedPrefsEdit = appSettingsPrefs.edit();
     }
 

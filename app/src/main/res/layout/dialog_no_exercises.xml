@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/white_container_big_corners"
     android:layout_width="250dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:weightSum="5">
+    android:weightSum="5"
+    android:background="@drawable/container_options">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -41,8 +41,8 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:text="Entendido"
-            android:background="@drawable/background_blue_button"
-            android:textAppearance="@style/blue_button_text"/>
+            android:background="@drawable/container_accept_button"
+            android:textAppearance="@style/accept_button_text"/>
 
     </LinearLayout>
 

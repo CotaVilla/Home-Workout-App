@@ -8,20 +8,11 @@
 
     <include layout="@layout/fragment_title"/>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        style="@style/filter_text"
-        android:text="Filtros" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filter_recycler"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp"/>
 
     <TextView
@@ -31,7 +22,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         style="@style/filter_text"
-        android:text="Seleccionado: " />
+        android:text="@string/label_filter_type" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buscar por nombre:"
+            android:text="@string/label_filter_name"
             android:layout_marginTop="10dp"
             android:textAppearance="@style/filter_text"/>
 
@@ -51,11 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="Nombre del ejercicio"
+            android:hint="@string/label_filter_exercise_name"
             android:drawableStart="@drawable/ic_search"
             android:paddingHorizontal="20dp"
             android:paddingVertical="7dp"
-            android:background="@drawable/input_container"
+            android:background="@drawable/container_text"
             android:textAppearance="@style/label_input_text"/>
     </LinearLayout>
 
@@ -67,7 +58,7 @@
         android:paddingVertical="10dp"
         android:scrollbars="vertical"
         android:layout_weight="1"
-        android:background="@drawable/white_container_big_corners"/>
+        android:background="@drawable/container_options"/>
 
     <LinearLayout
         android:id="@+id/no_excercises"
@@ -76,14 +67,14 @@
         android:layout_height="0dp"
         android:layout_margin="20dp"
         android:layout_weight="1"
-        android:background="@drawable/white_container_big_corners"
+        android:background="@drawable/container_options"
         android:orientation="vertical"
         android:gravity="center_horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="No se encontraron ejercicios."
+            android:text="@string/message_no_exercises"
             android:textAppearance="@style/no_exercises"/>
     </LinearLayout>
 

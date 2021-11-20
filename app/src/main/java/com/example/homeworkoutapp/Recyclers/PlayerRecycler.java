@@ -114,11 +114,11 @@ public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPl
 
 
         private void defaultBg() {
-            container.setBackgroundResource(R.drawable.round_container_blue);
+            container.setBackgroundResource(R.drawable.container_item);
         }
 
         private void selecterBg() {
-            container.setBackgroundResource(R.drawable.background_selected);
+            container.setBackgroundResource(R.drawable.container_selected);
         }
     }
 

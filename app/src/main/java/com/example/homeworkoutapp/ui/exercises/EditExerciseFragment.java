@@ -214,7 +214,7 @@ public class EditExerciseFragment extends Fragment {
     public void makeToast(Toast _toast){
         Toast toast = _toast;
         View view = toast.getView();
-        view.setBackgroundResource(R.drawable.background_toast);
+        view.setBackgroundResource(R.drawable.container_toast);
         TextView text = (TextView) view.findViewById(android.R.id.message);
         text.setTextColor(Color.parseColor("#FFFFFF"));
         toast.show();

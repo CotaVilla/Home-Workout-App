@@ -24,7 +24,6 @@ import com.example.homeworkoutapp.R;
 import com.example.homeworkoutapp.Recyclers.ExerciseRutinesRecycler;
 import com.example.homeworkoutapp.StartActivity;
 import com.example.homeworkoutapp.databinding.FragmentNewRutineBinding;
-import com.example.homeworkoutapp.databinding.FragmentRoutinesBinding;
 import com.example.homeworkoutapp.objects.Rutine;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 import com.example.homeworkoutapp.ui.exercises.NewExerciseFragment;
@@ -169,7 +168,7 @@ public class NewRutineFragment extends Fragment {
     public void makeToast(Toast _toast){
         Toast toast = _toast;
         View view = toast.getView();
-        view.setBackgroundResource(R.drawable.background_toast);
+        view.setBackgroundResource(R.drawable.container_toast);
         TextView text = (TextView) view.findViewById(android.R.id.message);
         text.setTextColor(Color.parseColor("#FFFFFF"));
         toast.show();
