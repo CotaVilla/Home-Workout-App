@@ -1,18 +1,17 @@
 package com.example.homeworkoutapp;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-
-import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Loading_Screen extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences appSettingsPrefs;
     private SharedPreferences.Editor sharedPrefsEdit;
@@ -30,14 +29,13 @@ public class Loading_Screen extends Activity {
         else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-        setContentView(R.layout.activity_layout_initiation);
-
-
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_layout_main);
 
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(Loading_Screen.this,StartActivity.class);
+                Intent intent = new Intent(MainActivity.this,StartActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -45,6 +43,5 @@ public class Loading_Screen extends Activity {
 
         Timer time = new Timer();
         time.schedule(task,2000);
-        super.onCreate(savedInstanceState);
     }
 }
