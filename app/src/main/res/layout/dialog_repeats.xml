@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="50dp"
     android:orientation="vertical"
     android:background="@drawable/container_options">
 
@@ -39,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/container_transparent"
-            android:text="Cancelar"
+            android:text="@string/btn_text_cancel"
             android:textAllCaps="false"
             android:textAppearance="@style/dialog_button"/>
 
@@ -55,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/container_transparent"
-            android:text="Aceptar"
+            android:text="@string/dialog_btn_accept"
             android:textAllCaps="false"
             android:textAppearance="@style/dialog_button"/>
     </LinearLayout>

@@ -69,8 +69,10 @@
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/drawable/side_nav_bar.xml" value="0.2760416666666667" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/drawable/white_container_big_corners.xml" value="0.2760416666666667" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/drawable/white_container_little_corners.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout-v31/fragment_new_rutine.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/activity_details.xml" value="0.33697916666666666" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/activity_layout_initiation.xml" value="0.25" />
+        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/activity_layout_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/activity_layout_start.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/activity_layout_start_content.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/activity_main.xml" value="0.22" />
@@ -90,14 +92,14 @@
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment__initiation.xml" value="0.25" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_create_rutine.xml" value="0.33" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_edit_exercise.xml" value="0.35260416666666666" />
-        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_edit_routine.xml" value="1.0" />
+        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_edit_routine.xml" value="0.25" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_exercise_details.xml" value="0.25" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_exercises.xml" value="0.43121149897330596" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_gallery.xml" value="0.2015625" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_home.xml" value="0.2015625" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_initiation.xml" value="0.25" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_new_exercise.xml" value="0.33" />
-        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_new_rutine.xml" value="0.33" />
+        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_new_rutine.xml" value="0.22" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_options.xml" value="0.31047265987025024" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_play.xml" value="0.33" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_restart.xml" value="0.21145833333333333" />
@@ -107,12 +109,12 @@
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_slideshow.xml" value="0.33" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_title.xml" value="0.421505376344086" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/fragment_view_exercise.xml" value="0.33541666666666664" />
-        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_excersice.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_excersice.xml" value="0.4773218142548596" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_filter_excersice.xml" value="0.5" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_filter_exercises.xml" value="1.5" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_player.xml" value="0.33" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_player_exercise.xml" value="0.33" />
-        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_rutine.xml" value="0.1" />
+        <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_rutine.xml" value="0.33" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_rutine_exercise.xml" value="0.5" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_step.xml" value="0.5138282387190685" />
         <entry key="..\:/Users/Edy/Documents/AndroidStudio/Home-Workout-App/app/src/main/res/layout/item_to_play.xml" value="0.17831813576494426" />

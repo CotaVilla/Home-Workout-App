@@ -8,21 +8,22 @@
 
     <include layout="@layout/fragment_title"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/filter_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="20dp"/>
-
     <TextView
         android:id="@+id/selected_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         style="@style/filter_text"
         android:text="@string/label_filter_type" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/filter_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_filter_name"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:textAppearance="@style/filter_text"/>
 
         <EditText
@@ -54,7 +55,8 @@
         android:id="@+id/exercises_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="20dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
         android:paddingVertical="10dp"
         android:scrollbars="vertical"
         android:layout_weight="1"

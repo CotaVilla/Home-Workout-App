@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -139,6 +141,7 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
 
                     Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.dialog_options_rutine_excersice);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                     TextView option_title = dialog.findViewById(R.id.rutine_options_title);
                     TextView option_edit = dialog.findViewById(R.id.rutine_option_edit);
@@ -169,7 +172,6 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
                             Log.d("demo","Duplicate");
                             Rutine_Exercise exercise = list_exercises.get(getAdapterPosition());
                             Rutine_Exercise newDuplicate = new Rutine_Exercise(exercise.exercise_id,exercise.rutine_id,exercise.position,exercise.exercise_name,exercise.work_time,exercise.rest_time,exercise.repeats);
-                            newDuplicate.exercise_name += " copia";
                             list_exercises.add(newDuplicate);
                             notifyDataSetChanged();
                             dialog.dismiss();

@@ -1,6 +1,7 @@
 package com.example.homeworkoutapp.ui.routines;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -126,6 +127,9 @@ public class EditRoutineFragment extends Fragment {
                     fragmentTransaction.replace(R.id.nav_host_fragment_content_start,newExerciseFragment);
                     fragmentTransaction.commit();
                 }
+                else {
+                    makeToast(Toast.makeText(context,"Ha llegado al limite de ejercicios.",Toast.LENGTH_SHORT));
+                }
             }
         });
 
@@ -155,6 +159,14 @@ public class EditRoutineFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_start,routines);
                 fragmentTransaction.commit();
+            }
+        });
+
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                exercisesCount.setText(adapter.list_exercises.size()+"/100");
+                super.onChanged();
             }
         });
 

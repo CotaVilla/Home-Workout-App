@@ -16,8 +16,6 @@ import com.example.homeworkoutapp.ui.options.OptionsFragment;
 import com.example.homeworkoutapp.ui.routines.RoutinesFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;

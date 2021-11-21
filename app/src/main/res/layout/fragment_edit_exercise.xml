@@ -15,15 +15,6 @@
         android:orientation="vertical"
         android:layout_marginHorizontal="20dp">
 
-        <TextView
-            android:id="@+id/exercise_name_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Añadir ejercicio"
-            android:textAppearance="@style/content_title_fragment" />
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,7 +61,7 @@
             android:paddingHorizontal="10dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/container_accept_button"
-            android:text="Seleccionar un ejercicio."
+            android:text="@string/btn_select_exercise"
             android:textAllCaps="false"
             android:textAppearance="@style/accept_button_text"/>
 

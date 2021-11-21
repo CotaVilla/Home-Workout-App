@@ -8,19 +8,19 @@
     <color name="accent">#FBBF26</color>
 
     <color name="background_primary">#4F4F4F</color>
-    <color name="background_secondary">#3D3D3D</color>
+    <color name="background_secondary">#3E3E3E</color>
 
     <color name="container_primary">#454B54</color>
-    <color name="container_secondary">#3F3F3F</color>
+    <color name="container_secondary">#353535</color>
     <color name="container_transparent">#00000000</color>
 
     <color name="icon_primary">#FBBF26</color>
     <color name="icon_secondary">#FFFFFF</color>
     <color name="icon_transparent">#4DFFFFFF</color>
 
-    <color name="color_text_1">#B2B2B2</color>
+    <color name="color_text_1">#FFFFFF</color>
     <color name="color_text_2">#FFFFFF</color>
     <color name="color_text_3">#FBBF26</color>
     <color name="color_text_4">#FFFFFF</color>
-    <color name="color_text_5">#FF0000</color>
+    <color name="color_text_5">#FBBF26</color>
 </resources>

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,6 +129,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
         public void showDialogError(){
             Dialog errorDialog = new Dialog(context);
             errorDialog.setContentView(R.layout.dialog_no_exercises);
+            errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             AppCompatButton aceptar = errorDialog.findViewById(R.id.accept_error);
 
@@ -144,6 +147,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
 
             Dialog dialog = new Dialog(context);
             dialog.setContentView(R.layout.dialog_options_rutine);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             TextView option_title = dialog.findViewById(R.id.rutine_options_title);
             TextView option_play = dialog.findViewById(R.id.rutine_option_play);

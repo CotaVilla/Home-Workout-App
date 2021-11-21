@@ -3,6 +3,7 @@ package com.example.homeworkoutapp.ui.exercises;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -45,7 +46,6 @@ public class NewExerciseFragment extends Fragment {
     int repeats;
 
     TextView title;
-    TextView subtitle;
     TextView exerciseName;
     TextView workTime;
     TextView restTime;
@@ -117,7 +117,6 @@ public class NewExerciseFragment extends Fragment {
         View root = binding.getRoot();
 
         title = root.findViewById(R.id.frag_title);
-        subtitle = root.findViewById(R.id.exercise_name_detail);
         exerciseName = root.findViewById(R.id.selected_exercise);
         workTime = root.findViewById(R.id.exercise_work_time);
         restTime = root.findViewById(R.id.exercise_rest_time);
@@ -127,7 +126,6 @@ public class NewExerciseFragment extends Fragment {
         cancel = root.findViewById(R.id.cancel_exercise);
 
         title.setText("Añadir ejercicio");
-        subtitle.setText("Nueva rutina > Añadir ejercicio");
 
         if(actualExercise != null){
             pasableExercise = database_helper.getExercise(actualExercise.exercise_id);
@@ -248,6 +246,7 @@ public class NewExerciseFragment extends Fragment {
     public void showTimePicker(){
         Dialog timePickerDialog = new Dialog(context);
         timePickerDialog.setContentView(R.layout.dialog_time);
+        timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         AppCompatButton cancel = timePickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = timePickerDialog.findViewById(R.id.ok);
@@ -289,6 +288,7 @@ public class NewExerciseFragment extends Fragment {
     public void showTimePicker2(){
         Dialog timePickerDialog = new Dialog(context);
         timePickerDialog.setContentView(R.layout.dialog_time);
+        timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         AppCompatButton cancel = timePickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = timePickerDialog.findViewById(R.id.ok);
@@ -330,6 +330,7 @@ public class NewExerciseFragment extends Fragment {
     public void showRepeatsPicker(){
         Dialog repeatsPickerDialog = new Dialog(context);
         repeatsPickerDialog.setContentView(R.layout.dialog_repeats);
+        repeatsPickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         AppCompatButton cancel = repeatsPickerDialog.findViewById(R.id.cancel);
         AppCompatButton ok = repeatsPickerDialog.findViewById(R.id.ok);

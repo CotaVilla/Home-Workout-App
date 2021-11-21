@@ -8,29 +8,30 @@
     android:background="@drawable/container_options">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp">
 
         <TextView
             android:id="@+id/rutine_options_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:text="Oh oh!"
+            android:layout_marginStart="10dp"
+            android:text="@string/dialog_error_title"
             android:textAppearance="@style/options_title" />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:clipToPadding="false">
         <TextView
             android:id="@+id/rutine_option_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
-            android:text="La rutina que quieres reproducir no tiene ejercicios. Agrega unos para reproducirla."
+            android:text="@string/dialog_error_no_exercises"
             android:textAppearance="@style/options_content" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -38,9 +39,10 @@
             android:layout_width="wrap_content"
             android:paddingHorizontal="5dp"
             android:layout_height="30dp"
+            android:elevation="3dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="Entendido"
+            android:text="@string/dialog_button_accept"
             android:background="@drawable/container_accept_button"
             android:textAppearance="@style/accept_button_text"/>
 

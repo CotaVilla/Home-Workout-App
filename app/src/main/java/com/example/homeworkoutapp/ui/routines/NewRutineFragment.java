@@ -150,6 +150,13 @@ public class NewRutineFragment extends Fragment {
             }
         });
 
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                exercisesCount.setText(adapter.list_exercises.size()+"/100");
+                super.onChanged();
+            }
+        });
         return root;
     }
     private boolean validateDataInserted(){

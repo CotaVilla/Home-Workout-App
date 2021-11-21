@@ -8,12 +8,13 @@
     android:weightSum="5">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp">
 
         <TextView
             android:id="@+id/excercise_options_title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="Example text"
@@ -28,18 +29,18 @@
             android:id="@+id/excercise_option_open"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginBottom="5dp"
-            android:text="Ver más"
+            android:text="@string/dialog_see_more"
             android:textAppearance="@style/options_content" />
 
         <TextView
             android:id="@+id/excercise_option_hide"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginBottom="5dp"
-            android:text="Ocultar"
+            android:text="@string/dialog_hide"
             android:textAppearance="@style/options_content" />
 
 

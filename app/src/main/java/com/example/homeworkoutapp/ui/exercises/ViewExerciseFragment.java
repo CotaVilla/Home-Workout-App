@@ -40,6 +40,7 @@ public class ViewExerciseFragment extends Fragment {
     Database_Helper database_helper;
     Context context;
 
+    TextView title;
     TextView exercise_Name;
     TextView exercise_Description;
     TextView exercise_Tips;
@@ -60,6 +61,7 @@ public class ViewExerciseFragment extends Fragment {
         View root = binding.getRoot();
         context = getContext();
 
+        title = root.findViewById(R.id.frag_title);
         exercise_Name = root.findViewById(R.id.exercise_name_detail);
         exercise_Description = root.findViewById(R.id.excercise_description);
         exercise_Video = root.findViewById(R.id.gif_image_view);
@@ -69,6 +71,7 @@ public class ViewExerciseFragment extends Fragment {
         database_helper = new Database_Helper(getActivity());
         list_steps = database_helper.getSteps(exercise);
 
+        title.setText("Ver ejercicio");
         exercise_Name.setText(exercise.name);
         exercise_Description.setText(exercise.description);
         exercise_Tips.setText(exercise.tips);
