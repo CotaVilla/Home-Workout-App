@@ -60,8 +60,8 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
         holder.rutine = object;
         holder.rutine_name.setText(object.name);
         holder.description.setText(object.Description);
-        holder.exercises.setText("Ejercicio: " + object.Exercises);
-        holder.time.setText("Duration: " + object.Duration + " sec");
+        holder.exercises.setText("Ejercicios: " + object.Exercises);
+        holder.time.setText("Duration: " + segToTime(object.Duration));
     }
 
     // Get the amount of items to create
@@ -233,6 +233,17 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
         }
 
         return context;
+    }
+
+    private String segToTime(int totalSecs){
+        String time;
+
+        int hours = totalSecs / 3600;
+        int minutes = (totalSecs % 3600) / 60;
+        int seconds = totalSecs % 60;
+
+        time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return time;
     }
 
 }

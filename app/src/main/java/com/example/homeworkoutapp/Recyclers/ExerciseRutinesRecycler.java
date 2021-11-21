@@ -56,10 +56,10 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
 
         holder.rutine_exercise = object;
         holder.excercise_name.setText("#" + (position+1) + " " + object.exercise_name);
-        holder.workout_time.setText("Ejercicio: " + object.work_time + " sec");
-        holder.rest_time.setText("Descanso: " + object.rest_time + " sec");
+        holder.workout_time.setText("Ejercicio: " + segToTime(object.rest_time));
+        holder.rest_time.setText("Descanso: " + segToTime(object.rest_time));
         holder.repeats.setText("Repeticiones: " + object.repeats + " sec");
-        holder.duration.setText("Duracion: " + (object.work_time+object.rest_time)*object.repeats + " sec");
+        holder.duration.setText("Duracion: " + segToTime((object.work_time+object.rest_time)*object.repeats));
     }
 
     @Override
@@ -202,5 +202,16 @@ public class ExerciseRutinesRecycler extends RecyclerView.Adapter<ExerciseRutine
         }
 
         return context;
+    }
+
+    private String segToTime(int totalSecs){
+        String time;
+
+        int hours = totalSecs / 3600;
+        int minutes = (totalSecs % 3600) / 60;
+        int seconds = totalSecs % 60;
+
+        time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return time;
     }
 }
