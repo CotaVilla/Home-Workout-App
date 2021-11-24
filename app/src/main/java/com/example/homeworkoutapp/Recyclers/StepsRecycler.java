@@ -17,6 +17,7 @@ import java.util.ArrayList;
 // Video de como hacer botones https://www.youtube.com/watch?v=FA5cGLLiSWs
 // Menu con opciones para los items https://www.youtube.com/watch?v=fNpt-_JHS64
 
+// Adaptador para mostrar la lista de pasos en los detalles de un ejercicios
 public class StepsRecycler extends RecyclerView.Adapter<StepsRecycler.Step_item>{
 
     ArrayList<Step> step_list;

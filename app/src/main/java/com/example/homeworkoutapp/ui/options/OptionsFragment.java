@@ -17,8 +17,12 @@ import android.widget.TextView;
 
 import com.example.homeworkoutapp.R;
 
+// clase para la vista de opciones del programa
 @SuppressLint("UseSwitchCompatOrMaterialCode")
 public class OptionsFragment extends Fragment {
+    //variables de la clase
+
+    //Con esto guardamos las preferencias del usuario
     SharedPreferences appSettingsPrefs;
     SharedPreferences.Editor sharedPrefsEdit;
 
@@ -29,18 +33,13 @@ public class OptionsFragment extends Fragment {
     Switch sound_routine_finish;
     Switch narrator;
 
-
-    public OptionsFragment() {
-        // Required empty public constructor
-    }
-
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appSettingsPrefs = getActivity().getSharedPreferences("AppSettingsPrefs", Context.MODE_PRIVATE);
         sharedPrefsEdit = appSettingsPrefs.edit();
     }
 
+    // inicializador de la vista o el fragmento
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_options, container, false);
@@ -60,6 +59,7 @@ public class OptionsFragment extends Fragment {
         sound_routine_finish.setChecked(appSettingsPrefs.getBoolean("sound_routine_finish",true));
         narrator.setChecked(appSettingsPrefs.getBoolean("narrator",true));
 
+        // eventos de los switch
         dark_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){

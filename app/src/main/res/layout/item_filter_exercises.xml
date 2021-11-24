@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="3dp"
-    android:outlineProvider="bounds"
     android:clipToPadding="false">
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/itemFilter"
@@ -14,7 +13,6 @@
         android:layout_height="60dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="5dp"
-        android:fadingEdgeLength="3dp"
         app:cardBackgroundColor="@color/container_primary">
         <ImageView
             android:id="@+id/filter_image"
@@ -24,7 +22,6 @@
             android:layout_marginTop="2dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
-            android:src="@drawable/ic_no_image"
-            tools:ignore="ContentDescription" />
+            android:src="@drawable/ic_no_image"/>
     </com.google.android.material.card.MaterialCardView>
-</RelativeLayout>
+</LinearLayout>

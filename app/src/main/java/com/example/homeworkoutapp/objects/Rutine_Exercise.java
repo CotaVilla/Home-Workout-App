@@ -1,5 +1,6 @@
 package com.example.homeworkoutapp.objects;
 
+// Clase para guardar los datos de los ejercicios en las rutinas.
 public class Rutine_Exercise {
     public int exercise_id =1;
     public int rutine_id = 1;

@@ -1,5 +1,6 @@
 package com.example.homeworkoutapp.objects;
 
+//Clase para guardar los datos de los filtros de los ejercicios.
 public class Filter {
     public int filter_id;
     public String description;

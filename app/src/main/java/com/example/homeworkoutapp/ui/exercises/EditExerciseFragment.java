@@ -28,6 +28,7 @@ import com.example.homeworkoutapp.objects.Exercise;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
 public class EditExerciseFragment extends Fragment {
+    // variables de la clase
     Context context;
     FragmentEditExerciseBinding binding;
     Database_Helper database_helper;
@@ -54,6 +55,7 @@ public class EditExerciseFragment extends Fragment {
     AppCompatButton accept;
     AppCompatButton cancel;
 
+    //Constructor, se le pasa el ejercicio a editar de la rutina
     public EditExerciseFragment(Rutine_Exercise exercise) {
         pasableRE = exercise;
     }
@@ -61,6 +63,8 @@ public class EditExerciseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // cuando se crea se inicializan los valores de la clase
         database_helper = new Database_Helper(getActivity());
         pasableExercise = database_helper.getExercise(pasableRE.exercise_id);
         setWorkTime(pasableRE.work_time);
@@ -68,21 +72,25 @@ public class EditExerciseFragment extends Fragment {
         repeats = pasableRE.repeats;
     }
 
+    // para convertir los segundos de trabajo en hora/minutos/segundos
     public void setWorkTime(int time){
         workTimeHours = time / 3600;
         workTimeMinutes = time % 3600 / 60;
         workTimeSeconds = time % 3600 % 60;
     }
 
+    // para convertir los segundos de descanso en hora/minutos/segundos
     public void setRestTime(int time){
         _workTimeHours = time / 3600;
         _workTimeMinutes = time % 3600 / 60;
         _workTimeSeconds = time % 3600 % 60;
     }
 
+    // para cuando volvamos a abrir esta pantalla desde elegir ejercicio
     @Override
     public void onResume() {
         super.onResume();
+        //checamos si se eleigio un ejercio para cambiar el actual
         if(activity.getPasableExercise() != null){
             pasableExercise = activity.getPasableExercise();
             exerciseName.setText(pasableExercise.name);
@@ -111,6 +119,7 @@ public class EditExerciseFragment extends Fragment {
 
         exerciseName.setText(pasableRE.exercise_name);
 
+        //Si hay datos para los campos se carga, si no se deja vacio
         if(pasableExercise != null){
             exerciseName.setText(pasableExercise.name);
         }
@@ -130,6 +139,7 @@ public class EditExerciseFragment extends Fragment {
             }
         }
 
+        // eventos de los objetos
         workTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,6 +164,8 @@ public class EditExerciseFragment extends Fragment {
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // para cargar el fragmento para seleccionar ejercicio
+                // se le pasa el true para que cuando hagamos clic sobre los ejercicios se seleccionen
                 ExercisesFragment exercisesFragment = new ExercisesFragment(true);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -163,11 +175,12 @@ public class EditExerciseFragment extends Fragment {
             }
         });
 
-
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (validateDataInserted()){
+                    // si no falta algun dato se pasa el ejercio a travez de una variable en el activity
                     Log.d("VALID","Datos validos");
                     int worktimeSeconds = converTimeSeconds(workTimeHours,workTimeMinutes,workTimeSeconds);
                     int restimeSeconds = converTimeSeconds(_workTimeHours,_workTimeMinutes,_workTimeSeconds);
@@ -196,8 +209,9 @@ public class EditExerciseFragment extends Fragment {
         return root;
     }
 
+    // Metodo para validar los datos
     private boolean validateDataInserted(){
-
+        //se usan los toast para mostrar que falta algo
         if(pasableExercise == null){
             makeToast(Toast.makeText(context,"Seleccione un ejercicio.",Toast.LENGTH_SHORT));
             return false;
@@ -216,6 +230,8 @@ public class EditExerciseFragment extends Fragment {
         }
         return true;
     }
+
+    // para mostrar un mensaje customizado al fondo de la pantalla
     public void makeToast(Toast _toast){
         Toast toast = _toast;
         View view = toast.getView();
@@ -225,6 +241,7 @@ public class EditExerciseFragment extends Fragment {
         toast.show();
     }
 
+    // menu para seleccionar el tiempo de trabajo
     public void showTimePicker(){
         Dialog timePickerDialog = new Dialog(context);
         timePickerDialog.setContentView(R.layout.dialog_time);
@@ -267,6 +284,7 @@ public class EditExerciseFragment extends Fragment {
         timePickerDialog.show();
     }
 
+    // Menu para seleccionar el tiempo de descanso
     public void showTimePicker2(){
         Dialog timePickerDialog = new Dialog(context);
         timePickerDialog.setContentView(R.layout.dialog_time);
@@ -309,6 +327,7 @@ public class EditExerciseFragment extends Fragment {
         timePickerDialog.show();
     }
 
+    // menu para seleccionar las repeticiones
     public void showRepeatsPicker(){
         Dialog repeatsPickerDialog = new Dialog(context);
         repeatsPickerDialog.setContentView(R.layout.dialog_repeats);

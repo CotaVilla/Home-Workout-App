@@ -33,7 +33,9 @@ import java.util.ArrayList;
 
 import pl.droidsonroids.gif.GifImageView;
 
+// clase para ver los detalles de los ejercicios
 public class ViewExerciseFragment extends Fragment {
+    // variables de la clase
     Exercise exercise;
     FragmentViewExerciseBinding binding;
     StepsRecycler stepsAdapterRecycler;
@@ -47,14 +49,15 @@ public class ViewExerciseFragment extends Fragment {
     GifImageView exercise_Video;
     RecyclerView steps_Recycler;
 
-
     ArrayList<Step> list_steps;
 
+    //Constructor de la clase
     public ViewExerciseFragment(Exercise exercise) {
         this.exercise = exercise;
     }
 
 
+    // inicializador de la vista o el fragmento
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentViewExerciseBinding.inflate(inflater, container, false);
@@ -68,6 +71,7 @@ public class ViewExerciseFragment extends Fragment {
         steps_Recycler = root.findViewById(R.id.recycler_steps);
         exercise_Tips = root.findViewById(R.id.exercise_tips);
 
+        // aqui sacamos los pasos del ejercicio
         database_helper = new Database_Helper(getActivity());
         list_steps = database_helper.getSteps(exercise);
 
@@ -76,8 +80,10 @@ public class ViewExerciseFragment extends Fragment {
         exercise_Description.setText(exercise.description);
         exercise_Tips.setText(exercise.tips);
 
+        // cargamos el gif con e metodo del getMyDrawable y dentro de el el nombre del drawable
         exercise_Video.setImageResource(getMyDrawable(exercise.gifLocation));
 
+        // llenamos el recycler view
         steps_Recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
         stepsAdapterRecycler = new StepsRecycler(list_steps);
         steps_Recycler.setAdapter(stepsAdapterRecycler);
@@ -85,6 +91,7 @@ public class ViewExerciseFragment extends Fragment {
         return root;
     }
 
+    // metodo para buscar con el nombre del archivo el fig a cargar
     private int getMyDrawable(String ImageName) {
         int image=0;
 

@@ -1,5 +1,6 @@
 package com.example.homeworkoutapp.objects;
 
+// Clase para guardar los datos de los pasos para los detalles de un ejercicio
 public class Step {
     public int step_id;
     public int exercise_id;

@@ -61,7 +61,7 @@ public class RutinesRecycler extends RecyclerView.Adapter<RutinesRecycler.Rutine
         holder.rutine_name.setText(object.name);
         holder.description.setText(object.Description);
         holder.exercises.setText("Ejercicios: " + object.Exercises);
-        holder.time.setText("Duration: " + segToTime(object.Duration));
+        holder.time.setText("Duración: " + segToTime(object.Duration));
     }
 
     // Get the amount of items to create

@@ -27,6 +27,7 @@ import com.example.homeworkoutapp.ui.exercises.ViewExerciseFragment;
 
 import java.util.ArrayList;
 
+// Clase adaptador para la lista de ejercicios cuando queremos ver los ejercicios que hay en la app
 public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.itemExercise> {
     ArrayList<Exercise> list_exercises;
     Database_Helper databaseHelper;
@@ -34,6 +35,7 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
     boolean selectable;
     long hiddenFilter;
 
+    //Constructor de la clase
     public ExercisesRecycler(ArrayList<Exercise> list_exercises ,Database_Helper databaseHelper, boolean selectable, StartActivity activity) {
         this.selectable = selectable;
         this.list_exercises = list_exercises;
@@ -42,14 +44,17 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
         this.activity = activity;
     }
 
+    //Inicializador de los items de la lista
     @NonNull
     @Override
     public ExercisesRecycler.itemExercise onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Aqui se le coloca el layout que va a utilizar el item
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_excersice,null,false);
         itemExercise exercise = new itemExercise(view);
         return exercise;
     }
 
+    //Carga con los valores a los item de la lista
     @Override
     public void onBindViewHolder(@NonNull itemExercise holder, int position) {
         Exercise object = list_exercises.get(position);
@@ -58,12 +63,15 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
         holder.excercise_description.setText(object.description);
     }
 
+    //Obtiene el numero de items que debe de generar
     @Override
     public int getItemCount() {
         return list_exercises.size();
     }
 
+    // Clase del item que se va a generar en al lista de ejercicios de la rutina
     public class itemExercise extends RecyclerView.ViewHolder {
+        //Variables del item
         private Context context;
 
         Exercise exercise;
@@ -72,6 +80,7 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
         TextView name;
         TextView excercise_description;
 
+        //Contructor del item
         public itemExercise(@NonNull View itemView) {
             super(itemView);
 
@@ -82,6 +91,7 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
             name = itemView.findViewById(R.id.excercise_name);
             excercise_description = itemView.findViewById(R.id.excercise_description);
 
+            // cuando se carga esta lista para poder elegir el ejercicio al crear un nuevo ejercicio en la rutina
             if (selectable){
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -93,6 +103,7 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
                 });
             }
 
+            // eventos del item
             options.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -163,6 +174,7 @@ public class ExercisesRecycler extends RecyclerView.Adapter<ExercisesRecycler.it
             });
         }
     }
+    // usada para cargar nuevos ejercicios en la lista cuando se le le da clic a un filtro
     public void changeExercises(ArrayList<Exercise> exercises){
         list_exercises = exercises;
     };

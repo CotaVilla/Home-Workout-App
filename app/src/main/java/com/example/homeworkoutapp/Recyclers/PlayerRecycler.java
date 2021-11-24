@@ -18,30 +18,38 @@ import com.example.homeworkoutapp.ui.player.PlayerFragment;
 
 import java.util.ArrayList;
 
+// clase adaptador para la lista de ejercicios del reproductor
 public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPlay>{
     private ArrayList<Rutine_Exercise> list_exercises;
     private int selectedItemPos = -1;
     private int lastItemSelectedPos = -1;
     private Fragment currentFragment;
 
+
+    //Constructor de la clase
     public PlayerRecycler(ArrayList<Rutine_Exercise> list_exercises,Fragment playerFragment){
+
         this.list_exercises = list_exercises;
         currentFragment = playerFragment;
     }
 
+    //Inicializador de los items de la lista
     @NonNull
     @Override
     public itemToPlay onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Aqui se le coloca el layout que va a utilizar el item
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_player_exercise, parent, false);
         PlayerRecycler.itemToPlay rutineItem = new PlayerRecycler.itemToPlay(view);
         return rutineItem;
     }
 
+    // funcion para obtener los datos del ejercicio seleccionado
     public Rutine_Exercise getSelectedValues(){
         Rutine_Exercise exercise= list_exercises.get(selectedItemPos);
         return exercise;
     }
 
+    //Carga con los valores a los item de la lista
     @Override
     public void onBindViewHolder(@NonNull itemToPlay holder, @SuppressLint("RecyclerView") int position) {
         Rutine_Exercise object = list_exercises.get(position);
@@ -64,12 +72,15 @@ public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPl
             holder.defaultBg();
     }
 
+    //Obtiene el numero de items que debe de generar
     @Override
     public int getItemCount() {
         return list_exercises.size();
     }
 
+    // Clase del item que se va a generar en al lista de ejercicios en el reproductor
     public class itemToPlay extends RecyclerView.ViewHolder {
+        //variables de la clase
         private Context context;
 
         Rutine_Exercise exercise;
@@ -85,6 +96,7 @@ public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPl
         TextView duration;
         LinearLayout container;
 
+        //constructor de la clase
         public itemToPlay(@NonNull View itemView) {
             super(itemView);
 
@@ -96,6 +108,7 @@ public class PlayerRecycler extends RecyclerView.Adapter<PlayerRecycler.itemToPl
             ejercicio = itemView.findViewById(R.id.exercise_name);
             duration = itemView.findViewById(R.id.exercise_duration);
 
+            //evento de clic sobre el item
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

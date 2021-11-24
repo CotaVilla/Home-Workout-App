@@ -30,7 +30,10 @@ import com.example.homeworkoutapp.objects.Filter;
 
 import java.util.ArrayList;
 
+// clase para el fragmento donde se ve la lista de ejercicios
+// se usa para seleccionar los ejercicios o solo para verlos
 public class ExercisesFragment extends Fragment {
+    //variables de la clase
     private Context context;
     private FragmentExercisesBinding binding;
     StartActivity activity;
@@ -54,10 +57,12 @@ public class ExercisesFragment extends Fragment {
     String filter_description;
     String name_search;
 
+    //Constructor de la clase
     public ExercisesFragment(boolean selectable){
         this.selectable = selectable;
     }
 
+    // Inicializador de la vista
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity= (StartActivity)getActivity();
         binding = FragmentExercisesBinding.inflate(inflater, container, false);
@@ -100,6 +105,7 @@ public class ExercisesFragment extends Fragment {
 
         // END RecyclerView
 
+        // eventos para el buscador por nombre
         name_filter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -121,6 +127,7 @@ public class ExercisesFragment extends Fragment {
         return root;
     }
 
+    // metodo para cambiar los datos del filtro seleccionado
     public void setFilter(int filter_id, String description) {
         filter_description = description;
         this.filter_id = filter_id;
@@ -130,6 +137,7 @@ public class ExercisesFragment extends Fragment {
         search_exercises();
     }
 
+    // metodo par cargar los ejercicios aplicando los filtros
     public void search_exercises(){
         exersices = database_helper.getFilteredExcercises(filter_id,name_search);
 
@@ -145,6 +153,7 @@ public class ExercisesFragment extends Fragment {
         }
     }
 
+    //para liberar memoria
     @Override
     public void onDestroyView() {
         super.onDestroyView();

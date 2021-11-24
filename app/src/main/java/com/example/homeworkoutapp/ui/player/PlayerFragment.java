@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Queue;
 
+//
 public class PlayerFragment extends Fragment {
     Database_Helper database_helper;
     SharedPreferences appSettingsPrefs;
@@ -136,8 +137,8 @@ public class PlayerFragment extends Fragment {
 
         adapter = new PlayerRecycler(list_exercises,((FragmentActivity)getContext()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_start));
         recycler.setAdapter(adapter);
-        // END RecyclerView
 
+        // END RecyclerView
         buttonPlay = root.findViewById(R.id.player_play);
         buttonPrevious = root.findViewById(R.id.player_previous);
         buttonNext = root.findViewById(R.id.player_next);

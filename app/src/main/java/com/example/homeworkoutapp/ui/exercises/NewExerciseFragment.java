@@ -27,7 +27,9 @@ import com.example.homeworkoutapp.databinding.FragmentNewExerciseBinding;
 import com.example.homeworkoutapp.objects.Exercise;
 import com.example.homeworkoutapp.objects.Rutine_Exercise;
 
+// clase para agregar un nuevo ejercicio a la rutina
 public class NewExerciseFragment extends Fragment {
+    // variables de la clase
     Context context;
     FragmentNewExerciseBinding binding;
     Database_Helper database_helper;
@@ -55,14 +57,12 @@ public class NewExerciseFragment extends Fragment {
     AppCompatButton accept;
     AppCompatButton cancel;
 
-    public NewExerciseFragment() {
-        // Required empty public constructor
-    }
-
+    //Constructor
     public NewExerciseFragment(Rutine_Exercise exercise) {
         actualExercise = exercise;
     }
 
+    // cargar las variable si iniciales al crear la clase
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,28 +86,34 @@ public class NewExerciseFragment extends Fragment {
         }
     }
 
+    // para convertir los segundos de trabajo en hora/minutos/segundos
     public void setWorkTime(int time){
         workTimeHours = time / 3600;
         workTimeMinutes = time % 3600 / 60;
         workTimeSeconds = time % 3600 % 60;
     }
 
+    // para convertir los segundos de descanso en hora/minutos/segundos
     public void setRestTime(int time){
         _workTimeHours = time / 3600;
         _workTimeMinutes = time % 3600 / 60;
         _workTimeSeconds = time % 3600 % 60;
     }
 
+    // para cuando se resume despues de elegir un ejercicio
     @Override
     public void onResume() {
         super.onResume();
+        // si se selecciono no deberia de estar nula la variable
         if(activity.getPasableExercise() != null){
+            //y cargaria el dato del ejercicio
             pasableExercise = activity.getPasableExercise();
             exerciseName.setText(pasableExercise.name);
             activity.setPasableExercise(null);
         }
     }
 
+    // inicializacion de la vista
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -127,6 +133,7 @@ public class NewExerciseFragment extends Fragment {
 
         title.setText("Añadir ejercicio");
 
+        // cargar los datos en los textview si tienen algo
         if(actualExercise != null){
             pasableExercise = database_helper.getExercise(actualExercise.exercise_id);
             exerciseName.setText(actualExercise.exercise_name);
@@ -151,7 +158,7 @@ public class NewExerciseFragment extends Fragment {
             }
         }
 
-
+        //eventos de los campos
         workTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +183,8 @@ public class NewExerciseFragment extends Fragment {
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // para abrir la vista de seleccion de ejercicio
+                // se le pasa un true para que los ejercicios devuelvan el ejercicio cuando lo seleciones
                 ExercisesFragment exercisesFragment = new ExercisesFragment(true);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -185,11 +194,12 @@ public class NewExerciseFragment extends Fragment {
             }
         });
 
-
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // se validan los campos
                 if (validateDataInserted()){
+                    // se devuelve el ejercicio con los timepos y repeticiones
                     Log.d("VALID","Datos validos");
                     int worktimeSeconds = converTimeSeconds(workTimeHours,workTimeMinutes,workTimeSeconds);
                     int restimeSeconds = converTimeSeconds(_workTimeHours,_workTimeMinutes,_workTimeSeconds);
@@ -214,8 +224,9 @@ public class NewExerciseFragment extends Fragment {
         return root;
     }
 
+    // metodo para validar los campos
     private boolean validateDataInserted(){
-
+        // sale un mensaje con el campo faltante de datos
         if(pasableExercise == null){
             makeToast(Toast.makeText(context,"Seleccione un ejercicio.",Toast.LENGTH_SHORT));
             return false;
@@ -234,6 +245,8 @@ public class NewExerciseFragment extends Fragment {
         }
         return true;
     }
+
+    // metodo para mostrar un mensaje personalizado
     public void makeToast(Toast _toast){
         Toast toast = _toast;
         View view = toast.getView();
@@ -243,6 +256,7 @@ public class NewExerciseFragment extends Fragment {
         toast.show();
     }
 
+    // metodo para mostrar el selector de tiempo para ejercitarse
     public void showTimePicker(){
         Dialog timePickerDialog = new Dialog(context);
         timePickerDialog.setContentView(R.layout.dialog_time);
@@ -285,6 +299,7 @@ public class NewExerciseFragment extends Fragment {
         timePickerDialog.show();
     }
 
+    // metodo para mostrar el selector de tiempo para descansar
     public void showTimePicker2(){
         Dialog timePickerDialog = new Dialog(context);
         timePickerDialog.setContentView(R.layout.dialog_time);
@@ -327,6 +342,7 @@ public class NewExerciseFragment extends Fragment {
         timePickerDialog.show();
     }
 
+    // metodo para mostrar el selector de repeticiones
     public void showRepeatsPicker(){
         Dialog repeatsPickerDialog = new Dialog(context);
         repeatsPickerDialog.setContentView(R.layout.dialog_repeats);
@@ -365,6 +381,7 @@ public class NewExerciseFragment extends Fragment {
 
         repeatsPickerDialog.show();
     }
+    //convertidor de hh:mm:ss a puros segundos
     public int converTimeSeconds(int hours, int minutes, int seconds){
         int totalSeconds = hours * 3600;
         totalSeconds += minutes * 60;

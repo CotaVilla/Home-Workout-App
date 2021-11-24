@@ -2,6 +2,7 @@ package com.example.homeworkoutapp.objects;
 
 import android.util.EventLogTags;
 
+//Clase para guardar los datos de las rutinas
 public class Rutine {
     public int id = 0;
     public String name = "Rutina";
