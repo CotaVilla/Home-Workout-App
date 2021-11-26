@@ -58,8 +58,8 @@ public class NewExerciseFragment extends Fragment {
     AppCompatButton cancel;
 
     //Constructor
-    public NewExerciseFragment(Rutine_Exercise exercise) {
-        actualExercise = exercise;
+    public NewExerciseFragment() {
+
     }
 
     // cargar las variable si iniciales al crear la clase
