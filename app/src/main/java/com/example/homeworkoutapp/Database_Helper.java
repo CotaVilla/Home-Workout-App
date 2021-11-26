@@ -127,17 +127,17 @@ public class Database_Helper extends SQLiteOpenHelper {
         String qry_insert_exercises = "INSERT INTO " + TABLE_EXCERCISE + " VALUES" +
                 " (1,5,5,'Sentadilla','Ejercicio para fortalecer las piernas.','gif_sentadilla','Mantén un equilibrio apoyándote de los brazos.')," +
 
-                " (2,4,4,'Plancha','Ejercicio para fortalecer el abdomen.','gif_homer','Mantén los brazos separados y no bajes la pelvis.')," +
+                " (2,4,4,'Plancha','Ejercicio para fortalecer el abdomen.','plancha','Mantén los brazos separados y no bajes la pelvis.')," +
 
-                " (3,4,4,'Plancha lateral derecha','Ejercicio para fortalecer el abdomen oblicuo.','gif_homer','Posiciona un pie al frente para mantener el equilibrio.')," +
+                " (3,4,4,'Plancha lateral derecha','Ejercicio para fortalecer el abdomen oblicuo.','plancha_lateral_derecha','Posiciona un pie al frente para mantener el equilibrio.')," +
 
-                " (4,4,4,'Plancha lateral izquierda','Ejercicio para fortalecer el abdomen oblicuo.','gif_homer','Posiciona un pie al frente para mantener el equilibrio.')," +
+                " (4,4,4,'Plancha lateral izquierda','Ejercicio para fortalecer el abdomen oblicuo.','plancha_lateral_izquierda','Posiciona un pie al frente para mantener el equilibrio.')," +
 
-                " (5,1,1,'Saltos de Tijera','Ejercicio de cardio.','gif_homer','Estira completamente los brazos y no abras demasiado las piernas en el salto.')," +
+                " (5,1,1,'Saltos de Tijera','Ejercicio de cardio.','saltos_tijeras','Estira completamente los brazos y no abras demasiado las piernas en el salto.')," +
 
-                " (6,5,5,'Zancada frontal','Ejercicio para fortalecer las piernas.','gif_homer','Mantente siempre erguido mirando hacia el frente.')," +
+                " (6,5,5,'Zancada frontal','Ejercicio para fortalecer las piernas.','zancada','Mantente siempre erguido mirando hacia el frente.')," +
 
-                " (7,4,4,'Abdominales','Ejercicio para fortalecer el abdomen.','gif_homer','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
+                " (7,4,4,'Abdominales','Ejercicio para fortalecer el abdomen.','abdominal','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
 
                 " (8,6,6,'Flexiones Diamante','Ejercicio pecho y brazos.','gif_homer',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta.')," +
 
@@ -159,7 +159,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (17,5,5,'Jumping Jacks','Ejercicio que te ayuda a quemar muchas calorías y ejercita las piernas.','gif_homer','Es importante la posición de sentadillas puesto que te proveerá mayor estabilidad y menor impacto en las rodillas.')," +
 
-                " (18,4,4,'La V','Con este tipo de ejercicio se trabaja gran parte del torso.','gif_homer','Si no puedes mantener la «V» por más de 30 segundos, procura hacer tiempos más cortos y practicar más seguido.')," +
+                " (18,4,4,'Abdominal en V','Con este tipo de ejercicio se trabaja gran parte del torso.','abdominal_v','Si no puedes mantener la «V» por más de 30 segundos, procura hacer tiempos más cortos y practicar más seguido.')," +
 
                 " (19,6,6,'Boxeo','Es un ejercicio que te ayudará a liberar estrés y quemar calorías rápidamente.','gif_homer','Es conveniente realizar este ejercicio al concluir los sets de entrenamiento. No necesitas un saco de boxeo para el ejercicio. Si realizas el ejercicio durante al menos 5 minutos, será un trabajo cardiovascular muy eficaz.')," +
 
