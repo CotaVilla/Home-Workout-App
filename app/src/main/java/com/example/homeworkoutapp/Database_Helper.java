@@ -143,7 +143,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (9,6,6,'Flexiones','Ejercicio para fortalecer los brazos.','gif_flexion','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación.')," +
 
-                " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','gif_homer','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.')," +
+                " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','abdominal_piernas','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.')," +
 
                 " (11,4,4,'Elevación de rodilla a codo contrario','Ejercicio para fortalecer el abdomen.','gif_elevacion_rodilla','Trata de tocar la rodilla con el codo para mayor eficiencia.')," +
 
@@ -153,7 +153,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (14,6,6,'Full roll-up','Ejercicio para fortalecer los brazos.','gif_homer','Inicia tocando las rodillas y ve avanzando poco a poco hasta llegar a los pies.')," +
 
-                " (15,1,1,'Levantamiento de pelvis',' Ejercicio ideal para fortalecer tus glúteos, muslos, abdomen y piernas. Además, reduce el dolor de rodilla y de espalda baja.','gif_homer','Recuerda mantener la pelvis elevada unos segundos y no forzarte mucho tiempo.')," +
+                " (15,1,1,'Levantamiento de pelvis',' Ejercicio ideal para fortalecer tus glúteos, muslos, abdomen y piernas. Además, reduce el dolor de rodilla y de espalda baja.','butbridge','Recuerda mantener la pelvis elevada unos segundos y no forzarte mucho tiempo.')," +
 
                 " (16,5,5,'Frog jumps','Ejercicio que trabaja las piernas.','gif_homer','Es importante caer suavemente para evitar algún daño. No realizar este ejercicio si padeces sobrepeso, a menos que puedas aterrizar suavemente.')," +
 
@@ -161,7 +161,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (18,4,4,'Abdominal en V','Con este tipo de ejercicio se trabaja gran parte del torso.','abdominal_v','Si no puedes mantener la «V» por más de 30 segundos, procura hacer tiempos más cortos y practicar más seguido.')," +
 
-                " (19,6,6,'Boxeo','Es un ejercicio que te ayudará a liberar estrés y quemar calorías rápidamente.','gif_homer','Es conveniente realizar este ejercicio al concluir los sets de entrenamiento. No necesitas un saco de boxeo para el ejercicio. Si realizas el ejercicio durante al menos 5 minutos, será un trabajo cardiovascular muy eficaz.')," +
+                " (19,6,6,'Boxeo','Es un ejercicio que te ayudará a liberar estrés y quemar calorías rápidamente.','boxeo','Es conveniente realizar este ejercicio al concluir los sets de entrenamiento. No necesitas un saco de boxeo para el ejercicio. Si realizas el ejercicio durante al menos 5 minutos, será un trabajo cardiovascular muy eficaz.')," +
 
                 " (20,1,1,'Escalador',' El escalador es un excelente ejercicio para fortalecer el abdomen, brazos y hombros. Es sencillo y sus resultados son magníficos.','gif_escalador','Realiza entre 6 y 12 repeticiones de acuerdo con tu nivel de resistencia.');";
 
