@@ -139,17 +139,17 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (7,4,4,'Abdominales','Ejercicio para fortalecer el abdomen.','abdominal','Procura tocar las rodillas con los codos, en caso de no ser posible intenta llegar lo más cerca posible.')," +
 
-                " (8,6,6,'Flexiones Diamante','Ejercicio pecho y brazos.','gif_homer',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta.')," +
+                " (8,6,6,'Flexiones Diamante','Ejercicio pecho y brazos.','gif_flexion_diamante',' Inicia empujando el piso hasta poder levantar tu peso, repite hasta lograr una repetición y así hasta lograr la meta.')," +
 
-                " (9,6,6,'Flexiones','Ejercicio para fortalecer los brazos.','gif_homer','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación.')," +
+                " (9,6,6,'Flexiones','Ejercicio para fortalecer los brazos.','gif_flexion','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación.')," +
 
                 " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','gif_homer','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.')," +
 
-                " (11,4,4,'Elevación de rodilla a codo contrario','Ejercicio para fortalecer el abdomen.','gif_homer','Trata de tocar la rodilla con el codo para mayor eficiencia.')," +
+                " (11,4,4,'Elevación de rodilla a codo contrario','Ejercicio para fortalecer el abdomen.','gif_elevacion_rodilla','Trata de tocar la rodilla con el codo para mayor eficiencia.')," +
 
-                " (12,1,1,'Burpees','Es un ejercicio que mide la resistencia anaeróbica y con él se trabaja el abdomen, la espalda, el pecho, los brazos y las piernas.','gif_homer','Recuerda que es importante amortiguar la caída y aterrizar de la manera más suave posible al saltar. El número de series y el tiempo de descanso entre series de burpees dependerá de tu nivel: principiante, intermedio, avanzado.')," +
+                " (12,1,1,'Burpees','Es un ejercicio que mide la resistencia anaeróbica y con él se trabaja el abdomen, la espalda, el pecho, los brazos y las piernas.','gif_burpees','Recuerda que es importante amortiguar la caída y aterrizar de la manera más suave posible al saltar. El número de series y el tiempo de descanso entre series de burpees dependerá de tu nivel: principiante, intermedio, avanzado.')," +
 
-                " (13,6,6,'Deadbug','Ejercicio de movimiento de brazos y piernas que trabaja nuestra zona lumbar y mejora nuestra coordinación.','gif_homer','Mantén tus brazos y piernas siempre lo más estirados posible.')," +
+                " (13,6,6,'Deadbug','Ejercicio de movimiento de brazos y piernas que trabaja nuestra zona lumbar y mejora nuestra coordinación.','gif_deadbug','Mantén tus brazos y piernas siempre lo más estirados posible.')," +
 
                 " (14,6,6,'Full roll-up','Ejercicio para fortalecer los brazos.','gif_homer','Inicia tocando las rodillas y ve avanzando poco a poco hasta llegar a los pies.')," +
 
@@ -163,7 +163,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (19,6,6,'Boxeo','Es un ejercicio que te ayudará a liberar estrés y quemar calorías rápidamente.','gif_homer','Es conveniente realizar este ejercicio al concluir los sets de entrenamiento. No necesitas un saco de boxeo para el ejercicio. Si realizas el ejercicio durante al menos 5 minutos, será un trabajo cardiovascular muy eficaz.')," +
 
-                " (20,1,1,'Escalador',' El escalador es un excelente ejercicio para fortalecer el abdomen, brazos y hombros. Es sencillo y sus resultados son magníficos.','gif_homer','Realiza entre 6 y 12 repeticiones de acuerdo con tu nivel de resistencia.');";
+                " (20,1,1,'Escalador',' El escalador es un excelente ejercicio para fortalecer el abdomen, brazos y hombros. Es sencillo y sus resultados son magníficos.','gif_escalador','Realiza entre 6 y 12 repeticiones de acuerdo con tu nivel de resistencia.');";
 
         String qry_insert_steps = "INSERT INTO " + TABLE_STEP + " VALUES" +
                 "(1,1,'Debes mantener la cabeza horizontal.')," +
