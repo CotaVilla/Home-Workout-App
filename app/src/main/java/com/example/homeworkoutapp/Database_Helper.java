@@ -129,11 +129,11 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (2,4,4,'Plancha','Ejercicio para fortalecer el abdomen.','plancha','Mantén los brazos separados y no bajes la pelvis.')," +
 
-                " (3,4,4,'Plancha lateral derecha','Ejercicio para fortalecer el abdomen oblicuo.','plancha_lateral_derecha','Posiciona un pie al frente para mantener el equilibrio.')," +
+                " (3,4,4,'Plancha lateral derecha','Ejercicio para fortalecer el abdomen oblicuo.','plancha_lateral_derecho','Posiciona un pie al frente para mantener el equilibrio.')," +
 
-                " (4,4,4,'Plancha lateral izquierda','Ejercicio para fortalecer el abdomen oblicuo.','plancha_lateral_izquierda','Posiciona un pie al frente para mantener el equilibrio.')," +
+                " (4,4,4,'Plancha lateral izquierda','Ejercicio para fortalecer el abdomen oblicuo.','plancha_lateral_izquierdo','Posiciona un pie al frente para mantener el equilibrio.')," +
 
-                " (5,1,1,'Saltos de Tijera','Ejercicio de cardio.','saltos_tijeras','Estira completamente los brazos y no abras demasiado las piernas en el salto.')," +
+                " (5,1,1,'Saltos de Tijera','Ejercicio de cardio.','saltos_tijera','Estira completamente los brazos y no abras demasiado las piernas en el salto.')," +
 
                 " (6,5,5,'Zancada frontal','Ejercicio para fortalecer las piernas.','zancada','Mantente siempre erguido mirando hacia el frente.')," +
 
@@ -143,7 +143,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (9,6,6,'Flexiones','Ejercicio para fortalecer los brazos.','gif_flexion','Cuando realices la flexión, rota las manos hacia afuera para que el hombro también sienta la rotación.')," +
 
-                " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','abdominal_piernas','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.')," +
+                " (10,4,4,'Abdominales con piernas elevadas','Ejercicio para fortalecer el abdomen.','abdominales_piernas','No dejar que los talones toquen el piso para hacer más fuerza con el abdomen.')," +
 
                 " (11,4,4,'Elevación de rodilla a codo contrario','Ejercicio para fortalecer el abdomen.','gif_elevacion_rodilla','Trata de tocar la rodilla con el codo para mayor eficiencia.')," +
 
@@ -151,13 +151,13 @@ public class Database_Helper extends SQLiteOpenHelper {
 
                 " (13,6,6,'Deadbug','Ejercicio de movimiento de brazos y piernas que trabaja nuestra zona lumbar y mejora nuestra coordinación.','gif_deadbug','Mantén tus brazos y piernas siempre lo más estirados posible.')," +
 
-                " (14,6,6,'Full roll-up','Ejercicio para fortalecer los brazos.','gif_homer','Inicia tocando las rodillas y ve avanzando poco a poco hasta llegar a los pies.')," +
+                " (14,6,6,'Full roll-up','Ejercicio para fortalecer los brazos.','gif_estiramiento_de_brazos','Inicia tocando las rodillas y ve avanzando poco a poco hasta llegar a los pies.')," +
 
                 " (15,1,1,'Levantamiento de pelvis',' Ejercicio ideal para fortalecer tus glúteos, muslos, abdomen y piernas. Además, reduce el dolor de rodilla y de espalda baja.','butbridge','Recuerda mantener la pelvis elevada unos segundos y no forzarte mucho tiempo.')," +
 
-                " (16,5,5,'Frog jumps','Ejercicio que trabaja las piernas.','gif_homer','Es importante caer suavemente para evitar algún daño. No realizar este ejercicio si padeces sobrepeso, a menos que puedas aterrizar suavemente.')," +
+                " (16,5,5,'Frog jumps','Ejercicio que trabaja las piernas.','gif_salto_rana','Es importante caer suavemente para evitar algún daño. No realizar este ejercicio si padeces sobrepeso, a menos que puedas aterrizar suavemente.')," +
 
-                " (17,5,5,'Jumping Jacks','Ejercicio que te ayuda a quemar muchas calorías y ejercita las piernas.','gif_homer','Es importante la posición de sentadillas puesto que te proveerá mayor estabilidad y menor impacto en las rodillas.')," +
+                " (17,5,5,'Jumping Jacks','Ejercicio que te ayuda a quemar muchas calorías y ejercita las piernas.','saltos_tijera','Es importante la posición de sentadillas puesto que te proveerá mayor estabilidad y menor impacto en las rodillas.')," +
 
                 " (18,4,4,'Abdominal en V','Con este tipo de ejercicio se trabaja gran parte del torso.','abdominal_v','Si no puedes mantener la «V» por más de 30 segundos, procura hacer tiempos más cortos y practicar más seguido.')," +
 
